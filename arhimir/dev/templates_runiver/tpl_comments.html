@@ -1,0 +1,11 @@
+<tr>
+	<td colspan = "2"><a href="/users/{{ login }}">{{ login }}</a><br><img src='/show_avatara/{{ userid }}'></td>
+	<td>{{ content }}</td>
+</tr>
+<tr>
+	<td colspan = "2">
+	{% if admin %}
+		<a href="/comment/delete/{{ comment_id }}">удалить</a>
+	{% endif %}
+	</td>
+</tr>

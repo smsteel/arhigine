@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{% if title %}{{ title }} :: {% else %}{% endif %}Московский философский колледж</title>
+	<link rel="stylesheet" href="/css/style-runiver.css" type="text/css"  media="screen" />
+    <meta name="description" content="Московский философский колледж">
+	<link rel="shortcut icon" href="/images/favicon_runiver.ico" type="image/x-icon"> 
+    <script type="text/javascript" src="/css/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="/css/personal.js"></script>
+    <script type="text/javascript" src="/css/jquery.ajaxupload-3.5.js"></script>
+    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="/css/jquery.validate.js"></script> 
+</head>
+<body>
+<div id="masthead">
+  <h1 id="siteName"><a href="/"><img src="/images/head1.jpg"/></a></h1>
+  
+  
+  
+</div>
+<div id="navBar">
+	
+	    {% if authorized %}
+	    <div class="loginfo">
+			<div style="padding-left: 5px; padding-right: 5px; font-size: 11px;">
+				{{ loginfo }}
+			</div>
+		</div>
+		{% else %}
+		<h2><a href="/news/">Личный кабинет</a></h2>
+	    {% endif %}
+	    <div>
+	    	
+			<form action="/search" id="cse-search-box">
+		  	<label>поиск</label><br/>
+		    <input type="hidden" name="cx" value="012268017940460993452:cdvyhwq2loa" />
+		    <input type="hidden" name="cof" value="FORID:10" />
+		    <input type="hidden" name="ie" value="UTF-8" />
+		    <input type="text" name="q" size="12" />
+		    <input type="submit" name="sa" value="Поиск" />
+		</form>
+		<script type="text/javascript" src="http://www.google.com/cse/brand?form=cse-search-box&lang=ru"></script>
+			
+	        <!--form id="search" action="/search-help" method="get">
+	      <label>поиск</label>
+	        <input id="spe42" type="text" size="10" name="find"  style="background-color:#f5f5f5;" onfocus="val = new String(this.value);  if (val.length < 15 && val.indexOf('поиск') > 0) this.value='';"  value="&nbsp;строка&nbsp;поиска">
+	        <input onclick='$("#search").submit();' type="submit" value="найти"/>
+	        </form-->
+			
+	    </div>
+	
+  <div id="sectionLinks">
+    
+    <ul>
+      <li><a href="/home">Семинары, лекции, события</a></li>
+      <li><a href="/manifest">Манифест Колледжа</a></li>
+      <li><a href="/events">Календарь</a></li>
+      <li><a href="/persons">Лица</a></li>
+      <li><a href="/help">Обучение в колледже</a></li>
+      <li><a href="/contacts">Контакты</a></li>
+    </ul>
+  </div>
+  {% if news %}
+  <div class="relatedLinks">
+    <h3>Новости Колледжа</h3>
+    <ul>
+  	{% for item in news %}
+      <li><a href="/news/{{item.id}}">{{item.sdate}} {{item.caption}}</a> <div class="feature">{{item.preview}} <a href="/news/{{item.id}}">далее...</a></div></li>
+  	{% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+    <!-- h3>Архив событий</h3>
+    <ul>
+      <li><a href="/video">Видеозапись 1</a></li>
+      <li><a href="#">Стенограмма 1</a></li>
+      <li><a href="/links">Related Link</a></li>
+      <li><a href="#">Аудиозапись 1</a></li>
+      <li><a href="#">Стенограмма X</a></li>
+      <li><a href="/album">Фотоальбом</a></li>
+      <li><a href="/event1">Событие 1</a></li>
+      <li><a href="/event/8011">Философия языка</a></li>
+      <li><a href="/links">Полезные ресурсы</a></li>
+    </ul>
+  </div-->
+</div>
+<!--end navBar div -->
+
+<div id="main_content">
+{{ content }}  
+</div>
+  
+<!--end content -->
+<div id="siteInfo"> <a href="/help">Помощь</a> | <a href="/contacts">Связаться с администрацией</a> | &copy;2009 Moscow Philosophical College </div>
+<br />
+
+<!-- Yandex.Metrika -->
+<script src="//mc.yandex.ru/resource/watch.js" type="text/javascript"></script>
+<script type="text/javascript">
+try { var yaCounter278181 = new Ya.Metrika(278181); } catch(e){}
+</script>
+<noscript><div style="position: absolute;"><img src="//mc.yandex.ru/watch/278181" alt="" /></div></noscript>
+<!-- /Yandex.Metrika -->
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10596361-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+</html>

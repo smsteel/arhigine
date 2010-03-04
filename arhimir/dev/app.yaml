@@ -1,0 +1,22 @@
+application: ru-dev
+version: test
+#application: net-edu
+#version: 16
+runtime: python
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: css
+- url: /images
+  static_dir: images
+- url: /editor
+  static_dir: editor
+- url: /ckeditor
+  static_dir: ckeditor
+- url: /templates
+  script: templates
+- url: /version
+  static_dir: version
+- url: .*
+  script: main.py

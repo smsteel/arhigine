@@ -1,0 +1,100 @@
+{% include "block_jt_gallery.html" %}
+<div class="main" id="info">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div id="infotext" style="padding-left: 20px; padding-right: 20px; font-size: 18px;">Альбом "{{ name }}"{% if isadmin %} ( Album ID: {{ albumid }} ){% endif %}</div>
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 18px;">Архитектор: <a href="/users/{{ ownerlogin }}">{{ ownername }} {{ ownersurname }}</a></div>
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 12px;">Связан с объектом: <a href="/objects/{{ objectid }}">{{ connected }}</a></div>
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 12px; width: 140px;">
+		<!-- Избранное -->
+		<div id="hover2" style="padding: 3px 5px 3px 3px; width: 250px;">
+		{% if not in_fav %}
+			<a href="/favorites/add/2/{{ albumid }}"><div id="hover2" style="margin-top: 2px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/star.png" /> Добавить в избранное</div></a>
+		{% else %}
+			<a href="/favorites/del/{{ albumid }}"><div id="hover2" style="margin-top: 2px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/star2.png" /> Убрать из избранного</div></a>
+		{% endif %}
+		</div>
+		
+		<a href="/order/{{ ownerlogin }}"><div id="hover2" style="padding: 3px 5px 3px 3px;"><img style="border: 0; padding-right: 4px; vertical-align: -50%;" src="/images/order.png" /> Сделать заказ</div></a>
+		</div>
+		
+		{% if addphoto %}
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 12px; width: 140px;">
+		<a href="/admin/addphoto/{{ albumid }}"><div id="hover2" style="padding: 3px 5px 3px 3px;"><img style="border: 0; padding-right: 4px; vertical-align: -50%;" src="/images/add_photo.png" /> Добавить фото</div></a>
+		</div>
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 12px; width: 140px;">
+		<a href="/admin/deletealbum/{{ albumid }}"><div id="hover2" style="padding: 3px 5px 3px 3px;"><img style="padding-top 2px; padding-right: 4px; border: 0; vertical-align: -50%;" src="/images/delete_album.png" /> Удалить альбом</div></a>
+		</div>
+		{% endif %}
+		{% if options %}
+		<div style="padding-left: 20px; padding-right: 20px; padding-top: 10px; font-size: 12px;">
+			<form method="POST">
+			Привязан к объекту:
+			<select id="objectid" name="objectid" class="add" style="width: 100%;">
+				<option value="0">Не привязывать</option>
+				{{ options }}
+			</select>
+			<input type="hidden" name="albumid" value="{{ albumid }}" />
+			<input class="add" type="submit" value="Изменить" />
+			</form>
+		</div>
+		{% endif %}
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+		
+</div>
+
+<div class="main">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div class="triggers" style="padding-left: 20px; padding-right: 20px;">
+			{{ photos }}
+		</div>
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+
+</div>
+<script>
+	function tagsubmit(s)
+	{
+	    alert("#search" + s);
+	    $("#search" + s).submit();
+	}
+	$("span").hover(
+	    function()
+	    {
+	        if($(this).attr("id")=="hover")
+	            $(this).attr("style", "background-color: #EDEDED;");
+	    },
+	    function()
+	    {
+	        if($(this).attr("id")=="hover")
+	            $(this).attr("style", "background-color: #DDDDDD;");
+	    }
+	);
+	$("div").hover(
+		function()
+		{
+			if($(this).attr("id")=="hover2")
+				$(this).attr("style", "background-color: #EDEDED; padding: 3px 5px 3px 3px;");
+		},
+		function()
+		{
+			if($(this).attr("id")=="hover2")
+				$(this).attr("style", "background-color: #DBDBDB; padding: 3px 5px 3px 3px;");
+		}
+	);
+</script>

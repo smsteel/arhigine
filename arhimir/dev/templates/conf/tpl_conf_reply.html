@@ -1,0 +1,13 @@
+{% include "tpl_conf_cap.html" %}
+<br>
+Вопрос: {{ question.cap }}
+<hr>
+{{ question.text }}
+<hr>
+Ответ:
+<hr>
+<form method="post">
+<textarea name="answer" cols="50" rows="10"></textarea>
+<br>
+<input type="submit" value="Ответить">
+</form>

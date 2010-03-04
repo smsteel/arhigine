@@ -1,0 +1,93 @@
+<div style="padding-left: 20px; padding-top: 8px; padding-right: 20px;">
+{% if eventlist %}
+{{ eventlist }}
+{% endif %}
+{% if admin %}
+<br>
+<b><font style="font-size: 20px;">{{ caption }}</font></b>
+<form method="post" enctype="multipart/form-data">
+<table cellpadding="1" cellspacing="1" width=100%>
+	<tr>
+	    <td>Название:</td>
+	</tr>
+	<tr>
+		<td><hr></td>
+	</tr>
+	<tr>
+	    <td><input type=text name="name" value="{{ name }}" style="width: 100%"></td>
+	</tr>
+	<tr>
+	    <td>Дата проведения:</td>
+	</tr>
+	<tr>
+		<td>
+			Число: <input name="day" value="{{ day }}" style="width: 25px;">
+			Месяц: <input name="month" value="{{ month }}" style="width: 25px;">
+			Год: <input name="year" value="{{ year }}" style="width: 50px;">
+		</td>
+	</tr>
+	<tr>
+		<td><hr></td>
+	</tr>
+	<tr>
+	    <td>Время проведения:</td>
+	</tr>
+	<tr>
+		<td><input type=text name="time" value="{{ time }}" style="width: 100%"></td>
+	</tr>
+	<tr>
+		<td><hr></td>
+	</tr>
+	<tr>
+	    <td>Место проведения:</td>
+	</tr>
+	<tr>
+		<td><input type=text name="place" value="{{ place }}" style="width: 100%"></td>
+	</tr>
+	<tr>
+		<td><hr></td>
+	</tr>
+	<tr>
+	    <td>Организатор:</td>
+	</tr>
+	<tr>
+		<td><input type=text name="owner" value="{{ owner }}" style="width: 100%"></td>
+	</tr>
+	<tr>
+		<td><hr></td>
+	</tr>
+	<tr>
+		<td>Кто может просматривать событие?</td>
+	</tr>
+	<tr>
+		<td>
+			<select name="access" style="width: 250px;">
+				{{ access }}
+			</select>
+		</td>
+	</tr>
+	<tr>
+	    <td>Картинка:</td>
+	</tr>
+	<tr>
+		<td><hr align=left style="width: 250px;"></td>
+	</tr>
+	<tr>
+	    <td><input type=file name="pic" style="width: 250px;"></td>
+	</tr>
+	<tr>
+		<td>Описание:</td>
+	</tr>
+	<tr>
+		<td><hr></td>
+	</tr>
+	<tr>
+	    <td>{{ editor }}</td>
+	</tr>
+	<tr>
+	    <td><div align="center" style="padding: 5px;"><input style="padding: 5px; width: 150px;" type=submit value="Ок"></div></td>
+    </tr>
+</table>
+</form>
+{% endif %}
+</div>

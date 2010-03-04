@@ -1,0 +1,16 @@
+<form method="POST">
+<div class="main">
+
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 18px;">
+			{% if cap %}
+				Заголовок:<br>
+				<input type="text" class="add" name="cap" value="{{ cap }}" /><br>
+			{% endif %}
+			Сообщение:
+			{{ ckeditor }}
+			<br>
+			<input type="submit" value="Отправить" />
+		</div>
+
+</div>
+</form>

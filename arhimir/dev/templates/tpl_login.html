@@ -1,0 +1,50 @@
+
+{% if action %}<div style="padding-left: 5px;"><button type="button" rel="div.overlay:eq(0);" style="padding: 7px; width: 160px;">Форма входа</button></div>{% endif %}
+
+<div {% if action %}class="overlay" id="overlay1"{% else %} align="center" style="padding: 20px;"{% endif %}>
+	{% if not effect %}<table width=100% height=80% valign=center halign=center><tr><td><table align=center style="border-style: solid; border-width: 2px;" cellpadding="0" cellspacing="0"><tr><td>{% endif %}
+	<table width=500>
+	    <form {% if action %}action="/login/"{% endif %}{% if action2 %}action="/login/"{% endif %} method="post">
+	    	<tr height=30 style="background-color: #EEEEEE;">
+	    		<td colspan = "2" align="center">Форма входа:</td>
+	    	</tr>
+	    	<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+	        <tr valign = "top" height=30>
+	            <td width=30%>Логин в системе:</td>
+	            <td width=70%><input maxlength=30 type="text" name="login" style="width: 100%"></td>
+	        </tr>
+			<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+	        <tr>
+	            <td width=30%>Пароль в системе:</td>
+	            <td width=70%><input maxlength=30 type="password" name="password" style="width: 100%"></td>
+	        </tr>
+	        <tr>
+	        	<td>&nbsp;</td>
+	        	<td><a href=/reminder/>Забыли пароль?</a></td>
+	        </tr>
+	        <tr>
+	        	<td>&nbsp;</td>
+	        	<td><a href="/reg/">Регистрация</a></td>
+			<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+	        <tr valign="bottom" height=30>
+	            <td colspan="2" align = "center"><input style="padding: 5px; width: 150px;" type="submit" value="Войти"></td>
+	        </tr>
+	    </form>
+	</table>
+	{% if not effect %}</td></tr></table></td></tr></table>{% endif %}
+</div>
+
+<script>
+$(function() { 
+    var api = $("div.overlay:eq(0)").overlay({api:true}); 
+});
+{% if openlogin %}
+setTimeout('openOverlay();', 200);
+{% endif %}
+</script>

@@ -1,0 +1,148 @@
+{% include "block_jt_gallery.html" %}
+<style>
+a.rating {
+	text-decoration: none;
+}
+div.rating_good {
+	color: #3F3F3F;
+	border: 1px solid #777777;
+	padding: 1px 5px 0px 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+
+{% if can_vote %}
+	background-color: #eeeeee;
+{% else %}
+	{% if my_vote %}
+	background-color: #00C434;
+	{% else %}
+	background-color: #DBDBDB;
+	{% endif %}
+{% endif %}
+	float: left;
+}
+div.rating_bad {
+	color: #3F3F3F;
+	border: 1px solid #777777;
+	padding: 0px 5px 1px 5px;
+
+	margin-left: 5px;
+	margin-right: 5px;
+{% if can_vote %}
+	background-color: #eeeeee;
+{% else %}
+	{% if not my_vote %}
+	background-color: #FF424B;
+	{% else %}
+	background-color: #DBDBDB;
+	{% endif %}
+{% endif %}
+	float: left;
+}
+</style>
+<div class="main">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 18px;">Объект "{{ objectname }}"</div>
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 18px;">Архитектор: <a href="/users/{{ ownerlogin }}">{{ ownername }} {{ ownersurname }}</a></div>
+		{% if show_rating %}
+		<div style="font-size: 14px; float: left; width: 100%; padding-top: 5px;">
+			<b>
+			<div style="float: left; padding-left: 25px; margin-top: 1px; margin-right: 3px;">Рейтинг:</div>
+			<a href="#" class="rating" onclick="vote('good');">
+			<div class="rating_good">
+				+
+			</div>
+			</a>
+			<div style="float: left; margin-top: 1px; margin-left: 2px;">{{ rating }}</div>
+			<a href="#" class="rating" onclick="vote('bad');">
+			<div class="rating_bad">
+				–
+			</div>
+			</a>
+			</b>
+		</div>
+		{% endif %}
+		<!-- Избранное -->
+		<div style="width: 100%; float: left;">
+		<div style="padding-left: 20px; width: 250px; float: left;">
+			{% if not in_fav %}
+				<a href="/favorites/add/1/{{ objectid }}"><div id="hover2" style="margin-top: 2px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/star.png" /> Добавить в избранное</div></a>
+			{% else %}
+				<a href="/favorites/del/{{ objectid }}"><div id="hover2" style="margin-top: 2px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/star2.png" /> Убрать из избранного</div></a>
+			{% endif %}
+		</div>
+		</div>
+		<div style="width: 100%; float: left;">
+		<div style="padding-left: 20px; width: 200px; float: left;"><a href="/order/{{ ownerlogin }}"><div id="hover2" style="margin-top: 2px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/order.png" /> Сделать заказ</div></a></div>
+		</div>
+		{% if delobject %}
+		<div style="width: 100%; float: left;">
+		<div style="padding-left: 20px; padding-right: 20px; width: 200px; float: left;">
+			<a href="/admin/deleteobject/{{ objectid }}"><div id="hover2" style="margin-top: 2px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/delete_album.png" /> Удалить объект</div></a>
+		</div>
+		</div>
+		{% endif %}
+		
+		<div style="width: 100%; padding-left: 20px;"><p style="float: left; margin-right: 40px;"><img style="float: left; margin-right: 10px;" src="/picture/0/{{ objectid }}" />{{ objectdesription }}</div>
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+		
+</div>
+
+<div class="main">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 18px;">Фотоальбомы:</div>
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+		
+</div>
+
+{{ albums }}
+
+<script>
+$("div").hover(
+	function()
+	{
+		if($(this).attr("id")=="hover2")
+			$(this).attr("style", "margin-top: 2px; background-color: #EDEDED; padding: 3px 5px 3px 3px;");
+	},
+	function()
+	{
+		if($(this).attr("id")=="hover2")
+			$(this).attr("style", "margin-top: 2px; background-color: #DBDBDB; padding: 3px 5px 3px 3px;");
+	}
+);
+function vote(v)
+{
+	$.get("/objects/vote/{{ objectid }}/" + v, { }, function(data){
+		if(data != "") {
+			if(data == "error")
+				alert("Ошибка при голосовании");
+			else if(data == "vote_success")
+			{
+				if(v == "good")
+					$(".rating_" + v).attr("style", "background-color: #00C434;");
+				else if(v == "bad")
+					$(".rating_" + v).attr("style", "background-color: #FF424B;");
+			}
+			else if(data == "vote_exists")
+				alert("А вы уже голосовали за этот объект!");
+		}
+	});
+}
+</script>

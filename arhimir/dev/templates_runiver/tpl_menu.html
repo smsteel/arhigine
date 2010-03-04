@@ -1,0 +1,10 @@
+<div>
+	<a class="menu" href="/user/{{ userid }}"><div id="hover" class="menu">Личные данные</div></a>
+	<a class="menu" href="/msg/"><div id="hover" class="menu">Личные сообщения</div></a>
+	<a class="menu" href="/news/"><div id="hover" class="menu" >Новости</div></a>
+	<a class="menu" href="/users/"><div id="hover" class="menu" >Список пользователей</div></a>
+	<a class="menu" href="/events/"><div id="hover" class="menu" >Список мероприятий</div></a>
+	{% if isadmin %}
+		<a class="menu" href="/admin/"><div id="hover" class="menu" >Панель управления</div></a>
+	{% endif %}
+</div>

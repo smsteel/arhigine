@@ -1,0 +1,21 @@
+<div style="padding-left: 20px; padding-top: 8px;">
+<h2>{% ifequal access 10 %}Текущая версия: {{ version }}{% endifequal %}</h2>
+<li><a href="/admin/event/">Управление событиями</a></li>
+{% ifequal access 10 %}<li><a href="/admin/users/">Управление пользователями</a></li>{% endifequal %}
+{% ifequal access 9 %}<li><a href="/admin/users/">Управление пользователями</a></li>{% endifequal %}
+{% ifequal access 8 %}<li><a href="/admin/users/">Управление пользователями</a></li>{% endifequal %}
+<li><a href="/admin/objects/">Управление объектами</a></li>
+{% ifequal access 10 %}<li><a href="/pages/">Управление страницами</a></li>{% endifequal %}
+{% ifequal access 9 %}<li><a href="/pages/">Управление страницами</a></li>{% endifequal %}
+{% ifequal access 8 %}<li><a href="/pages/">Управление страницами</a></li>{% endifequal %}
+{% ifequal access 10 %}<li><a href="/news/add/">Добавить новость</a></li>{% endifequal %}
+{% ifequal access 9 %}<li><a href="/news/add/">Добавить новость</a></li>{% endifequal %}
+{% ifequal access 8 %}<li><a href="/news/add/">Добавить новость</a></li>{% endifequal %}
+{% ifequal access 10 %}<li><a href="/customize/">Настройки портала</a></li>{% endifequal %}
+{% ifequal access 10 %}<li><a href="/admin/stats/gallery/photo/">Статистика галереи (тестовый режим)</a></li>{% endifequal %}
+{% ifequal access 9 %}<li><a href="/admin/stats/gallery/photo/">Статистика галереи (тестовый режим)</a></li>{% endifequal %}
+{% ifequal access 8 %}<li><a href="/admin/stats/gallery/photo/">Статистика галереи (тестовый режим)</a></li>{% endifequal %}
+{% ifequal access 10 %}<li><a href="/admin/stats/online/">Статистика текущей активности (тестовый режим)</a></li>{% endifequal %}
+<li><a href="/admin/album/add/">Добавить альбом</a></li>
+<li><a href="/invite/">Пригласить</a></li>
+</div>

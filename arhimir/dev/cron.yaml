@@ -1,0 +1,5 @@
+cron:
+- description: send mail every 5 minutes
+  url: /system/mail_train/
+  schedule: every 5 minutes
+

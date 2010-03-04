@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru">
+
+	<head>
+		<title>Сообщество архитекторов и дизайнеров{% if title %} :: {{ title }}{% else %}{% endif %}</title>
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="description" content="Сообщество архитекторов и дизайнеров, портал Архимир">
+		<meta name="keywords" content="архитектура; дизайн интерьера; сообщество архитекторов">
+		<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon"> 
+		
+		<!-- scripts here -->
+		<script type="text/javascript" src="/css/jquery.tools.min.js"></script>
+		<script type="text/javascript" src="/css/personal.js"></script>
+		<script type="text/javascript" src="/css/jquery.ajaxupload-3.5.js"></script>
+		<script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+		<script type="text/javascript" src="/css/jquery.validate.js"></script>
+		<script type="text/javascript" src="/css/browser.js"></script>
+		<script>
+			$(document).ready(function() {
+				$.reject();
+				$("#community_menu").mouseenter(
+					function() {
+						$("#padding_community_menu").css({ left: $("#top_menu").position().left + 225 });
+						$("#padding_community_menu").show();
+				});
+				$("#padding_community_menu").mouseleave(
+					function() {
+						$("#padding_community_menu").hide();
+				});
+			});			
+		</script>
+		<link href="/css/main.css" rel="stylesheet" media="all" />
+	</head>
+
+	<body>
+		<!-- top div -->
+		<div id="padding_community_menu"><b><a href="http://community.livejournal.com/archistory/">ЖЖ Архистори</a></b></div>
+		<div class="top">
+			<a href="/"><img id="logo" src="/images/watermark.png" alt="{{ title }}" /></a>
+			<ul id="top_menu">
+				<li><a href="/about">О проекте</a> |</li>
+				<li><a href="/events/">События</a> |</li>
+				<li><a href="/users/arhitectors/1">Архитекторы</a> |</li>
+				<li><a href="/forum/">Форум</a></li>
+			</ul>
+			<a href="/news/" id="login">
+				<img src="/images/enter.png" />
+			</a>
+			<a href="/reg/" id="register">
+				Регистрация
+			</a>
+			<div id="search">
+				<form id="searcher" action="/search/" method="post">
+					<input type="text" value="Поиск" name="find" />
+					<a onclick="$('#searcher').submit();" href="#"></a>
+				</form>
+			</div>
+		</div>
+		<!-- end of top div -->
+		<div class="arhi">
+			<div id="caption_arhi">ТОП архитекторов</div>
+			<br clear="all" />
+			<div id="arhitop">
+			{% for arh in arhs %}
+				<a href="/users/{{ arh.login}}"><img src="/show_avatara/{{ arh.id }}" /></a>
+			{% endfor %}
+			</div>
+		</div>
+		
+<!-- omg! -->
+
+<div class="scroll_cap">
+	<div id="caption">Объекты по рейтингу</div>
+	<div id="new_block">
+		<a id="new" href="/last_objects/">Новые объекты</a>
+	</div>
+</div>		
+{{ scroll }}
+
+
+<!-- end of omg -->
+
+	<div class="news">
+		<div id="caption_news">Новости</div>
+		{{ news }}
+		<div style="float: left; width: 300px; height: 50px;text-align: right;"><a class="all_news" href="/news_all/">Архив новостей</a></div>
+		{{ tags }}
+	</div>
+		
+	<div class="info">
+		<div class="info_block" id="events">
+		
+			<div id="caption">События и мероприятия</div>
+			
+			<div id="content">
+				{% for event in events %}
+					<a class="event" href="/event/{{ event.id }}">{{ event.name }}</a> <br />
+					<a style="font-size: 12px;">Состоится {{ event.date|date:"d.m.Y" }}</a><br /><br />
+					
+				{% endfor %}
+			</div>
+		</div>
+		<div class="info_block" id="conferences">
+		
+			<div id="caption">Конференции</div>
+			<div id="content">
+				{% for conf in confs %}
+				<a class="event" href="/conf/{{ conf.name }}">{{ conf.cap }}</a><br />
+				<a style="font-size: 12px;">Обновлена {{ conf.updated|date:"d.m.Y" }}</a><br /><br />
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	
+	<div class="bottom"><a href="/conf/ask/arhimir">Я хочу сообщить об ошибке на сайте/предложить улучшение!</a><br>Copyright ©2009-2010 Arhimir developer team</div>
+	{%if request_time %}<div style="font-family: Verdana; font-size: 12px; position: fixed; bottom: 0px; left: 0px; background-color: #ffdacb; padding: 10px; opacity: 0.85;">{{ request_time }}</div>{% endif %}
+	<!-- Yandex.Metrika -->
+	<script src="//mc.yandex.ru/resource/watch.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	try { var yaCounter140798 = new Ya.Metrika(140798); } catch(e){}
+	</script>
+	<noscript><div style="position: absolute;"><img src="//mc.yandex.ru/watch/140798" alt="" /></div></noscript>
+	<!-- /Yandex.Metrika -->
+	
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-9439324-1");
+	pageTracker._trackPageview();
+	} catch(err) {}</script>
+	
+	</body>
+
+</html>

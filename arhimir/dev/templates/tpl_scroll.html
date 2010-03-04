@@ -1,0 +1,266 @@
+<style>
+#thumbs div { 
+    float:left; 
+    width:214px; 
+    height:214px; 
+     
+    color:#fff; 
+    border-left:0px solid #333; 
+    cursor:pointer; 
+} 
+ 
+/* style when mouse is over the item */ 
+#thumbs div.hover { 
+    background-color:#444;     
+} 
+ 
+/* style when element is active (clicked) */ 
+#thumbs div.active { 
+    background-color:#066; 
+    cursor:default; 
+}
+body {
+    font-family:"Lucida Grande","Lucida Sans Unicode","bitstream vera sans","trebuchet ms",verdana;
+}
+a:active {
+  outline:none;
+}
+:focus {
+  -moz-outline-style:none;
+}
+div.scroll-align {
+	left: 25%;
+	position: relative;
+	margin: 35px 0 50px -285px;
+	width: 838px;
+	/* background-color: orange; */
+}
+div.scrollable {  
+	border-width: 0px;
+    position:relative;
+    overflow:hidden;
+    width: 642px;
+    height: 214px;
+}
+#thumbs {    
+    position:absolute;
+    width:20000em;    
+    clear:both;
+    border:0px solid #000;
+}
+#thumbs div.thms {
+    float:left;
+    width:214px;
+    height:214px; 
+    color:#fff;
+    border-left:0px solid #000;
+    cursor:pointer;
+}
+ 
+/* style when mouse is over the item */
+#thumbs div.hover {
+    background-color:#DDDDDD;    
+}
+ 
+/* style when element is active (clicked) */
+#thumbs div.active {
+    background-color:#066;
+    cursor:default;
+}
+ 
+#thumbs h3 {
+    margin:13px;        
+    font-family:"bitstream vera sans";
+    font-size:13px;
+    color:#fff;    
+}
+span.blue {
+    margin: 5px;
+    float: right;
+    font-family:"bitstream vera sans";
+    font-size:13px;
+    color:#fff;
+}
+/*#thumbs span {
+    margin: 15px;
+    float: left;
+    font-family:"bitstream vera sans";
+    font-size:13px;
+    color:#fff;    
+}*/
+ 
+#thumbs h3 em {
+    font-style:normal;
+    color:yellow;
+}
+ 
+#thumbs p {
+    height: 30px;
+    margin:13px;        
+    margin-top: 25px;
+    font-family:"bitstream vera sans";
+    font-size:13px;
+    text-align:left;
+    color:#fff;    
+}
+/* this makes it possible to add next button beside scrollable */
+div.scrollable {
+    float:left;    
+}
+ 
+a.readnext:link, a.readnext:active, a.readnext:visited {
+    color: #FFFFFF;
+}
+ 
+a.readnext:hover {
+    color: #AAAAAA;
+}
+ 
+/* prev, next, prevPage and nextPage buttons */
+a.prev, a.next {
+    display:block;
+    width:32px;
+    height:32px;
+    background:url(/images/left.png) no-repeat;
+    float:left;
+    margin:43px 4px;
+    margin-top:91px;
+    cursor:pointer;
+    font-size:1px;
+}
+ 
+a.prevPage {
+    display:block;
+    width:46px;
+    height:46px;
+    background:url(/images/left_page.png) no-repeat;
+    float:left;
+    margin:43px 4px;
+    margin-top:84px;
+    cursor:pointer;
+    font-size:1px;
+}
+ 
+/* mouseover state */
+a.prev:hover, a.next:hover {
+    background-position:0px -33px;        
+}
+a.prevPage:hover, a.nextPage:hover {
+    background-position:0px -47px;        
+}
+ 
+/* disabled navigational button 
+a.disabled {
+    visibility:hidden !important;        
+}*/
+ 
+/* next button uses another background image */
+a.next {
+    background-image:url(/images/right.png);
+    clear:right;    
+}
+ 
+a.nextPage {
+    background-image:url(/images/right_page.png);
+    display:block;
+    width:46px;
+    height:46px;
+    float:left;
+    margin:43px 4px;
+    margin-top:84px;
+    cursor:pointer;
+    font-size:1px;
+    clear:right;
+}
+ 
+ 
+/*********** navigator ***********/
+ 
+ 
+/* position and dimensions of the navigator */
+div.navi {
+    margin-left:328px;
+    width:200px;
+    height:20px;
+    border-width: 0px;
+}
+ 
+ 
+/* items inside navigator */
+div.navi a {
+    width:8px;
+    height:8px;
+    float:left;
+    margin:3px;
+    background:url(/images/navigator.png) 0 0 no-repeat;
+    display:block;
+    font-size:1px;
+    border-width: 0px;
+}
+ 
+/* mouseover state */
+div.navi a:hover {
+    background-position:0 -8px;      
+}
+ 
+/* active state (current page state) */
+div.navi a.active {
+    background-position:0 -16px;     
+} 
+</style>
+ 
+<div class="scroll-align">
+ 
+<!-- prev link -->
+<a class="prevPage"></a> 
+<a class="prev"></a>
+ 
+<!-- root element for scrollable -->
+<div class="scrollable">
+    <div id="thumbs">
+    	{{ thumbs }}
+    </div>
+</div>
+<!-- next link -->
+<a class="next"></a>
+<a class="nextPage"></a> 
+<!-- let rest of the page float normally -->
+<br clear="all" />
+ 
+</div>
+ 
+</div>
+<script>
+var objects_loaded = {{ nonAjax }};
+var objects_count = {{ objects_count }};
+$(function() {         
+    var last_index = 0     
+    // initialize scrollable  
+    var api = $("div.scrollable").scrollable({ 
+        size: 3, 
+        items: '#thumbs',   
+        hoverClass: 'hover',
+        onSeek: function() {
+        	if(last_index < this.getIndex() & objects_loaded < this.getIndex() + {{ nonAjax }})
+        	{
+        		for(i=0; i<(this.getIndex() - last_index); i++)
+        		{
+	        		if(objects_loaded < objects_count)
+	        		{
+		        		$.get("/scroll/", { load: objects_loaded }, function(data){
+		        			if(data != "") {
+		        				var api = $("div.scrollable").scrollable();
+			        			api.getItemWrap().append("<div class=\"thms\" onclick='window.location = \"/objects/" + data + "\"'><span class=\"object_picture\" style=\"margin-left: 7px; margin-top: 7px; display:block; width:200px; height:200px; background-image:url(/picture/200/crop/0/" + data + ");\"></span></div>")
+			        			api.reload();
+		        			}
+		        		});
+		        		objects_loaded++;
+	        		}
+        		}
+        	}
+        	last_index = this.getIndex();
+        }
+    });
+    api.mousewheel();
+});
+</script>

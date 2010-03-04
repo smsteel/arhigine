@@ -1,0 +1,221 @@
+﻿<script>
+var photos_added = 0;
+$(document).ready(function() {
+	
+	function init_button()
+	{
+		new AjaxUpload('#photo_upload', {
+		        name: 'pic',
+		        action: '',
+		        data: { albumid: '{{ albumid }}',
+		        		isphoto: '1',
+		        		deletephoto: '0' },
+		        autoSubmit: true,
+		        responseType: "text/html",
+		        onComplete: function(file, response) {
+		        	if(response != "size")
+		        	{
+		        		add_img(response);
+		        	}
+		        	else
+		        	{
+		        		alert("Фотография не должна быть больше 1024x768 пикселей, но хотя бы одна сторона фотографии должна быть больше 400 пикселей");
+		        		remove_html();
+		        	}
+		        	init_button();
+		        },
+		        onSubmit: function(file, extension) { 
+		
+			        var re = new RegExp('(jpg|jpeg|png|gif)$', 'i');
+			        if (!re.test(extension)) {
+			            alert('Можно загружать только картинки с расширениями JPG, JPEG, GIF и PNG!');
+			            return false;
+			        }
+			        else {
+			        	add_html();
+			        }
+			 	}
+		});
+	}
+	
+	init_button();
+	
+	$("#add_photos").hide();
+
+});
+</script>
+<div class="main" id="info">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div id="infotext" style="padding-left: 20px; padding-right: 20px; font-size: 18px;">Добавление альбома</div>
+		{% if isadmin %}{% if bytes %}<div id="infotext" style="padding-left: 20px; padding-right: 20px; font-size: 14px;">В базе данных уже {{ bytes }} байт фотографий</div>{% endif %}{% endif %}
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+		
+</div>
+<form method="post" id="albumform">
+<div class="main">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div style="padding-left: 20px; padding-right: 20px;">
+			<div style="padding-bottom: 10px;">Название альбома:<input id="name" class="add" style="width: 100%;" type="text" name="name" /></div>
+			<div style="padding-bottom: 10px;">
+			Привязывать к объекту: 
+			<select id="objectid" name="objectid" class="add" style="width: 100%;">
+				<option value="0">Не привязывать</option>
+				{{ options }}
+			</select>
+			</div>
+		</div>
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+
+</div>
+<input type="hidden" name="albumid" value="{{ albumid }}" />
+</form>
+<div class="main">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div style="padding-left: 20px; padding-right: 20px;">
+			<span style="cursor: pointer;" onclick='$("#add_photos").slideDown(1000);'">Добавить фотографии</span>
+			<br><font style="font-size: 8px; color: #666666;">(нажмите, чтобы добавить фотографии)</font>
+			<div id="add_photos" style="padding: 10px;">
+				<div style='float: left; margin: 10px 0px 0px 10px;'><img id="photo_upload" src="/images/add_photo.jpg" /></div>
+				<div style="width: 100%; float: left; padding-top: 10px;"><font style="font-size: 8px; color: #880000;">Внимание! Скрипт находится в тестовом режиме, если загрузка не была совершена, попробуйте подождать и выбрать файл еще раз.</font></div>
+			</div>
+			
+		</div>
+		
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+		
+</div>
+
+<div class="main">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div style="padding-left: 20px; padding-right: 20px;">
+			<span id="save_album" style="cursor: pointer;" onclick='save_album();'>Сохранить альбом</span>
+		</div>
+		
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+		
+</div>
+<script>
+function remove_img(html_id, db_id)
+{
+	$("#photo" + html_id).attr("style", "background-image: url(/images/arhimir_loading.gif); background-repeat: no-repeat; background-position:51px 51px; float: left; width: 140px; height: 140px; margin: 0px 0px 0px 5px;");
+	if(html_id=="" || html_id==0 || !html_id)
+	{
+		$("#photo" + html_id).fadeOut(500);
+	}
+	else
+	{
+		$.ajax({
+			type: "POST",
+			url: "ajax",
+			data: "deletephoto=1&photoid=" + db_id + "&isphoto=0",
+			success: function(data, textStatus) {
+				if(data=="deleted")
+				{
+					$("#photo" + html_id).fadeOut(500);
+				}
+				else
+				{
+					alert("Не удалось удалить!");
+					$("#photo" + html_id).attr("style", "background-image: url(/picture/3/" + html_id +"); background-repeat: no-repeat; background-position:0px 10px; float: left; width: 140px; height: 140px; margin: 0px 0px 0px 5px;");
+				}
+			},
+			complete: function (XMLHttpRequest, textStatus) {
+				if(XMLHttpRequest.status != 200)
+				{
+					$("#photo" + html_id).attr("style", "background-image: url(/picture/3/" + html_id +"); background-repeat: no-repeat; background-position:0px 10px; float: left; width: 140px; height: 140px; margin: 0px 0px 0px 5px;");
+				}
+			}
+		});
+	}
+}
+function save_album()
+{
+	$(".main").slideUp(200);
+	setTimeout('$("#infotext").text("Сохранение альбома...");', 200);
+	$("#info").slideDown(200);
+	setTimeout('ajax_save();', 400);
+}
+
+function ajax_save()
+{
+	$.ajax({
+		type: "POST",
+		url: "ajax",
+		data: "name=" + $("#name").val() + "&objectid=" + $("#objectid").val() + "&isphoto=0&deletephoto=0" + "&albumid={{ albumid }}",
+		success: function(data, textStatus) {
+			$("#info").slideUp(200);
+			if(data=="added")
+			{
+				setTimeout("show_message(\"Альбом сохранен.<br><a href=''>Добавить еще</a>\");", 200);
+			}
+			else
+			{
+				setTimeout("show_message(\"Ошибка при сохранении альбома.<br>Сервер сообщает: \" + data);", 200);
+			}
+			$("#info").slideDown(200);
+		},
+		complete: function (XMLHttpRequest, textStatus) {
+			if(XMLHttpRequest.status != 200) {
+				$("#info").slideUp(200);
+				setTimeout('$("#infotext").html("Произошла ошибка при сохранении альбома. Статус: " + textStatus);', 200);
+				$("#info").slideDown(200);
+			}
+		}
+	});
+}
+
+function show_message(msg)
+{
+	$("#infotext").html(msg);
+}
+
+function remove_html()
+{
+	$("#photo" + photos_added).fadeOut(500);
+}
+
+function add_html()
+{
+	$("#add_photos").html("<div id='photo" + photos_added + "' style='background-image: url(/images/arhimir_loading.gif); background-repeat: no-repeat; background-position:51px 51px; float: left; width: 140px; height: 140px; margin: 0px 0px 0px 5px;'></div>" + $("#add_photos").html());
+}
+
+function add_img(data)
+{
+	$("#photo" + photos_added).attr("style", "background-image: url(/picture/3/" + data +"); background-repeat: no-repeat; background-position:0px 10px; float: left; width: 140px; height: 140px; margin: 0px 0px 0px 5px;");
+	$("#photo" + photos_added).html("<img onclick='remove_img(" + photos_added + ", " + data + ")' style='float: right; cursor: pointer;' src='/images/delete_button.png' />")
+	photos_added++;
+}
+</script>

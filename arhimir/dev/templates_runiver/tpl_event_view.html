@@ -1,0 +1,66 @@
+<div style="padding-left: 20px; padding-top: 20px; padding-right: 20px;">
+<table cellspacing="10" cellpadding="0" width=100% border=0 height=100>
+<tr height=100%>
+	<th rowspan="2" valign=top width=10 height=100%>{% if event_id %}<img style="border-style: dashed; border-width: 1px; padding: 5px;" src="/show_event_pic/{{ event_id }}">{% else %}&nbsp;{% endif %}</th>
+	<td valign=top height=50%>
+		<table style="border-style: dashed; border-width: 1px;" cellspacing="0" cellpadding="0" width=100% height=100%>
+			<tr>
+				<td valign=top><div style="padding: 10px;"><b>{{ event_name }}</b><hr>{% if event_descr %}{{ event_descr }}{% else %}Нет описания{% endif %}</div></td>
+			</tr>
+		</table>
+	</td>
+</tr>
+<tr height=50%>
+	<td valign=top height=50%>
+		<table style="border-style: dashed; border-width: 1px;" cellspacing="0" cellpadding="0" width=100% height=100%>
+			<tr>
+				<td valign=top>
+					<div style="padding: 10px;">
+						<table cellpadding="0" cellspacing="0" style="padding: 0px;" border=0>
+							<!--tr>
+								<td>Дата:</td>
+								<td>&nbsp;</td>
+								<td>{% if date %}{{ date }}{% else %}не указана{% endif %}</td>
+							</tr>
+							<tr><td style="heigth: 15px;" colspan="3" valign=center><hr></td></tr-->
+							<tr>
+								<td>Время:</td>
+								<td>&nbsp;</td>
+								<td>{% if time %}{{ time }}{% else %}не указано{% endif %}</td>
+							</tr>
+							<tr><td style="heigth: 15px;" colspan="3" valign=center><hr></td></tr>
+							<tr>
+								<td>Место проведения:</td>
+								<td>&nbsp;</td>
+								<td>{% if place %}{{ place }}{% else %}не указано{% endif %}</td>
+							</tr>
+							<tr><td style="heigth: 15px;" colspan="3" valign=center><hr></td></tr>
+							<tr>
+								<td>Организатор:</td>
+								<td>&nbsp;</td>
+								<td>{% if owner %}{{ owner }}{% else %}не указан{% endif %}</td>
+							</tr>
+							<tr><td style="heigth: 15px;" colspan="3" valign="center"><hr></td></tr>
+							<tr>
+								<td colspan=3 style="height: 15px;" valign="middle">
+								<a href="javascript:void(0)" valign="center" onclick="$('#ljmsg').show()">Показать код для блога</a><br/>
+									<form target="_blank" method="post" action="http://www.livejournal.com/update.bml" id="ljForm">
+										<textarea cols="30" rows="4" style="display:none" name="event" id="ljmsg" ><a href="http://www.runiver.net/event/{{event_id}}"><img  align="left" alt="{{event_name}}" src="http://www.runiver.net/show_event_pic/{{event_id}}"></a>{{ event_descr }}<br>Время проведения: {% if time %}{{ time }}{% else %}не указано{% endif %}<br>Место проведения: {% if place %}{{ place }}{% else %}не указано{% endif %}<br>Организатор: {% if owner %}{{ owner }}{% else %}не указано{% endif %}<br><a href="http://www.runiver.net/event/{{event_id}}">Карточка события</a> на сайте <a href="http://www.runiver.net">Московского философского колледжа</a><br><br>{% if register %}{{ register }}{% else %}регистрация закрыта{% endif %}</textarea>
+										<input align="middle" name="submit" title="разместить в ЖЖ" style="height:30px" type="image" src="http://www.livejournal.com/img/userpic_loggedout.gif">
+										<input type="hidden" name="subject" value="{{ event_name }}">
+										<a href="#" onclick='$("#ljForm").submit();'>Разместить информацию о событии в ЖЖ</a>
+									</form>
+								</td>
+							</tr>
+							<tr><td style="heigth: 15px;" colspan="3" valign="center"><hr></td></tr>
+							<tr>
+								<td colspan=3 align="center">{% if register %}{{ register }}{% else %}регистрация закрыта{% endif %}</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+</table>

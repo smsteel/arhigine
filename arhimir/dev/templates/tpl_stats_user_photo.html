@@ -1,0 +1,35 @@
+<div class="main">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div style="margin-left: 20px; margin-right: 20px; padding-top: 20px;">
+			<div style="padding-left: 4px;padding-bottom: 4px;"><font style="font-size: 12px;">Статистика обновляется раз в сутки, отображены только те пользователи, которые загружали фотографии.</font></div>
+			<div>
+			<table style="width: 100%;" cellspacing="0" cellpadding="0" valign="middle">
+                <tr style="background-color: #EDEDED; height: 30px;">
+                    <td width="30px" valign="middle" >&nbsp;</td>
+                    <td>Имя пользователя</td>
+                    <td>Загружено фотографий, шт.</td>
+                    <td>Загружено фотографий, МБайт</td>
+                </tr>
+                {% for user_photo_stat in user_photo_stats %}
+                <tr style="background-color: #{% if user_photo_stat.user_highlight %}FFB070{% else %}EDEDED{% endif %}; height: 30px;">
+                    <td style="border-width: 2px 0px 0px 0px; border-style: solid; border-color: #AAAAAA;" height="30px" align="center"><img style="width: 24px; height: 24px;" src="/show_avatara/{{ user_photo_stat.user_id }}" /></td>
+                    <td style="border-width: 2px 0px 0px 0px; border-style: solid; border-color: #AAAAAA;"><a href="/users/{{ user_photo_stat.user_login }}">{{ user_photo_stat.user_login }}</a></td>
+                    <td style="border-width: 2px 0px 0px 0px; border-style: solid; border-color: #AAAAAA;">{{ user_photo_stat.photos_count }}</td>
+                    <td style="border-width: 2px 0px 0px 0px; border-style: solid; border-color: #AAAAAA;">{{ user_photo_stat.photos_size }}</td>
+                </tr>
+                {% endfor %}
+			</table>
+			</div>
+		</div>
+		
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+		
+</div>

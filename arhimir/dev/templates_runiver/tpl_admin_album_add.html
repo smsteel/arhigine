@@ -1,0 +1,36 @@
+<script>
+	picforms = 0;
+	function addtoform()
+	{
+		picforms++;
+		$("#picadd").append('<div class="form" id="fpic' + picforms + '"><input type="file" id="pic' + picforms + '" name="pic' + picforms + '" style="width: 250px;">Ключевые слова: <input type="text" id="tags' + picforms + '" name="tags' + picforms + '"><input type="button" id="bpic' + picforms + '" name="pic' + picforms + '" value="X" onclick="removefromform(' + picforms + ');"></div>');
+	}
+	function removefromform(id)
+	{
+		$("#bpic" + id).hide();
+		$("#fpic" + id).hide();
+		$("#pic" + id).hide();
+		$("#tags" + id).hide();
+		$("#pic" + id).attr("name", "deleted");
+		$("#picadd").append('<input type="hidden" name="pic' + id + '" value="deleted">');
+	}
+</script>
+<form method="post" enctype="multipart/form-data">
+	<div style="padding: 10px;">
+		<div class="form"><b>Добавление альбома:</b></div>
+		<hr>
+		<div class="form">Привязать к объекту: 
+			<select name="object" style="width: 250px;">
+				<option value=0>Не привязывать</option>
+				{{ options }}
+			</select>
+		</div>
+		<div class="form">Название альбома: <input type="text" name="name"></div>
+		<div class="form">Фотографии: <input type="file" name="pic0" style="width: 250px;"></div>
+		<div class="form">Ключевые слова: <input type="text" name="tags0"></div>
+		<div id="picadd"></div>
+		<div class="form"><input type="button" onclick="addtoform();" value="Добавить еще фото"></div>
+		<div class="form"><input type="submit" value="Сохранить альбом"></div>
+	</div>
+</form>
+		

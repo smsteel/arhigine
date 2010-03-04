@@ -1,0 +1,160 @@
+{% if effect %}
+<script>
+$(function() {
+	$("a[rel]").overlay();
+});
+</script>
+{% if jbutton %}<div style="padding: 5px;"><button type="button" rel="div.overlay:eq(0)" style="padding: 7px; width: 160px;">Форма регистрации</button></div>{% endif %}
+{% endif %}
+{% if effect %}<div class="overlay" id="overlay">{% else %}<div style="padding: 10px;" align="center">{% endif %}
+{% if not effect %}<table align=center style="border-style: solid; border-width: 2px;" cellpadding="0" cellspacing="0"><tr><td>{% endif %}
+	<table width={% if effect %}100%{% else %}600px{% endif %}>
+	    <form {% if check %}onsubmit = "return checkForm(this);"{% endif %} {% if action %}action="/{{ action }}/"{% endif %} method="post" enctype="multipart/form-data">
+	    {% if userid %}<input type="hidden" value="{{ userid }}" name="userid">{% endif %}
+	    	<tr height=30 style="background-color: #EEEEEE;">
+	    		<td colspan = "2" align="center">{{ title }}</td>
+	    	</tr>
+	    	<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+	        <tr valign = "top" height=30>
+	            <td width=30%>Логин в системе:</td>
+	            <td align="right" width=70%><input {% if login %} disabled value = "{{ login }}" {% endif %} id = "login{% if login %}1{% endif %}" maxlength=30 type="text" name="login{% if login %}1{% endif %}" style="left:0; right:0; width:100%;"></td>
+	        </tr>
+			<tr>
+			    <td colspan="2"><div align="center" id = "infodiv"></div></td>
+			</tr>
+			<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+			{% if checkpwd %}
+			<tr>
+				<td colspan="2">
+					<table width=100%>
+					<tr>
+						<td colspan="2">Аватара:</td>
+					</tr>
+					<tr>
+						<td width=128>
+							<img height=128 width=128 src="/show_avatara/{{userid}}">
+							<BR>
+							<input type="checkbox" name="delete">Удалить
+						</td>
+						<td valign=top width=100%><div align=left style="padding: 5px;">Изменить: <input type="file" name="img"/></div></td>
+					</tr>
+					</table>
+				</td>
+				
+			</tr>
+			<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+			
+			<tr>
+				<td align="center" colspan="2">
+					<b><a href="approve/">Являетесь архитектором? Подайте заявку на повышение статуса!</a></b>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" align=center>Вводите пароли, только если хотите их изменить</td>
+			</tr>
+			<tr>
+				<td width=200>Старый пароль:</td>
+				<td><input name="oldpassword" style="left:0; right:0; width:100%;"></td>
+			</tr>
+			{% endif %}
+	        <tr>
+	            <td width=200>{% if checkpwd %}Новый пароль{% else %}Пароль{% endif %} в системе:</td>
+	            <td><input id = "password" type="password" maxlength=30 name="password" style="left:0; right:0; width:100%;"></td>
+	        </tr>
+	        <tr valign = "top" height=30>
+	            <td width=200>Подтверждение пароля:</td>
+	            <td><input id = "passwordcheck" type="password" maxlength=30 name="pascheck" style="left:0; right:0; width:100%;"></td>
+	        </tr>
+	        <tr>
+	        	<td colspan = "2"><div align="center" id = "passdiv"></div></td>
+	        </tr>
+			<tr>
+				<td colspan = "2"><hr></td>
+			</tr>
+	        <tr valign = "top" height=30>
+	            <td width=200>Имя:</td>
+	            <td><input id = "name" {% if name %} value = "{{ name }}" {% endif %} type="text" name="name" maxlength=30 style="left:0; right:0; width:100%;"></td>
+	        </tr>
+	        <tr>
+	        	<td colspan = "2"><div align="center" id = "namediv"></div></td>
+	        </tr>
+			<tr>
+				<td colspan = "2"><hr></td>
+			</tr>
+	        <tr valign = "top" height=30>
+	            <td width=200>Фамилия:</td>
+	            <td><input id = "surname" {% if surname %} value = "{{ surname }}" {% endif %} type="text" name="surname" maxlength=30 style="left:0; right:0; width:100%;"></td>
+	        </tr>
+	        <tr>
+	        	<td colspan = "2"><div align = "center" id = "surnamediv"></div></td>
+	        </tr>
+			<tr>
+				<td colspan = "2"><hr></td>
+			</tr>
+	        <tr valign="top" height=30>
+	            <td width=200>Электронная почта:</td>
+	            <td><input id = "email" {% if email %} value = "{{ email }}" {% endif %} type="text" maxlength=30 name="email" style="left:0; right:0; width:100%;"></td>
+	        </tr>
+	        <tr>
+	        	<td colspan = "2"><div align="center" id = "emaildiv"></div></td>
+	        </tr>
+	        
+	        <tr>
+				<td>Twitter:</td>
+				<td><input name="twitter" style="left:0; right:0; width:100%;" value='{{ twitter }}'></td>
+			</tr>
+			
+			<tr>
+				<td>Livejournal:</td>
+				<td><input name="livejournal" style="left:0; right:0; width:100%;" value='{{ livejournal }}'></td>
+			</tr>
+	        
+	        {% if checkpwd %}
+	        <tr>
+	        	<td>О себе</td>
+	        	<td><textarea cols=50 rows=7 name="user_about">{{ user_about }}</textarea></td>
+	        </tr>
+			{% endif %}
+			{% if not checkpwd %}
+			<tr>
+				<td colspan = "2"><hr></td>
+			</tr>
+			<tr>
+				<td colspan = "2">Продолжая регистрацию, Вы принимаете <a href="/rules_users"><b>правила портала</b></a>. В том случае, если вы являетесь архитектором, то Вы принимаете еще и <a href="/rules_archi"><b>правила для архитекторов</b></a></td>
+			</tr>
+			{% endif %}
+	        <tr valign="bottom" height=30>
+	            <td colspan = "2" align = "center"><div style="padding: 5px;"><input style="padding: 5px; width: 200px;" type="submit" value="{{ button }}"></div></td>
+	        </tr>
+	    </form>
+	</table>
+{% if not effect %}</tr></td></table>{% endif %}
+</div>
+<script>
+{% if load_username %}
+	setTimeout('loadUserName();', 3000);
+{% endif %}
+{% if effect %}
+	setTimeout('loadUserName();', 3000);
+{% else %}
+	emailLoad = true;
+{% endif %}
+{% if check %}
+	loadEmail();
+{% if checkpwd %}
+	checkpwd = false;
+{% endif %}
+{% endif %}
+</script>
+

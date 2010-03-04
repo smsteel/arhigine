@@ -1,0 +1,127 @@
+<form method="post" onsubmit = "return checkForm(this);">
+<div style="padding: 5px;"><table align=center style="border-style: solid; border-width: 2px;" cellpadding="0" cellspacing="0"><tr><td>
+	<table style="padding: 5px;">
+		<tr>
+			<td colspan="2" align=center height=35 valign=top>
+			<font style="font-size: 20px;">Регистрация на "{{ event_name }}"</font>
+			</td>
+		</tr>
+		<tr>
+			<td width="175">
+				<font color="red">*</font> Имя
+			</td>
+			<td>
+				<input id="name" {% if name %}value="{{ name }}" disabled{% endif %} type="text" name="name" style="width: 250px;">
+			</td>
+		</tr>
+		<tr>
+			<td colspan = "2">
+				<div align=center id="namediv"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<font color="red">*</font> Фамилия
+			</td>
+			<td>
+				 <input id="surname" {% if surname %}value="{{ surname }}" disabled{% endif %} type="text" name="surname" style="width: 250px;">
+			</td>
+		</tr>
+		<tr>
+			<td colspan = "2">
+				<div align=center id="surnamediv"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Контакный телефон 
+			</td>
+			<td>
+				<input id="phone" type="text" name="phone" style="width: 250px;">
+			</td>
+		</tr>
+		<tr>
+			<td colspan = "2">
+				<div align=center id="phonediv"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<font color="red">*</font> Электронный адрес
+			</td>
+			<td>
+				<input id="email" {% if email %}value="{{ email }}" disabled{% endif %} type="text" name="email" style="width: 250px;">
+			</td>
+		</tr>
+		<tr>
+			<td colspan = "2">
+				<div align=center id="emaildiv"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Образование, опыт
+			</td>
+			<td>
+				<input type="text" name="company" style="width: 250px;">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Профессиональные интересы
+			</td>
+			<td>
+				<input type="text" name="position" style="width: 250px;">
+			</td>
+		</tr>
+	 	<!-- <tr>
+	 		<td>
+				<font color="red">*</font> Способ оплаты
+			</td>
+			<td>
+				<select name="payway" style="width: 250px;">
+					<option value=0>Бесплатно</option>
+					<option value=1>Безналичный рассчет</option>
+					<option value=2>Наличными с курьером</option>
+					<option value=3>web-money</option>
+				</select>
+			<td>
+		</tr> 
+		<tr>
+			<td>
+				<font color="red">*</font> Являетесь ли вы архитектором?
+			</td>
+			<td>
+				<select name="isarhitect" style="width: 250px;">
+					<option value="0">Нет</option>
+					<option value="1">Да</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+	 		<td colspan="2">
+					<font color="red">*</font> Разместили ли вы свое портфолио на <a href="http://arhimir.ru">arhimir.ru</a> ?
+					<br>
+					<input type="radio" checked name="is_portfolio" value="0">Нет<br>
+					<input type="radio" name="is_portfolio" value="1">Да (скидка 5%!)
+				</select>
+			<td>
+		</tr> -->
+		<tr>
+	 		<td colspan="2">
+					Вопросы / Комментарии<br>
+					<textarea style="width: 100%;" name="additional" cols="50" rows="7"></textarea>
+				</select>
+			<td>
+		</tr>
+		<tr>
+	 		<td colspan="2">
+				<input type="submit" value="Я подтверждаю свое участие в мероприятии" style="width: 100%;">
+			</td>
+		</tr>
+	</table>
+</td></tr></table></div>
+</form>
+<script>
+emailLoad = false;
+</script>

@@ -1,0 +1,17 @@
+<table width="100%">
+	<tr>
+		<td><font size="4">{{ cap }}</font></td>
+	</tr>
+	<tr>
+		<td>
+			<a href="/conf/{{ name }}">Вопросы</a> | 
+			<a href="/conf/rules/{{ name }}">Правила</a> | 
+			<a href="/conf/about/{{ name }}">О конференции</a> | 
+			<a href="/conf/ask/{{ name }}">Задать вопрос</a>
+			{% if owner %}
+				| <a href="/conf/waiting/{{ name }}">Свежие вопросы</a> |
+				<a href="/conf/settings/{{ name }}">Настройки</a>
+			{% endif %}
+		</td>
+	</tr>
+</table>

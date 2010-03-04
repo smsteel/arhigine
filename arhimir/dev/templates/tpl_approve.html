@@ -1,0 +1,56 @@
+<form method="post" id="app_form">
+<div class="main" id="info">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div style="padding-left: 20px; padding-right: 20px;">
+			<font style="font-size: 18px;">Все поля являются обязательными для заполнения</font>
+			<div style="padding-top: 4px;"><label for="fio" style="font-size: 12px;">ФИО:</label><br><input style="margin-top: 4px; width: 440px;" type="text" name="fio" value="{% if surname %}{{ surname }} {% endif %}{{ name }}" /></div>
+			<div style="padding-top: 8px;"><label for="phone" style="font-size: 12px;">Телефон:</label> <font style="font-size: 12px; color: #AAAAAA;">( Например, +7 (945) 1234567 )</font><br><input style="margin-top: 4px; width: 440px;" type="text" name="phone" /></div>
+			<div style="padding-top: 4px;"><label for="position" style="font-size: 12px;">Род деятельности:</label><br><input style="margin-top: 4px; width: 440px;" type="text" name="position" /></div>
+			<div style="padding-top: 4px;"><label for="graduate" style="font-size: 12px;">Образование (Вуз, годы обучения):</label><br><textarea name="graduate" style="margin-top: 4px; width: 440px;"></textarea></div>
+			<div style="padding-top: 4px;"><label for="exp" style="font-size: 12px;">Опыт работы:</label><br><textarea name="exp" style="margin-top: 4px; width: 440px;"></textarea></div>
+			<div style="padding-top: 14px; font-size: 12px;">Отправляя эту анкету, вы автоматически принимаете <b><a href="#">правила для архитекторов</a></b>.</div>
+			<div style="padding-top: 14px;"><input type="submit" value="Подтверждаю, что я архитектор" /></div>
+
+		</div>
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+		
+</div>
+</form>
+
+<!-- smsteel noop -->
+
+<style>
+	label.error { float: none; color: red; padding-left: 5px; vertical-align: middle; }
+</style>
+
+<script>
+
+	$().ready(function(){
+		$("#app_form").validate({
+	        rules : {
+		        fio : {required : true},
+		        phone : {required : true},
+				position : {required : true},
+				graduate : {required : true},
+				exp : {required : true}
+	        },
+	        messages : {
+	        	fio : "Укажите ФИО",
+	        	phone : "Укажите телефон",
+	        	position : "Укажите род деятельности",
+	        	graduate : "Укажите образование",
+	        	exp : "Укажите опыт работы"
+	        }
+		});
+	});
+
+</script>

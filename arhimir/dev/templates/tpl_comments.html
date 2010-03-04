@@ -1,0 +1,50 @@
+<link rel="stylesheet" href="/css/comments.css" type="text/css" media="screen">
+<script>
+    function show_reply(t)
+    {
+        if($("#comment_" + t).html() != "")
+            $("#comment_" + t).empty();
+        else
+            $("#comment_" + t).append('<div class="reply_form"><form method="POST" action="/comments"><input type="hidden" name="entity" value="{{ entity }}" /><textarea name="content"></textarea><input type="submit" value="Ответить" /><input type="hidden" name="parent_comment" value="' + t + '"</form></div>');
+    }
+</script>
+{% for comment in comments %}
+<div style="display: block; margin-left: {% if comment.level %}{{ comment.level }}{% else %}0{% endif %};">
+	<div class="comment">
+		<div class="userinfo">
+			<a id="username" href="/users/{{ comment.login }}">{{ comment.login }}</a>
+			<img id="avatar" width="50" height="50" alt="Аватара пользователя" src="/show_avatara/{{ comment.userid }}?resize=50x50" />
+		</div>
+		<div class="commentinfo">
+			<font>Комментарий оставлен {{ comment.date|date:"d.m.Y" }} в {{ comment.date|date:"H:i:s" }}</font>
+		</div>
+		<div class="content">
+			{{ comment.content }}
+		</div>
+	</div>
+	<div class="actions">
+		{% if admin %}<a href="/comment/delete/{{ comment.id }}"><img src="/images/delete_small.png" /></a>{% endif %}
+		{% if logged %}<a onclick="show_reply({{ comment.id }});">Ответить на этот комментарий</a>{% endif %}
+	</div>
+	<div id="comment_{{ comment.id }}"></div>
+</div>
+{% endfor %}
+{% if logged %}
+﻿<div style="padding: 10px;">
+	﻿<form method="post" action="/comments?entity={{ entity }}">
+		<table width="100%">
+			<tr>
+				<td align="center"><b>Добавить новый комментарий:</b></td>
+			</tr>
+			<tr>
+				<td align="center"><textarea style="width: 300px; height: 100px;" name="content"></textarea></td>
+			</tr>
+			<tr>
+				<td align="center"><input style="padding: 5px;" type=submit value="Добавить"></td>
+			</tr>
+		</table>
+	</form>
+</div>
+{% else %}
+<div class="forum_cats" style="margin-left: 10px; margin-right: 10px; padding: 5px;"><a href="/login/?return={{ url }}">Авторизируйтесь</a>, чтобы оставить комментарий</a></div>
+{% endif %}

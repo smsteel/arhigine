@@ -1,0 +1,26 @@
+<div style="padding-left: 20px; padding-top: 8px; padding-right: 20px;">
+Введите логин пользователя:
+<hr>
+<input id = "adminuser" maxlength=30 type="text" name="login" style="left:0; right:0; width:100%;">
+<br>
+<div id = "adminuserdiv"></div>
+</div>
+<script>
+	$("#adminuserdiv").hide();
+	adminuser = '';
+	$("#adminuser").keyup(function() {
+		if ($("#adminuser").attr("value") != adminuser)
+		{
+		    $("#adminuserdiv").load("/admin/users/", {"logins" : $("#adminuser").attr("value")});
+		}
+		if($("#adminuser").attr("value")=="")
+		{
+		    $("#adminuserdiv").fadeOut(400);
+		}
+		else
+		{
+		    $("#adminuserdiv").fadeIn(1000);
+		}
+		adminuser = $("#adminuser").attr("value");
+    });
+</script>
