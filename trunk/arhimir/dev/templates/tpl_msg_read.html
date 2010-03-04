@@ -1,0 +1,50 @@
+<div style="padding: 20px; width=100%;">
+	<table width=100%>
+		<tr>
+			<td width=100><font style="font-size: 10px;">Тема сообщения:</font></td>
+			<td><b>{{ caption }}</b></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr></td>
+		</tr>
+		<tr>
+			<td colspan="2"><font style="font-size: 10px;">Текст сообщения:</font></td>
+		</tr>
+		<tr>
+			<td colspan="2" valign="top">
+			<table cellspacing=0 cellpadding=0 width=100% style="border-style: dotted; border-width: 1px;">
+			<tr height="1">
+				<td colspan="3" height="1"><font style="font-size: 1px;">&nbsp;</font></td>
+			</tr>
+			<tr>
+				<td width=15px>&nbsp;</td>
+				<td>{{ content }}</td>
+				<td width=15px>&nbsp;</td>
+			</tr>
+			<tr height="1">
+				<td colspan="3" height="1"><font style="font-size: 1px;">&nbsp;</font></td>
+			</tr>
+			</table>
+			</td>
+		</tr>
+		{% if reply %}
+		<tr>
+			<td>
+			<table cellspacing=0 cellpadding=0 style="border-style: dotted; border-width: 1px;">
+			<tr height="1">
+				<td colspan="3" height="1"><font style="font-size: 1px;">&nbsp;</font></td>
+			</tr>
+			<tr>
+				<td width=15px>&nbsp;</td>
+				<td><a href='/msg/send/{{ owner }}?theme=RE: {{ caption }}'>Ответить</a></td>
+				<td width=15px>&nbsp;</td>
+			</tr>
+			<tr height="1">
+				<td colspan="3" height="1"><font style="font-size: 1px;">&nbsp;</font></td>
+			</tr>
+			</table>
+			</td>
+		</tr>
+		{% endif %}
+	</table>
+</div>

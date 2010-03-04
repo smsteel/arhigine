@@ -1,0 +1,18 @@
+{% include "tpl_conf_cap.html" %}
+<br>
+Вопросы, ожидающие ответа:
+<br>
+<hr>
+<table>
+{% for question in questions %}
+<tr>
+	<td colspan="3">{{ question.cap }} (от <a href="/users/{{ question.user }}">{{ question.user }}</a> {{ question.date|date:"d.m.Y H:i" }})</td>
+</tr>
+<tr>
+	<td>{{ question.text }}</td>
+	<td><a href="/conf/reply/{{ name }}/{{ question.id }}"><image src="/images/edituser.png" alt="Ответить"/></a></td>
+	<td><a href="/conf/delete/{{ name }}/{{ question.id }}"><image src="/images/delete_album.png" alt="Удалить"/></td>
+</tr>
+{% endfor %}
+</table>
+<hr>

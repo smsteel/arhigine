@@ -1,0 +1,15 @@
+<form method="post" enctype="multipart/form-data">
+<div class="main">
+
+
+		<div style="padding-left: 20px; padding-right: 20px;">
+			
+            Фото: <div style="padding-top: 5px;"><input class="add" type="file" name="pic"></div>
+            Ключевые слова: <div style="padding-top: 5px;"><input class="add" type="text" name="tags" value="{{ tags }}"></div>
+            <div style="padding-top: 5px;"><input type="submit" value="Сохранить"></div>
+            <div style="padding-top: 5px; color: Red;"><a href="/del_photo/{{ id }}">Удалить навсегда!</a></div>
+            
+		</div>
+
+</div>
+</form>

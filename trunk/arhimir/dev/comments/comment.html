@@ -1,0 +1,19 @@
+<div style="display: block; margin-left: {% if level %}{{ level }}{% else %}0{% endif %}">
+	<div class="comment">
+		<div class="userinfo">
+			<a id="username" href="/users/{{ login }}">{{ login }}</a>
+			<img id="avatar" width="50" height="50" alt="Аватара пользователя" src="/show_avatara/{{ userid }}?resize=50x50" />
+		</div>
+		<div class="commentinfo">
+			<font>Комментарий оставлен {{ date|date:"d.m.Y" }}</font>
+		</div>
+		<div class="content">
+			{{ content }}
+		</div>
+	</div>
+	<div class="actions">
+		{% if admin %}<a href="/comment/delete/{{ id }}"><img src="/images/delete_small.png" /></a>{% endif %}
+		{% if logged %}<a onclick="show_reply({{ id }});">Ответить на этот комментарий</a>{% endif %}
+	</div>
+	<div id="comment_{{ id }}"></div>
+</div>

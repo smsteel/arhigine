@@ -1,0 +1,46 @@
+<form method="post" enctype="multipart/form-data">
+<div class="main">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+		
+		
+		
+			<div style="padding-left: 20px; padding-right: 20px; padding-bottom: 10px;">
+			
+				<div style="font-size: 18px;">{{ caption }} объекта</div>
+				<div class="info">Название: <br><input class="add" type="text" name="name" value="{{ name }}"></div>
+				<div class="info">Картинка: <br><input class="add" type="file" name="pic" /></div>
+				<div class="info">Описание: <br>{{ editor }}</div>
+
+				{% if isadmin %}
+				<div class="info">Привязать объект к пользователю: <br><input class="add" id="login" type="text" name="login"></div>
+				<div style="display: none;" class="info" id="showlogins">&nbsp;</div>
+				{% endif %}
+				{% if userid %}
+				<input type="hidden" class="add" name="userid" value="{{ userid }}">
+				{% endif %}
+				<div class="info"><input type="submit" value="{{ button }}"></div>
+				
+				
+			</div>
+		
+		
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+
+</div>
+<input type="hidden" name="id" value="{% if id %}{{ id }}{% else %}0{% endif %}">
+</form>
+{% if isadmin %}
+<script>
+$("#login").keyup(function() {
+	$("#showlogins").load("user/", {"logins" : $("#login").attr("value"), "objectadd" : "true"});
+	$("#showlogins").show();
+});
+</script>
+{% endif %}

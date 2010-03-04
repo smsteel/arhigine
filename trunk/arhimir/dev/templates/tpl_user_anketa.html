@@ -1,0 +1,47 @@
+﻿<div style="padding-left: 15px;">
+	<table cellpadding="1" cellspacing="1">
+		<tr>
+			<td><i><b>Анкета пользователя:</b></i></td>
+			<td><a href="/users/{{ login }}">{{ name }} {{ surname }}</a></td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr></td>
+		</tr>
+		<tr>
+			<td><i>Контактный телефон:</i></td>
+			<td>{{ phone }}</td>
+		</tr>
+		<tr>
+			<td><i>Компания:</i></td>
+			<td>{% if company %}{{ company }}{% else %}&nbsp;{% endif %}</td>
+		</tr>
+		<tr>
+			<td><i>Должность:</i></td>
+			<td>{% if position %}{{ position }}{% else %}&nbsp;{% endif %}</td>
+		</tr>
+		{% if payway %}<tr>
+			<td><i>Способ оплаты:</i></td>
+			<td>{{ payway }}</td>
+		</tr>{% endif %}
+		<tr>
+			<td>Архитектор:</td>
+			<td>{% if isarhitect %}Да{% else %}Нет{% endif %}</td>
+		</tr>
+		<tr>
+			<td><i>Разместил ли портфолио:</i></td>
+			<td>{% if is_portfolio %}Да{% else %}Нет{% endif %}</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr></td>
+		</tr>
+		<tr>
+			<td colspan="2"><i>Вопросы и комментарии:</i></td>
+		</tr>
+		<tr>
+			<td colspan="2">{% if additional %}{{ additional }}{% else %}Нет{% endif %}</td>
+		</tr>
+		<tr>
+			<td colspan="2"><hr></td>
+		</tr>
+	</table>
+</div>

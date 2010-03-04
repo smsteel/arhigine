@@ -1,0 +1,23 @@
+{% include "tpl_conf_cap.html" %}
+
+<hr>
+
+<table width="100%">
+{% for question in questions %}
+<tr>
+	<td>Вопрос от <a href="/users/{{ question.user }}">{{ question.user }}</a> {{ question.date|date:"d.m.Y H:i" }}</td>
+</tr>
+<tr>
+	<td><font size="4">{{ question.cap }}</font></td>
+</tr>
+<tr>
+	<td>{{ question.text }}</td>
+</tr>
+<tr>
+	<td bgcolor="#DBDBDB">
+		Ответ:<br>
+		{{ question.answer }}
+	</td>
+</tr>
+{% endfor %}
+</table>

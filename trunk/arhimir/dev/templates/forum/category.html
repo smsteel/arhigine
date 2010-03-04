@@ -1,0 +1,40 @@
+<a id="new_topic" class="new_topic_up" href="/forum/topic/add/{{ cat_id }}"><img src="/images/newtopic_down.png" /></a>
+<div class="forum">
+<div id="caption"><a href="/forum/"><b>Категории</b></a> :: <b>{{ cat_name }}</b></div>
+<div class="forum_cap">
+	<ul>
+		<li id="column0">&nbsp;</li>
+		<li id="column1">Темы</li>
+		<li id="column2">Статистика</li>
+		<li id="column3">Последнее сообщение</li>
+	</ul>
+</div>
+{% for top in tops %}
+	<div class="forum_cats">
+		<ul>
+			<li id="column0"><img src="/images/message.png" /></li>
+			<li id="column1"><a href="/forum/topic/{{ top.id }}">{{ top.name }}</a></li>
+			<li id="column2">
+			<div class="cat_stats">
+				<img src="/images/balloon_message.png" /> ответов: {{ top.answers }}
+			</div>
+			</li>
+			<li id="column3">
+			{% if top.last_message %}
+			<div class="message_info message_topic">
+				<div id="date">	
+					<img src="/images/refresh.png" />
+					{{ top.last_message.date|date:"d.m.Y" }}
+				</div>
+				<div id="user">
+					<img src="/images/people.png" />
+					<a href="/users/{{ top.last_message.user.login }}">{{ top.last_message.user.login }}</a>
+				</div>
+			</div>
+			{% else %}<div class="no_message_info">Нет сообщений</div>{% endif %}</li>
+		</ul>
+	</div>
+{% endfor %}
+</div>
+<a id="new_topic" href="/forum/topic/add/{{ cat_id }}"><img src="/images/newtopic_up.png" /></a>
+{% include "../block_pages.html" %}

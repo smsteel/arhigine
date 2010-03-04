@@ -1,0 +1,249 @@
+<style>
+    a:active {
+      outline:none;
+    }
+    :focus {
+      -moz-outline-style:none;
+    }
+
+    /* the thumbnails */
+    #triggers {
+        text-align:left;
+    }
+    
+    #triggers img {
+        background-color:#fff;
+        padding: 2px;
+        border:1px solid #ccc;
+        margin:2px 2px;
+        -moz-border-radius:4px;
+        -webkit-border-radius:4px;
+    }
+    
+    /* the active thumbnail */
+    #triggers a.active img {
+        outline:0px solid #000;
+    
+        /* show on top of the expose mask */
+        z-index:9999;
+        position:relative;
+    }
+    /* the overlayed element */
+    .simple_overlay {
+        
+        /* must be initially hidden */
+        display:none;
+        
+        /* place overlay on top of other elements */
+        z-index:10000;
+        
+        /* styling */
+        background-color:#333;
+        
+        width:675px;    
+        min-height:200px;
+        border:1px solid #666;
+        
+        /* CSS3 styling for latest browsers */
+        -moz-box-shadow:0 0 90px 5px #000;
+        -webkit-box-shadow: 0 0 90px #000;    
+    }
+    
+    /* close button positioned on upper right corner */
+    .simple_overlay .close {
+        background-image:url(/images/close.png);
+        position:absolute;
+        right:-15px;
+        top:-15px;
+        cursor:pointer;
+        height:35px;
+        width:35px;
+    }
+    /* the large image. we use a gray border around it */
+    #img {
+        border:0px solid #666;
+    }
+    
+    /* "next image" and "prev image" links */
+    .next, .prev {
+        
+        /* absolute positioning relative to the overlay */
+        position:absolute;
+        top:40%;    
+        border:1px solid #666;    
+        cursor:pointer;
+        display:block;
+        padding:10px 20px;
+        color:#fff;
+        font-size:11px;
+        
+        /* upcoming CSS3 features */
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;    
+    }
+    
+    .prev {
+        left:0;
+        border-left:0;
+        -moz-border-radius-topleft:0;
+        -moz-border-radius-bottomleft:0;
+        -webkit-border-bottom-left-radius:0;
+        -webkit-border-top-left-radius:0;
+    }
+    
+    .next {
+        right:0;
+        border-right:0;
+        -moz-border-radius-topright:0;
+        -moz-border-radius-bottomright:0;
+        -webkit-border-bottom-right-radius:0;
+        -webkit-border-top-right-radius:0;    
+    }
+    
+    .next:hover, .prev:hover {
+        text-decoration:underline;
+        background-color:#000;
+    }
+    
+    /* when there is no next or previous link available this class is added */
+    .disabled {
+        visibility:hidden;        
+    }
+    
+    /* the "information box" */
+    .info {
+        position:absolute;
+        bottom:-50px;
+        left:-20px;
+        padding:10px 15px;
+        color:#fff;
+        font-size:11px;
+        border-top:1px solid #666;
+    }
+    
+    .info strong {
+        display:block;    
+    }
+    
+    /* progress indicator (animated gif). should be initially hidden */
+    .progress {
+        position:absolute;
+        top:45%;
+        left:50%;
+        display:none;
+    }
+    
+    /* everybody should know about RGBA colors. */
+    .next, .prev, .info {
+        background:#333 !important;
+        background:rgba(0, 0, 0, 0.6) url(/images/h80.png) repeat-x;        
+    }
+    span.tag
+    {
+        cursor: pointer;
+        font-size: 10px;
+        background-color: #DDDDDD;
+    }
+</style>
+
+<div class="main" id="info">
+
+
+		<div id="infotext" style="padding-left: 20px; padding-right: 20px; font-size: 18px;">Альбом "{{ name }}"{% if isadmin %} ( Album ID: {{ albumid }} ){% endif %}</div>
+		<!--div style="padding-left: 20px; padding-right: 20px; font-size: 12px;">Владелец альбома: <a href="/users/{{ ownerlogin }}">{{ ownername }} {{ ownersurname }}</a></div>
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 12px;">Связан с объектом: <a href="/objects/{{ objectid }}">{{ connected }}</a></div-->
+		{% if addphoto %}
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 12px; width: 125px;">
+		<a href="/admin/addphoto/{{ albumid }}"><div id="hover2" style="padding: 3px 5px 3px 3px;"><img style="border: 0; padding-right: 4px; vertical-align: -50%;" src="/images/add_photo.png" /> Добавить фото</div></a>
+		</div>
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 12px; width: 135px;">
+		<a href="/admin/deletealbum/{{ albumid }}"><div id="hover2" style="padding: 3px 5px 3px 3px;"><img style="padding-top 2px; padding-right: 4px; border: 0; vertical-align: -50%;" src="/images/delete_album.png" /> Удалить альбом</div></a>
+		</div>
+		{% endif %}
+		{% if options %}
+		<div style="padding-left: 20px; padding-right: 20px; padding-top: 10px; font-size: 12px;">
+			<form method="POST">
+			Привязан к объекту:
+			<select id="objectid" name="objectid" class="add" style="width: 100%;">
+				<option value="0">Не привязывать</option>
+				{{ options }}
+			</select>
+			<input type="hidden" name="albumid" value="{{ albumid }}" />
+			<input class="add" type="submit" value="Изменить" />
+			</form>
+		</div>
+		{% endif %}
+		
+</div>
+
+<div class="main">
+
+
+		<div id="triggers" style="padding-left: 20px; padding-right: 20px;">
+			{{ photos }}
+		</div>
+
+
+</div>
+<!-- overlay element -->
+<div class="simple_overlay" id="gallery">
+
+    <!-- "previous image" action -->
+    <a class="prev">назад</a>
+
+    <!-- "next image" action -->
+    <a class="next">далее</a>
+
+    <!-- image information -->
+    <div class="info"></div>
+
+    <!-- load indicator (animated gif) -->
+    <img class="progress" src="/images/arhimir_loading.gif" />
+
+</div>
+<script>
+$(function() {
+        
+	// select the thumbnails and make them trigger our overlay
+	$("#triggers a").overlay({
+	
+	    // each trigger uses the same overlay with the id "gallery"
+	    target: '#gallery'
+	
+	// let the gallery plugin do its magic!
+	}).gallery({
+	
+	    // the plugin accepts its own set of configuration options
+	    speed: 800
+	});
+	});
+	function tagsubmit(s)
+	{
+	    alert("#search" + s);
+	    $("#search" + s).submit();
+	}
+	$("span").hover(
+	    function()
+	    {
+	        if($(this).attr("id")=="hover")
+	            $(this).attr("style", "background-color: #EDEDED;");
+	    },
+	    function()
+	    {
+	        if($(this).attr("id")=="hover")
+	            $(this).attr("style", "background-color: #DDDDDD;");
+	    }
+);
+$("div").hover(
+	function()
+	{
+		if($(this).attr("id")=="hover2")
+			$(this).attr("style", "background-color: #EDEDED; padding: 3px 5px 3px 3px;");
+	},
+	function()
+	{
+		if($(this).attr("id")=="hover2")
+			$(this).attr("style", "background-color: #DBDBDB; padding: 3px 5px 3px 3px;");
+	}
+);
+</script>

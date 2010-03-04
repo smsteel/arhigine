@@ -1,0 +1,33 @@
+<div class="main">
+		<div style="padding-left: 20px; padding-right: 20px; font-size: 18px;">Пользователи, зарегистрировавшиеся на мероприятие "<a href="/event/{{ event.id }}">{{ event.name }}</a>":</div>
+</div>
+
+<div class="main">
+		<div style="margin-left: 20px; margin-right: 20px; padding-top: 20px;">
+			{% if user_list %}
+			<div style="padding-bottom: 10px;"><b><a href="/admin/event_msg/{{ event.id }}">Отослать всем сообщение</a></b></div>
+			<table style="width: 100%;" cellspacing="0" cellpadding="0" valign="middle">
+                <tr style="background-color: #EDEDED; height: 30px;">
+                    <td width="30px" valign="middle" >&nbsp;</td>
+                    <td>Логин пользователя</td>
+                    <td>Имя пользователя</td>
+                    <td>Фамилия пользователя</td>
+                    <td>Телефон пользователя</td>
+                </tr>
+                
+                {% for user in user_list %}
+                <tr style="background-color: #EDEDED; height: 30px;">
+                    <td style="border-width: 2px 0px 0px 0px; border-style: solid; border-color: #AAAAAA;" height="30px" align="center"><img style="width: 24px; height: 24px;" src="/show_avatara/{{ user.id }}" /></td>
+                    <td style="border-width: 2px 0px 0px 0px; border-style: solid; border-color: #AAAAAA;"><a href="/users/{{ user.login }}">{{ user.login }}</a></td>
+                    <td style="border-width: 2px 0px 0px 0px; border-style: solid; border-color: #AAAAAA;">{% if user.name %}{{ user.name }}{% else %}не указано{% endif %}</a></td>
+                    <td style="border-width: 2px 0px 0px 0px; border-style: solid; border-color: #AAAAAA;">{% if user.surname %}{{ user.surname }}{% else %}не указана{% endif %}</a></td>
+                    <td style="border-width: 2px 0px 0px 0px; border-style: solid; border-color: #AAAAAA;">{% if user.phone %}{{ user.phone }}{% else %}не указан{% endif %}</a></td>
+                </tr>
+                {% endfor %}
+                
+			</table>
+			{% else %}
+            <font style="font-size: 16px;"><b>Пока никто не зарегистрировался</b></font>
+            {% endif %}
+		</div>
+</div>

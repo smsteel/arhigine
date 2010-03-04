@@ -1,0 +1,37 @@
+<div class="forum">
+<div class="forum_cap">
+	<ul>
+		<li id="column0">&nbsp;</li>
+		<li id="column1">Категории</li>
+		<li id="column2">Статистика</li>
+		<li id="column3">Последнее сообщение</li>
+	</ul>
+</div>
+{% for cat in cats %}
+	<div class="forum_cats">
+		<ul>
+			<li id="column0"><img src="/images/message.png" /></li>
+			<li id="column1"><a href="/forum/category/?cat={{ cat.id }}">{{ cat.name }}</a></li>
+			<li id="column2">
+			<div class="cat_stats">
+				<img src="/images/balloon_message.png" /> ответов: {{ cat.answers }}
+			</div>
+			</li>
+			<li id="column3">
+			{% if cat.last_message %}
+			<div class="message_info">
+				<div id="date">	
+					<img src="/images/refresh.png" />
+					{{ cat.last_message.date|date:"d.m.Y" }}
+				</div>
+				<div id="user">
+					<img src="/images/people.png" />
+					<a href="/users/{{ cat.last_message.user.login }}">{{ cat.last_message.user.login }}</a>
+				</div>
+				<div id="topic"> в теме: <a href="/forum/topic/{{ cat.last_message.topic.id }}">{{ cat.last_message.topic.name }}</a></div>
+			</div>
+			{% else %}<div class="no_message_info">Нет сообщений</div>{% endif %}</li>
+		</ul>
+	</div>
+{% endfor %}
+</div>

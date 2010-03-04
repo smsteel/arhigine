@@ -1,0 +1,66 @@
+<style media="all" type="text/css">@import "/css/menu.css";</style>
+<div class="menu">
+	<ul>
+		<li>
+			<a href="/news/" target="_self" >Новости</a>
+		</li>
+		<li>
+			<a href="/favorites/" target="_self" >Избранное</a>
+		</li>
+		<li>
+			<a href="/msg/" target="_self" >Сообщения</a>
+		</li>
+		<li>
+			<a href="/events/" target="_self" >Мероприятия</a>
+		</li>
+		<li>
+			<a href="/forum/" target="_self" >Форум</a>
+		</li>
+		<li>
+			<a {% ifequal page 'users' %}class="current"{% endifequal %} href="/users/arhitectors/1" target="_self" >Пользователи</a>
+			<ul>
+				<li><a href="/users/arhimir/1">Команда "Архимир"</a></li>
+				<li><a href="/users/arhitectors/1">Архитекторы</a></li>
+				<li><a href="/users/page/1">Все пользователи</a></li>
+			</ul>
+		</li>
+		<li>
+			<a href="/user/{{ userid }}" target="_self" >Профиль</a>
+		</li>
+		{% if access.show_menu_customizing_elements %}
+		<li>
+			<a href="/admin/" target="_self" >Управление</a>
+			<ul>
+				{% if access.event %}
+				<li><a href="/admin/event/" target="_self">События</a></li>
+				{% endif %}
+				{% if access.event %}
+				<li><a href="/admin/event/categories/" target="_self">Категории событий</a></li>
+				{% endif %}
+				{% if access.users %}
+				<li><a href="/admin/users/" target="_self">Пользователи</a></li>
+				{% endif %}
+				{% if access.pages %}
+				<li><a href="/pages/" target="_self">Страницы</a></li>
+				{% endif %}
+				{% if access.news %}
+				<li><a href="/news/add/" target="_self">Добавить новость</a></li>
+				{% endif %}
+				{% if access.customize %}
+				<li><a href="/customize/" target="_self">Настройки портала</a></li>
+				{% endif %}
+				{% if access.objects %}
+				<li><a href="/admin/objects/" target="_self">Объекты</a></li>
+				{% endif %}
+				{% if access.album %}
+				<li><a href="/admin/album/add/" target="_self">Добавить альбом</a></li>
+				{% endif %}
+				{% if access.statistics %}
+				<li><a href="/admin/stats/gallery/photo/" target="_self">Статистика галереи</a></li>
+				<li><a href="/admin/stats/online/" target="_self">Статистика посещаемости</a></li>
+				{% endif %}
+			</ul>
+		</li>
+		{% endif %}
+	</ul>
+</div>

@@ -1,0 +1,52 @@
+<div class="main">
+
+		<div style="padding-left: 20px; padding-right: 20px;">
+			<div class="avatar"><img src="/show_avatara/{{ id }}" /></div>
+			<div class="info">{% if architect %}Преподаватель колледжа{% endif %} <b>{{ name }} "{{ login }}" {{ surname }}</b></div>
+			{% if objects_count %}<!-- div class="info">Семинаров/тем: {{ objects_count }}</div -->{% endif %}
+			{% if date %}<div class="info">В Колледже с {{ date }}</div>{% endif %}
+			<div style="float: left;">
+			<a href="/msg/send/{{ login }}"><div id="hover2" style="margin-top: 10px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/mail.png" /> Написать сообщение</div></a>
+			{% ifequal logged_access 10 %}<a href="/changeinfo/{{ id }}"><div id="hover2" style="margin-top: 10px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/edituser.png" /> Редактировать данные пользователя</div></a>{% endifequal %}
+			</div>
+		</div>
+
+</div>
+
+{% if architect %}
+{% if user_about %}
+<div class="main">
+		
+		<div style="padding-left: 20px; font-size: 18px;">О себе:</div>
+		<div style="padding-left: 20px; padding-right: 20px;">{{ user_about }}</div>
+</div>
+{% endif %}
+{% endif %}
+
+{% if architect %}
+<!-- div class="main">
+
+	<div style="padding-left: 20px; font-size: 18px;">Объекты архитектора:</div>
+	{% if objects_list %}
+	{{ objects_list }}
+	{% else %}
+	<div style="padding-left: 20px; padding-right: 20px;">Нет ни одного объекта</div>
+	{% endif %}
+
+</div -->
+{% endif %}
+
+<script>
+$("div").hover(
+	function()
+	{
+		if($(this).attr("id")=="hover2")
+			$(this).attr("style", "margin-top: 10px; background-color: #EDEDED; padding: 3px 5px 3px 3px;");
+	},
+	function()
+	{
+		if($(this).attr("id")=="hover2")
+			$(this).attr("style", "margin-top: 10px; background-color: #DBDBDB; padding: 3px 5px 3px 3px;");
+	}
+);
+</script>
