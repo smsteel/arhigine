@@ -36,7 +36,7 @@ class Handler():
             rcp = []
             rcp_list = Rcp_list.gql("where message = :message", message = message)
             for r in rcp_list:
-                rcp.append()
+                rcp.append({'login': r.login})
             title = message.title
             show_to_owner = message.show_to_owner
             show_to_rcp = message.show_to_rcp
