@@ -1,0 +1,70 @@
+<style>
+	#message_list {
+		display: block;
+		margin: 20px;
+		border: 1px solid #000;
+	}
+	#message {
+		display: block;
+	}
+	#message #check {
+		float: left;
+		width: 20px;
+	}
+		#message #check input[type=checkbox] {
+			margin: 8px 6px;
+		}
+	#message #owner, #title {
+		float: left;
+		width: 33%;
+	}
+	#message #owner, #title, #datetime {
+		padding: 5px;
+	}
+	.legend {
+		background-color: #fd9446;
+	}
+	.first {
+		background-color: #ffebdc;
+	}
+	.second {
+		background-color: #daefff;
+	}
+	.bold {
+		font-weight:bold;
+	}
+	#delete {
+		margin-left: 25px;
+		margin-top: -10px;
+	}
+</style>
+<script>
+	$(document).ready(function() {
+		$("#delete").click(function() {
+			var formilized_keys = [];
+			$("input[type=checkbox]:checked").each(function() {
+				formilized_keys.push($(this).attr('name'));
+			});
+			alert(formilized_keys);
+		});
+	});
+</script>
+<h2>{% block caption %}{% endblock %}</h2>
+<div id="message_list">
+<div id="message" class="legend bold">
+	<div id="check">&nbsp;</div>
+	<div id="title">Тема письма</div>
+	<div id="owner">{% block whois %}{% endblock %}</div>
+	<div id="datetime">Дата</div>
+</div>
+{% for message in messages %}
+<div id="message" class="{% cycle first,second %} {% if not message.o_read %}bold{% endif %}">
+	<div id="check"><input type="checkbox" name="{{ message.key }}" /></div>
+	<div id="title">{{ message.title }}</div>
+	<div id="owner">{% block owner %}{% endblock %}</div>
+	<div id="datetime">{{ message.datetime|date:"d.m.Y" }} в {{ message.datetime|date:"H:i" }}</div>
+</div>
+{% endfor %}
+</div>
+<input id="delete" type="button" value="Удалить" />
+{% include "../block_pages.html" %}
