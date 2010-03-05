@@ -40,12 +40,27 @@
 </style>
 <script>
 	$(document).ready(function() {
+		$("#delete").attr("disabled", "");
 		$("#delete").click(function() {
-			var formilized_keys = [];
+			$(this).attr("disabled", "disabled");
+			var formalized_keys = "";
 			$("input[type=checkbox]:checked").each(function() {
-				formilized_keys.push($(this).attr('name'));
+				formalized_keys += $(this).attr('name') + ",";
 			});
-			alert(formilized_keys);
+			alert(formalized_keys);
+			$.post("/message/delete/", { 'messages' : formalized_keys }, function (data) {
+				switch(data) {
+					case "success":
+						location.reload();
+						break;
+					case "fail":
+						alert("Произошла ошибка при удалении!");
+						location.reload();
+						break;
+					default:
+						alert(data);
+				}
+			});
 		});
 	});
 </script>
