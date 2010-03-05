@@ -48,7 +48,16 @@ class Handler():
             formalized_messages.sort(key=lambda k: k['datetime'])
         return formalized_messages
             
-    def delete(self, keys):
-        pass
-        #db.delete(keys_for_del)
-            
+    def delete(self, messages, user):
+        messages_ = db.get(messages)
+        for message in messages_:
+            if message.owner == user:
+                message.deleted = True
+                message.put()
+            else:
+                rcp = Rcp_list.gql("where message = :message and rcp = :rcp", message = message, rcp = user)[0]
+                rcp.deleted = True
+                rcp.put()
+                
+                
+                
