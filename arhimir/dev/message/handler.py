@@ -32,7 +32,7 @@ class Handler():
     def __get_letters(self, messages):
         formalized_messages = []
         for message in messages:
-            owner = message.owner
+            owner = message.owner.login
             rcp = []
             rcp_list = Rcp_list.gql("where message = :message", message = message)
             for r in rcp_list:
