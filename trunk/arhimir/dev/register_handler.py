@@ -104,17 +104,10 @@ class RegisterHandler(OutputClass):
                 
 #                try:
                 
-                subject= cgi.escape("[" + self.paramByName("name") + "] Подтверждение регистрации")
-                
-                print subject
-                
-                body="""Спасибо за регистрацию на нашем сайте!  Пожалуйста, активируйте свою учетную запись, следуя по ссылке:
-                """+self.paramByName("url")+"""/confirm/""" + str(confirmation) + """
-                __
-                С уважением, администрация сайта"""
-                
-                #RegisterConfirm().sendEmailCheck(dbuser.put(), confirmation)
-                PostOffice().append_to_queue(dbuser.put(), subject.encode("utf-8"), "1")
+                subject = """[%s] Подтверждение регистрации""" % self.paramByName("name")
+
+                body = """Спасибо за регистрацию на нашем сайте! Пожалуйста, активируйте свою учетную запись, следуя по ссылке:\n%s/confirm/%s\n__\nС уважением, администрация сайта.""" % (self.paramByName("url"), confirmation)
+                PostOffice().append_to_queue(dbuser.put(), subject.decode("utf-8"), body.decode("utf-8"))
 #                except:
 #                    self.insertContent('Письмо на подверждение учетной записи не было отправлено<br>')
                 self.showMessage('<h1>Регистрация успешно завершена<br>На ящик '+str(dbuser.email)+' было отправлено письмо для активации вашей учетной записи<br>Вы сможете зайти на сайт только после прохождения активации!</h1><br><a href=/>Вернуться на главную</a>')
