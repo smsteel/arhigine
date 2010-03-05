@@ -3,7 +3,7 @@ from msg_handler import MSGHandler
 class MSGIncoming(MSGHandler):
     """ guess who """
     
-    url_handler = '/msg/incoming/?'
+#    url_handler = '/msg/incoming/?'
     
     def get(self):
         """ Show all msg captions """

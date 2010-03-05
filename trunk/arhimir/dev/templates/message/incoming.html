@@ -1,0 +1,4 @@
+{% extends "list.html" %}
+{% block caption %}Входящие{% endblock %}
+{% block whois %}От кого{% endblock %}
+{% block owner %}<a href="/users/{{ message.owner.login }}">{{ message.owner.login }}</a>{% endblock %}

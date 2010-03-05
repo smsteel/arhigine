@@ -1,6 +1,7 @@
 from db_entities.message.message import Message
 from db_entities.message.rcp_list import Rcp_list
 from sendmail.post_office import PostOffice
+from google.appengine.ext import db
 
 class Handler():
     
@@ -22,27 +23,32 @@ class Handler():
         rcp_list = Rcp_list.gql("where rcp = :rcp", rcp = user)
         messages = []
         for entity in rcp_list:
+            if entity.deleted: continue
             messages.append(entity.message)
         return self.__get_letters(messages)
     
     def get_outgoing(self, user):
-        messages = Message.gql("select __key__ where owner = :owner", owner = user)
+        messages = Message.gql("where owner = :owner and deleted = :is_deleted", owner = user, is_deleted = False)
         return self.__get_letters(messages)
     
     def __get_letters(self, messages):
         formalized_messages = []
         for message in messages:
-            owner = message.owner.login
+            owner = { 'login' : message.owner.login }
             rcp = []
+            r_read = False
             rcp_list = Rcp_list.gql("where message = :message", message = message)
             for r in rcp_list:
-                rcp.append({'login': r.login})
+                rcp.append({'login': r.rcp.login})
+                r_read = r.read
             title = message.title
-            show_to_owner = message.show_to_owner
-            show_to_rcp = message.show_to_rcp
+            o_read = message.read
             datetime = message.datetime
-            formalized_messages.append({'owner':owner, 'rcp':rcp, 'title':title, 'show_to_owner': show_to_owner, 'show_to_rcp': show_to_rcp, 'datetime': datetime})
+            formalized_messages.append({'key' : message.key(), 'r_read' : r_read, 'o_read' : o_read, 'owner':owner, 'rcp':rcp[:5], 'title':title, 'datetime': datetime})
+            formalized_messages.sort(key=lambda k: k['datetime'])
         return formalized_messages
             
-            
+    def delete(self, keys):
+        pass
+        #db.delete(keys_for_del)
             

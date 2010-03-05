@@ -1,0 +1,8 @@
+{% extends "list.html" %}
+{% block caption %}Исходящие{% endblock %}
+{% block whois %}Кому{% endblock %}
+{% block owner %}
+{% for r in message.rcp %} 
+	<a href="/users/{{ r.login }}">{{ r.login }}</a>
+{% endfor %}
+{% endblock %}
