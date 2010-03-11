@@ -3,6 +3,7 @@ from output_class import OutputClass
 from msg.msg_sender import MSGSender
 import cgi
 from db_entities.user import DBUser
+from sendmail.post_office import PostOffice
 
 class Approver(OutputClass):
 
@@ -46,10 +47,13 @@ class Approver(OutputClass):
         
 #        self.insertContent(content)
         try:
-            msgsend = MSGSender()
-            msgsend.send_msg(-1, login, self.request.get('content'), self.request.get('caption'))
+#            msgsend = MSGSender()
+#            msgsend.send_msg(-1, login, , )
+            PostOffice().append_to_queue(DBUser().get_key_by_login(login), self.request.get('caption'), self.request.get('content'))
         except:
             self.insertContent("Уведомлние не отправилось")
+            
+            
                           
         self.insertContent("""Готово""")
         self.drawPage()
