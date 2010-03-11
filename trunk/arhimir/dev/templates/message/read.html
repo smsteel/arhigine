@@ -1,0 +1,15 @@
+<style>
+	#message {
+		display: block;
+		margin: 20px;
+		border: 1px solid black;
+		-moz-border-radius: 5px;
+		background-color: white;
+	}
+</style>
+
+<div id="message">
+	Тема: {{ message.title }}
+	Сообщение: {{ message.body }}
+	{% ifnotequal message.owner.key user %}<a href="/message/send/{{ message.owner.login }}">Ответить</a>{% endifnotequal %}
+</div>
