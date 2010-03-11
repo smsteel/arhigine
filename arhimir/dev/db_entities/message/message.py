@@ -9,5 +9,3 @@ class Message(db.Model):
     deleted = db.BooleanProperty(default = False)
     datetime = db.DateTimeProperty(auto_now_add = True)
     
-    def has_unread_msg(self, userid):
-        return 0

@@ -5,10 +5,11 @@ from tools.multipage import Multipage
 class Incoming(OutputClass):
     
     access = 0
-    url_handler = '/msg/incoming/?'
+    url_handler = '/message/incoming/?'
     
     def get(self):
-        if not super(Incoming, self).get(): return 
+        if super(Incoming, self).get(): self.insertMenu()
+        else: return
         user = self.Session['user_key']
         
         messages = Handler().get_incoming(user)

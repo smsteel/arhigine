@@ -14,7 +14,8 @@ class forum_topic_add(OutputClass):
     
     def get(self):
         """ Drawing topic adding form"""
-        if not super(forum_topic_add, self).get(): return
+        if super(forum_topic_add, self).get(): self.insertMenu()
+        else: return
         self.insertTemplate("forum/topic_add.html", {})
         self.drawPage("Добавление категории в форум")
 

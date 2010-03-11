@@ -5,7 +5,7 @@ from tools.multipage import Multipage
 class Outgoing(OutputClass):
     
     access = 0
-    url_handler = '/msg/outgoing/?'
+    url_handler = '/message/outgoing/?'
     
     def get(self):
         if not super(Outgoing, self).get(): return 

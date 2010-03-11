@@ -1,6 +1,9 @@
-
+import cgi
 
 class tag_processor:
+
+    def mask_tags(self, data):
+        return cgi.escape(data)
     
     def del_tags(self, text):
         fixed_text = ''

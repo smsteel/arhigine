@@ -12,7 +12,7 @@
 			{% if objects_count %}<div class="info">Разместил объектов: {{ objects_count }}</div>{% endif %}
 			{% if date %}<div class="info">На проекте с: {{ date|date:"d.m.Y" }}</div>{% endif %}
 			<div style="float: left;">
-			<a href="/msg/send/{{ login }}"><div id="hover2" style="margin-top: 10px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/mail.png" /> Написать сообщение</div></a>
+			<a href="/message/send/{{ login }}"><div id="hover2" style="margin-top: 10px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/mail.png" /> Написать сообщение</div></a>
 			{% if architect %}<a href="/order/{{ login }}"><div id="hover2" style="margin-top: 10px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/order.png" /> Сделать заказ</div></a>{% endif %}
 			{% ifequal logged_access 10 %}<a href="/changeinfo/{{ id }}"><div id="hover2" style="margin-top: 10px; padding: 3px 5px 3px 3px;"><img style="border: 0; vertical-align: -25%;" src="/images/edituser.png" /> Редактировать данные пользователя</div></a>{% endifequal %}
 			</div>
