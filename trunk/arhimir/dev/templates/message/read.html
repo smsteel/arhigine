@@ -6,10 +6,21 @@
 		-moz-border-radius: 5px;
 		background-color: white;
 	}
+	#title {
+		margin: 10px 10px 0 10px;
+	}
+	#owner {
+		font-size: 10px;
+		margin: 0 0 10px 10px;
+	}
+	#body {
+	
+	}
 </style>
 
 <div id="message">
-	Тема: {{ message.title }}
-	Сообщение: {{ message.body }}
+	<div id="title">Тема: {{ message.title }}</div>
+	<div id="owner">от: {{ message.owner.login }}</div>
+	<div id="body">Сообщение: {{ message.body }}</div>
 	{% ifnotequal message.owner.key user %}<a href="/message/send/{{ message.owner.login }}">Ответить</a>{% endifnotequal %}
 </div>
