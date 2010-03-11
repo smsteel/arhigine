@@ -3,7 +3,7 @@ from output_class import OutputClass
 from msg.msg_sender import MSGSender
 import cgi
 from db_entities.user import DBUser
-from sendmail.post_office import PostOffice
+from message.handler import Handler
 
 class Approver(OutputClass):
 
@@ -47,9 +47,10 @@ class Approver(OutputClass):
         
 #        self.insertContent(content)
         try:
+            Handler().send(self.Session['user_key'], [DBUser().get_key_by_login(login)], self.request.get('caption'), self.request.get('content'))
 #            msgsend = MSGSender()
 #            msgsend.send_msg(-1, login, , )
-            PostOffice().append_to_queue(DBUser().get_key_by_login(login), self.request.get('caption'), self.request.get('content'))
+            #PostOffice().append_to_queue(, self.request.get('caption'), self.request.get('content'))
         except:
             self.insertContent("Уведомлние не отправилось")
             

@@ -3,6 +3,7 @@
 from output_class import OutputClass
 from db_entities.order import DBOrder
 from msg.msg_sender import MSGSender
+from message.handler import Handler
 
 """ Класс-обработчик заказов """
 class OrderHandler(OutputClass):
@@ -11,11 +12,12 @@ class OrderHandler(OutputClass):
     
     """ отсылает архитектору личное сообщение с заказом """
     def inform(self, arch, msg_text):
-        msgsend = MSGSender()
+#        msgsend = MSGSender()
         content = msg_text.decode("utf8")
         caption = "3AKA3!"
         try:
-            msgsend.send_msg(-1, arch, content, caption)
+            Handler().send(self.Session['user_key'], [arch], caption, content)
+#            msgsend.send_msg(-1, arch, content, caption)
             return True
         except:
             return False
