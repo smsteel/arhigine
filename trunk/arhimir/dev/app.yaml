@@ -1,5 +1,5 @@
 application: ru-dev
-version: test
+version: 18
 #application: net-edu
 #version: 16
 runtime: python
