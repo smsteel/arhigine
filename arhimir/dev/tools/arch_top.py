@@ -1,7 +1,7 @@
 from google.appengine.api import memcache
 from db_entities.gallery_object import DBGalleryObject
 from db_entities.user import DBUser
-import pickle, operator
+import pickle
 
 class ArchTop():
     
@@ -13,7 +13,7 @@ class ArchTop():
         else:
             data = memcache.get("sorted_objects_v2")
             if not data: return arhs
-            o_list = pickle.loads(data)
+            o_list = pickle.loads(data)[0:25]
             objects = []
             for object in o_list:
                 objects.append(DBGalleryObject.get_by_id(object))

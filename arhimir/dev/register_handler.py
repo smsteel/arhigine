@@ -82,7 +82,7 @@ class RegisterHandler(OutputClass):
                     this_invite = invite
                     break
             
-            if True:#self.checkLogin(self.request.get('login')) and self.checkEmail(self.request.get('email')):
+            if self.checkLogin(self.request.get('login')) and self.checkEmail(self.request.get('email')):
                 this_invite.used = True
                 dbuser = DBUser()
                 dbuser.login = str(cgi.escape(self.request.get('login'))).lower()
