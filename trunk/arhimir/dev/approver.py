@@ -1,6 +1,6 @@
 ﻿# -*- coding: UTF-8 -*-
 from output_class import OutputClass
-from msg.msg_sender import MSGSender
+#from msg.msg_sender import MSGSender
 import cgi
 from db_entities.user import DBUser
 from message.handler import Handler
