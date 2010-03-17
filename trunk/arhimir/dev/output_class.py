@@ -12,6 +12,8 @@ from db_entities.news import DBNews
 from db_entities.stat_daily_users import DBDailyUsers
 from random import choice as rndchoice
 from time import clock, time
+from message.handler import Handler as message_handler
+
 class OutputClass(webapp.RequestHandler):
     
     version = 14
@@ -219,7 +221,7 @@ class OutputClass(webapp.RequestHandler):
     
     def _drawPage(self, title = ""):
         #m_class = DBMSG()
-        messageinfo = '<div style="margin-top: 2px;"><a href=/msg/><b>Новое сообщение!</b></a></div>' #if m_class.has_unread_msg(self.Session['userid']) else ""
+        messageinfo = '<div style="margin-top: 2px;"><a href=/message/><b>Новое сообщение!</b></a></div>' if message_handler().has_unread_msg(self.Session['user_key']) else ""
         loginfo = """<div style="float: left; margin-right: 10px; width: 50px; height: 50px; padding: 2px; border-style: solid; border-width: 1px;"><img width="50" height="50" src="/show_avatara/""" + str(self.Session['userid']) +"""" /></div>        
             <div>Добро пожаловать, <b><a class="loginfo" href="/users/""" + self.Session['login'].encode("utf8") + """">""" + self.Session['login'].encode("utf8") + """</a></b></div> """ + messageinfo + """ 
             <div style="margin-top: 2px;"><a class="loginfo" href="/news/">Ваш личный кабинет</a></div>
