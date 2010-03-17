@@ -25,7 +25,8 @@ class forum_main(OutputClass):
             last_message = comments.getLastComment(formilized_topics)
             if last_message:
                 topic = DBForumTopic.get_by_id(last_message['objid'])
-                last_message['topic'] = { 'name' : topic.name.encode("utf8"),
+                topic_name = topic.name
+                last_message['topic'] = { 'name' : topic_name[0:32] + "..." if len(topic_name) > 32 else topic_name,
                                           'id' : int(topic.key().id()) }
             _categories.append({'id':int(cat.key().id()), 'name':cat.name.encode("utf-8"),
                                 'last_message' : last_message,
