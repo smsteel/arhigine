@@ -68,5 +68,7 @@ class Handler():
                 rcp.put()
                 
     def has_unread_msg(self, user):
-        
-        return Rcp_list.gql("where rcp = :rcp and read = :read", rcp = user, read = False).count(1)
+        try:
+            return Rcp_list.gql("where rcp = :rcp and read = :read", rcp = user, read = False).count(1)
+        except:
+            return False
