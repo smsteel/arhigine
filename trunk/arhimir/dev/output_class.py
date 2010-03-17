@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-
+#coding: utf-8
 from google.appengine.ext import webapp
 from google.appengine.ext import db
 from google.appengine.api import memcache
@@ -64,7 +64,8 @@ class OutputClass(webapp.RequestHandler):
                 'surname'       : False,
                 'email'         : False,
                 'userid'        : 0,
-                'access'        : -1 }
+                'access'        : -1,
+                'user_key'      : False, }
     
     __ContentOfMainTemplate = ''
     
@@ -234,7 +235,7 @@ class OutputClass(webapp.RequestHandler):
                                                                                                'content' : self.__ContentOfMainTemplate,
                                                                                                'version' : 'Engine version: ' + str(self.version),
                                                                                                'loginfo' : loginfo,
-                                                                                               'news': DBNews ().getItems(5),
+                                                                                               #'news': DBNews ().getItems(5),
                                                                                                'authorized' : self.Session['authorized'],
                                                                                                'title' : title,
                                                                                                'request_time' : self.request_time if self.Session['access'] == 10 else ""
@@ -242,7 +243,7 @@ class OutputClass(webapp.RequestHandler):
         except:
             self.response.out.write(template.render(self.__TemplatePath + 'tpl_html.html', { 'content' : self.__ContentOfMainTemplate,
                                                                                                'version' : 'Engine version: ' + str(self.version),
-                                                                                               'news': DBNews ().getItems(5),
+                                                                                               #'news': DBNews ().getItems(5),
                                                                                                'loginfo': loginfo,
                                                                                                'authorized' : self.Session['authorized'],
                                                                                                'request_time' : self.request_time if self.Session['access'] == 10 else ""
