@@ -11,6 +11,8 @@ class forum_main(OutputClass):
     
     def get(self):
         
+        self.checkSession(self.request.headers.get('Cookie'), False)
+        
         _categories = []
         
         cats = db.GqlQuery("SELECT * FROM DBForumCategory order by position") 

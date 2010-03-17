@@ -11,7 +11,7 @@ class forum_category(OutputClass):
     url_handler = '/forum/category/?'
 
     def get(self):
-        
+        self.checkSession(self.request.headers.get('Cookie'), False)
         category = 0
         cat = int(self.request.get('cat')) if self.request.get('cat') else 0#int(self.get_url_part(1))
 
