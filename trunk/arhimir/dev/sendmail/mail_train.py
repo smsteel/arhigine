@@ -11,10 +11,11 @@ class MailTrain(webapp.RequestHandler):
     
     def get(self):
         letter_bag = Letter.gql("limit 10")
-        for letter in letter_bag:
-            if self.send_letter(letter.to.email, letter.subject, letter.body):
-                db.delete(letter)
-            
+        if letter_bag.count(1):
+            for letter in letter_bag:
+                if self.send_letter(letter.to.email, letter.subject, letter.body):
+                    db.delete(letter)
+                
     def send_letter(self, to, subject, body, sender="no.reply.arhimir@gmail.com"):
         try:
             mail.send_mail(sender, to, subject, body=tag_processor().del_tags(body), html=body)
