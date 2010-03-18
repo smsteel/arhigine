@@ -513,12 +513,31 @@ div.forum {
 			width: 40%;
 		}
 			div.forum #column1 a {
-				font-size: 17px;
-				text-decoration: underline;
-				padding: 27px 0 0 0;
-				height: 43px;
-				display: block;
+				text-decoration: none;
 			}
+			div.forum #topic_name {
+				height: 70px;
+				font-size: 1px;
+				letter-spacing: -1ex;
+				word-spacing: -1ex; 
+			}
+				div.forum #topic_name_inner {
+					display: -moz-inline-stack;
+					display: inline-block;
+					+display: inline;
+					+zoom: 1;
+					font-size: 17px;
+					letter-spacing: normal;
+					word-spacing: normal;
+					vertical-align: middle;
+				}
+				div.forum #topic_name_magic {
+					width:1px; margin-right:-1px;
+					vertical-align:middle;
+					display:-moz-inline-stack;display:inline-block;
+					+display:inline;+zoom:1;
+					height:70px;
+				}
 		div.forum #column2 {
 			width: 20%;
 		}
