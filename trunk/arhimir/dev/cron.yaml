@@ -1,5 +1,5 @@
 cron:
-- description: send mail every 5 minutes
+- description: send mail every 8 minutes
   url: /system/mail_train/
-  schedule: every 5 minutes
+  schedule: every 8 minutes
 
