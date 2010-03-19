@@ -23,6 +23,8 @@ class Approve(OutputClass):
 #            msgsend = MSGSender()
             content = (self.request.get('fio') + 
                 "<br>" +
+                self.Session['login']+
+                "<br>" +
                 self.request.get('phone') +
                 "<br>" + self.request.get('position')+
                 "<br>" +
