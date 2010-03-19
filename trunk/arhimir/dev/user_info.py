@@ -5,6 +5,7 @@ from db_entities.gallery_object import DBGalleryObject
 from output_class import OutputClass
 from login_handler import LoginHandler
 from twitter.twitt_get import TwittGet
+from db_entities.user import DBUser
 
 class UserInfo(OutputClass):
     """ guess who """
@@ -39,6 +40,7 @@ class UserInfo(OutputClass):
                                                                    'name' : user.name.encode("utf8"),
                                                                    'surname' : user.surname.encode("utf8"),
                                                                    'login' : user.login.encode("utf8"),
+                                                                   'comments' : DBUser().count_comments(user.key()),
                                                                    'architect' : True if user.access == 5 or user.access == 6 else False,
                                                                    'logged_access' : self.Session['access'],
                                                                    'objects_count' : objects_count,
