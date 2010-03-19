@@ -69,4 +69,3 @@ class NameLengthSmall(Exception):
 class SurnameLengthSmall(Exception):
     pass
 
-print mail.is_email_valid("\ncvv bd")
