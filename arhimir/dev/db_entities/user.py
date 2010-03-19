@@ -22,3 +22,9 @@ class DBUser(db.Model):
     
     def get_key_by_login(self, login):
         return db.GqlQuery("SELECT __key__ FROM DBUser WHERE login = :login", login=login)[0]
+    
+    def count_comments(self, key):
+        cmt =  0
+        for x_ in db.GqlQuery("select __key__ from DBComments where user = :user", user = key):
+            cmt += 1
+        return cmt
