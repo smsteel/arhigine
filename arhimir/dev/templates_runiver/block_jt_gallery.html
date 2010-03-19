@@ -1,0 +1,128 @@
+<style>
+    a:active {
+      outline:none;
+    }
+    :focus {
+      -moz-outline-style:none;
+    }
+    .triggers {
+        text-align:left;
+    }
+    .triggers img {
+        background-color:#fff;
+        padding: 2px;
+        border:1px solid #ccc;
+        margin:2px 2px;
+        -moz-border-radius:4px;
+        -webkit-border-radius:4px;
+    }
+    .triggers a.active img {
+        outline:0px solid #000;
+        z-index:9999;
+        position:relative;
+    }
+    .simple_overlay {
+        display:none;
+        z-index:10000;
+        background-color:#333;
+        width:675px;    
+        min-height:200px;
+        border:1px solid #666;
+        -moz-box-shadow:0 0 90px 5px #000;
+        -webkit-box-shadow: 0 0 90px #000;    
+    }
+    .simple_overlay .close {
+        background-image:url(/images/close.png);
+        position:absolute;
+        right:-15px;
+        top:-15px;
+        cursor:pointer;
+        height:35px;
+        width:35px;
+    }
+    #img {
+        border:0px solid #666;
+    }
+    .next, .prev {
+        position:absolute;
+        top:40%;    
+        border:1px solid #666;    
+        cursor:pointer;
+        display:block;
+        padding:10px 20px;
+        color:#fff;
+        font-size:11px;
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;    
+    }
+    .prev {
+        left:0;
+        border-left:0;
+        -moz-border-radius-topleft:0;
+        -moz-border-radius-bottomleft:0;
+        -webkit-border-bottom-left-radius:0;
+        -webkit-border-top-left-radius:0;
+    }
+    .next {
+        right:0;
+        border-right:0;
+        -moz-border-radius-topright:0;
+        -moz-border-radius-bottomright:0;
+        -webkit-border-bottom-right-radius:0;
+        -webkit-border-top-right-radius:0;    
+    }
+    .next:hover, .prev:hover {
+        text-decoration:underline;
+        background-color:#000;
+    }
+    .disabled {
+        visibility:hidden;        
+    }
+    .info {
+        position:absolute;
+        bottom:-50px;
+        left:-20px;
+        padding:10px 15px;
+        color:#fff;
+        font-size:11px;
+        border-top:1px solid #666;
+    }
+    .info strong {
+        display:block;    
+    }
+    .progress {
+        position:absolute;
+        top:45%;
+        left:50%;
+        display:none;
+    }
+    .next, .prev, .info {
+        background:#333 !important;
+        background:rgba(0, 0, 0, 0.6) url(/images/h80.png) repeat-x;        
+    }
+    span.tag
+    {
+        cursor: pointer;
+        font-size: 10px;
+        background-color: #DDDDDD;
+    }
+</style>
+<script>
+    $(document).ready(function() {
+		$(".triggers").each(function(i) {
+			$(".simple_overlay:eq(0)").clone().prependTo("#galleries");
+			$(this).find('a').overlay({
+			    target: '.simple_overlay:eq(' + i + ')'
+			}).gallery({
+			    speed: 800
+			});
+		});
+	});
+</script>
+<div class="simple_overlay" id="gallery">
+    <a class="prev">назад</a>
+    <a class="next">далее</a>
+    <div class="info"></div>
+    <img class="progress" src="/images/arhimir_loading.gif" />
+</div>
+<div id="galleries"></div>
