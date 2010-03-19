@@ -1,6 +1,7 @@
 ﻿# -*- coding: UTF-8 -*-
 from output_class import OutputClass
-from msg.msg_sender import MSGSender
+from sendmail.post_office import PostOffice
+from db_entities.user import DBUser
 
 class Approve(OutputClass):
 
@@ -19,7 +20,7 @@ class Approve(OutputClass):
     def post(self):
         self.checkSession(self.request.headers.get('Cookie'))
         if self.Session['access'] < 5:
-            msgsend = MSGSender()
+#            msgsend = MSGSender()
             content = (self.request.get('fio') + 
                 "<br>" +
                 self.request.get('phone') +
@@ -31,8 +32,9 @@ class Approve(OutputClass):
             )
             caption = "Architector approve"
             try:
+                PostOffice().append_to_queue(DBUser().get_key_by_login("spe"), caption, content)
                 #msgsend.send_msg(self.Session['userid'], "smsteel", content, caption)
-                msgsend.send_msg(self.Session['userid'], "spe", content, caption)
+#                msgsend.send_msg(self.Session['userid'], "spe", content, caption)
                 self.redirect("/msgbox/approvesend")
             except:
                 self.redirect("/msgbox/approvefail")
