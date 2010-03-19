@@ -1,0 +1,8 @@
+<h1>Список категорий</h1>
+{% for cat in cats %}
+
+&bull;{{ cat.name }}<br />
+
+{% endfor %}
+<hr />
+<a href="/admin/event/categories/add">Добавить категорию</a>

@@ -1,0 +1,27 @@
+<style>
+	div.pages {
+		display: block;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+</style>
+<div class="pages">
+	Страницы:
+	{% for page in pages.list %}
+		{% if forloop.first %}
+			{% ifnotequal page 1 %}
+				<a href="{{ pages.url }}page=1">1</a>&nbsp;...&nbsp;
+			{% endifnotequal %}
+		{% endif %}
+		{% ifequal page pages.current_page %}
+		<b>{{ page }}</b>
+		{% else %}
+		<b><a href="{{ pages.url }}page={{ page }}">{{ page }}</a></b>
+		{% endifequal %}
+		{% if forloop.last %}
+			{% ifnotequal page pages.last_page %}
+				&nbsp;...&nbsp;<a href="{{ pages.url }}page={{ pages.last_page }}">{{ pages.last_page }}</a>
+			{% endifnotequal %}
+		{% endif %}
+	{% endfor %}
+</div>

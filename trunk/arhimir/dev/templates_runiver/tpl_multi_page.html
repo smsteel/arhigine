@@ -1,0 +1,92 @@
+<div class="main">
+	<div style="width: 100%; float: left;">
+		<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+		<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+	</div>
+	
+	<style>
+	div.users_info {
+		margin-left: 20px;
+	}
+	div.users_info ul {
+		list-style: none;
+		margin:0;
+		padding:0;
+	}
+	div.users_info ul li {
+		float: left;
+		margin-right: 15px;
+	}
+	div.users_info ul #registered {
+		color: #015601;
+	}
+	div.users_info ul #architects {
+		color: #563E00;
+	}
+	div.users_info ul #non_confirmed {
+		color: #4C0000;
+	}
+	</style>
+	
+	<div class="users_info">
+		<ul>
+			<li id="registered">Зарегистрированных: {{ users.registered_count }}</li>
+			<li id="architects">Архитекторов: {{ users.architects_count }}</li>
+			<li id="non_confirmed">{% if you_admin %}Неактивированных: {{ users.non_confirmed_count }}{% endif %}</li>
+		</ul>
+	</div>
+	
+	<div style="width: 100%; float: left;">
+		<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+		<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+	</div>
+</div>
+{% for user in users_list %}
+<div style="width: 380px; margin-left: 10px; margin-top: 10px; float: left; background-color: #DBDBDB;">
+
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_up.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_up.png" /></div>
+		</div>
+
+		<div style="margin-left: 20px; margin-right: 20px; padding-top: 20px;">
+						
+			<table cellspacing="0" cellpadding="0" style="width: 100%;">
+
+				<tr valign="top" height="128" style="background-color: #{% ifequal user.access 0 %}EDEDED{% endifequal %}{% ifequal user.access 5 %}FFB070{% endifequal %}{% ifequal user.access 6 %}FFB070{% endifequal %}{% ifequal user.access 8 %}c0f5a2{% endifequal %}{% ifequal user.access 10 %}a7b5d6{% endifequal %};">
+					<td width="128" height="128">
+						<a href="/users/{{ user.login }}"><img width="128" height="128" src="/show_avatara/{{ user.id }}" /></a>
+					</td>
+					<td style="padding: 5px;">
+						<div style="display: block;">
+							<a href="/users/{{ user.login }}"><font color="black">
+								{{ user.name }} {{ user.login }} {{ user.surname }}
+								</font>
+							</a>
+						</div>
+						{% if user.twitt %}
+							<img src="/images/twitter.png" style="float: left; margin: 8px 0 0px 0px; padding-right: 2px;"/><font style="border-top: 1px dotted #444; margin-top: 5px; display: block; font-size: 11px;">{{ user.twitt }}</font>
+						{% endif %}
+					</td>
+				</tr>
+			
+			</table>
+			
+		</div>
+		
+		<div style="width: 100%; float: left;">
+			<div style="float: left;"><img src="/images/border_left_down.png" /></div>
+			<div style="float: right;"><img src="/images/border_right_down.png" /></div>
+		</div>
+		
+</div>
+{% endfor %}
+<div style="float: left; text-align: center; display: block; width: 100%; margin-top: 20px;">
+{% spaceless %}
+	<a style="text-decoration: none;" href="1">&laquo;</a>&nbsp;
+	{% for page in pages_list %}
+		{% ifequal page current_page %}<b>{{ page }}</b>&nbsp;{% else %}<a href="{{ page }}">{{ page }}</a>&nbsp;{% endifequal %}
+	{% endfor %}
+	<a style="text-decoration: none;" href="{{ last_page }}">&raquo;</a>
+{% endspaceless %}
+</div>
