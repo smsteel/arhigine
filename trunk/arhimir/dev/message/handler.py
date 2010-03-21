@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+
 from db_entities.message.message import Message
 from db_entities.message.rcp_list import Rcp_list
 from sendmail.post_office import PostOffice

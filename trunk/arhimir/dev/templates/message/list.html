@@ -75,7 +75,7 @@
 {% for message in messages %}
 <div id="message" class="{% cycle first,second %} {% if not message.o_read %}bold{% endif %}">
 	<div id="check"><input type="checkbox" name="{{ message.key }}" /></div>
-	<div id="title"><a href="/message/read/{{ message.key }}">{{ message.title }}</a></div>
+	<div id="title"><a href="/message/read/{{ message.key }}">{% if message.title %}{{ message.title }}{% else %}Без темы{% endif %}</a></div>
 	<div id="owner">{% block owner %}{% endblock %}</div>
 	<div id="datetime">{{ message.datetime|date:"d.m.Y" }} в {{ message.datetime|date:"H:i" }}</div>
 </div>
