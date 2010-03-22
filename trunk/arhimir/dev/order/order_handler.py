@@ -2,7 +2,7 @@
 
 from output_class import OutputClass
 from db_entities.order import DBOrder
-from msg.msg_sender import MSGSender
+#from msg.msg_sender import MSGSender
 from message.handler import Handler
 
 """ Класс-обработчик заказов """
