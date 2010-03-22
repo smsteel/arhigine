@@ -53,8 +53,15 @@ class Handler():
     
     def get_letter(self, letter, user):
         letter_ = db.get(letter)
-        if letter_.owner.key() == user or Rcp_list.gql("where message = :letter and rcp = :user", letter = db.Key(letter), user = user).count(1):
+        rcp = False
+        try:
+            rcp = Rcp_list.gql("where message = :letter and rcp = :user", letter = db.Key(letter), user = user)[0]
+        except: pass
+        if letter_.owner.key() == user or rcp:
+            rcp.read = True
+            rcp.put()
             return letter_
+
             
     def delete(self, messages, user):
         messages_ = db.get(messages)
@@ -65,7 +72,7 @@ class Handler():
                 message.put()
             else:
                 rcp = Rcp_list.gql("where message = :message and rcp = :rcp", message = message, rcp = user)[0]
-                rcp.deleted = True
+#                rcp.deleted = True
                 rcp.read = True
                 rcp.put()
                 
