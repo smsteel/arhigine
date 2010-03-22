@@ -72,7 +72,7 @@ class Handler():
                 message.put()
             else:
                 rcp = Rcp_list.gql("where message = :message and rcp = :rcp", message = message, rcp = user)[0]
-#                rcp.deleted = True
+                rcp.deleted = True
                 rcp.read = True
                 rcp.put()
                 
