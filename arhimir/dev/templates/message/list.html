@@ -47,7 +47,6 @@
 			$("input[type=checkbox]:checked").each(function() {
 				formalized_keys += $(this).attr('name') + ",";
 			});
-			alert(formalized_keys);
 			$.post("/message/delete/", { 'messages' : formalized_keys }, function (data) {
 				switch(data) {
 					case "success":
