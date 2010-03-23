@@ -88,14 +88,14 @@ class EventReg(OutputClass):
         anketa.eventid = int(event)
         anketa.name = db.Text(self.Session['name'], "utf_8") if self.Session['authorized'] else self.request.get('name')
         anketa.surname = db.Text(self.Session['surname'], "utf_8") if self.Session['authorized'] else self.request.get('surname')
-        anketa.phone = self.request.get('phone').encode("utf8")
+        anketa.phone = self.request.get('phone')
         anketa.email = self.Session['email'] if self.Session['authorized'] else self.request.get('email')
         anketa.company = self.request.get('company')
         anketa.position = self.request.get('position')
 #        anketa.payway = int(self.request.get('payway'))
         if self.request.get('is_portfolio'):
             anketa.is_portfolio = bool(int(self.request.get('is_portfolio')))
-        anketa.additional = self.request.get('additional').encode("utf8")
+        anketa.additional = self.request.get('additional')
         if self.request.get('isarhitect'):
             anketa.isarhitect = bool(int(self.request.get('isarhitect')))
         anketa.put()
