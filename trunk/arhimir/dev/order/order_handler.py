@@ -4,32 +4,32 @@ from output_class import OutputClass
 from db_entities.order import DBOrder
 #from msg.msg_sender import MSGSender
 from message.handler import Handler
+from db_entities.user import DBUser
 
 """ Класс-обработчик заказов """
 class OrderHandler(OutputClass):
     
     url_handler = '/order/.*'
+    access = 0
     
     """ отсылает архитектору личное сообщение с заказом """
     def inform(self, arch, msg_text):
 #        msgsend = MSGSender()
-        content = msg_text.decode("utf8")
+        content = msg_text.decode("utf-8")
         caption = "3AKA3!"
-        try:
-            Handler().send(self.Session['user_key'], [arch], caption, content)
-#            msgsend.send_msg(-1, arch, content, caption)
-            return True
-        except:
-            return False
+
+        Handler().send(self.Session['user_key'], [DBUser().get_key_by_login(arch)], caption, content)
+
     
     """ выводим форму заказа """
     def get(self):
+        if not super(OrderHandler, self).get(): return
         self.insertTemplate("tpl_order.html")
         self.drawPage("Оформить заказ")
         
     """ Добавляем заказ в БД и уведомляем всех о нем """
     def post(self):
-        
+        if not super(OrderHandler, self).get(): return
         """ А все ли у нас хорошо? """
         try:
         
