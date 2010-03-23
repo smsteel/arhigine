@@ -103,7 +103,7 @@ class AdminUser(OutputClass):
                 rc.sendEmailCheck(self.request.get('email'), confirmation)
                 answer += '<h1>Почта была изменена и на новый адрес было выслано письмо для подтверждения регистрации</h1>'
             if self.request.get('password') != '':
-                if(user.password == self.request.get('oldpassword')):
+                if user.password == hashlib.md5(self.request.get('oldpassword')).hexdigest():
                     user.password = hashlib.md5(self.request.get('password')).hexdigest()
                 else:
                     self.insertContent('<h1>Пароль не был изменен</h1><br>')
