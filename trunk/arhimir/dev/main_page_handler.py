@@ -70,7 +70,8 @@ class MainPageHandler(OutputClass):
             events = []
             db_events = DBEvent.gql("where date >= :today", today = db.datetime.date.today())
             for event in db_events:
-                events.append( {'date' : event.date, 'name' : event.name, 'descr' : event.descr, 'id' : event.key().id() })
+                if event.access <= self.Session['access']:
+                    events.append( {'date' : event.date, 'name' : event.name, 'descr' : event.descr, 'id' : event.key().id() })
             memcache.add("events4main", pickle.dumps(events), 18000)
         else:
             events = pickle.loads(events)
