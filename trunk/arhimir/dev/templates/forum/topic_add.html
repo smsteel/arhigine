@@ -1,13 +1,36 @@
 <script>
 	$(document).ready(function() {
+		function selected(textarea) {
+			return (textarea.selectionStart && textarea.selectionEnd) && textarea.selectionStart != textarea.selectionEnd;
+		}
+		function Selection(textarea) {
+			this.textarea = textarea;
+			this.value = this.textarea.value;
+			this.start = this.textarea.selectionStart;
+			this.end = this.textarea.selectionEnd;
+			this.selected = ( ( this.start && this.end ) && ( this.start != this.end ) ) ? true : false;
+			this.before_selection = this.value.substring(0, this.start);
+			this.into_selection = this.value.substring(this.start, this.end);
+			this.after_selection = this.value.substring(this.end, this.value.length);
+			this.insert_text = function(text_start, text_end) {
+				this.textarea.value = this.before_selection + text_start + this.into_selection + text_end + this.after_selection;
+				this.textarea.selectionStart = this.textarea.selectionEnd = this.before_selection.length + text_start.length + this.into_selection.length + text_end.length;
+				this.textarea.focus();
+			}
+			return this;
+		}
+		//function insert_text
 		$("#add_href").click(function() {
+			var selection = Selection(document.getElementById('descr'));
 			var href = prompt("Введите адрес ссылки (начинается с http://)", "http://");
-			var text = prompt("Введите текст для ссылки", "Ссылка");
-			$("#descr").text($("#descr").text() + "<a href=\"" + href + "\">" + text + "</a>");//(text.startsWith("http://") ? text : ("http://" + text)));
+			selection.into_selection = prompt("Введите текст для ссылки", selection.selected ? selection.into_selection : "Ссылка");
+			selection.insert_text("<a href=\"" + href + "\">", "</a>");
 		});
 		$("#add_img").click(function() {
+			var selection = Selection(document.getElementById('descr'));
 			var src = prompt("Введите адрес картинки (начинается с http://)", "http://");
-			$("#descr").text($("#descr").text() + "<img src=\"" + src + "\"></img>"); 
+			selection.insert_text("<img src=\"" + src + "\" alt=\"", "\" />");
+			
 		});
 	});
 </script>
