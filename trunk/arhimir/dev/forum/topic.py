@@ -21,9 +21,14 @@ class forum_topic(OutputClass):
             self.showMessage("Тема не найдена!")
             return 
         
+        can_edit = False
+        if self.Session['access'] >= 8 or topic.author.key() == self.Session['user_key']:
+            can_edit = True
+        
         t_p = tag_processor()
         topic_text = t_p.prepare(topic.description.encode("utf-8"))
         
-        self.insertTemplate('forum/topic.html', {'user_name':topic.author.login ,'top_name':topic.name.encode("utf-8"), 'top_descr':topic_text})
+        self.insertTemplate('forum/topic.html', {'can_edit':can_edit, 'user_name':topic.author.login ,'top_name':topic.name.encode("utf-8"), 'top_descr':topic_text, 'id': topic.key().id()})
         self.insertComments(topic.key())
         self.drawPage("Форум :: Просмотр темы "+topic.name.encode("utf-8"))
+

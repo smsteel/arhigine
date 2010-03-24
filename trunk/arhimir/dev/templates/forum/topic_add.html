@@ -37,11 +37,11 @@
 </style>
 
 <form id="topic_add" method="post">
-    <label to="text">Название темы:</label><input type="text" name="name" />
+    <label to="text">Название темы:</label><input type="text" name="name" value="{{ topic.name }}"/>
     <label>Вставить:</label>
     <input id="add_href" type="button" value="Ссылку" />
     <input id="add_img" type="button" value="Картинку" />
-    <label to="descr">Текст:</label><textarea id="descr" name="descr" cols="40" rows="5"></textarea>
-    <input type="submit" value="Добавить тему" />
+    <label to="descr">Текст:</label><textarea id="descr" name="descr" cols="40" rows="5">{{ topic.description }}</textarea>
+    <input type="submit" value="Сохранить изменения" />
 
 </form>
