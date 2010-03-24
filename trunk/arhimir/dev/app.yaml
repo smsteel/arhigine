@@ -1,7 +1,7 @@
-application: ru-dev
-version: 19
-#application: net-edu
-#version: test
+#application: ru-dev
+#version: 19
+application: net-edu
+version: test
 runtime: python
 api_version: 1
 

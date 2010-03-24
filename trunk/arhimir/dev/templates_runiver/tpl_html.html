@@ -5,7 +5,14 @@
 <title>{% if title %}{{ title }} :: {% else %}{% endif %}Московский философский колледж</title>
 	<link rel="stylesheet" href="/css/style-runiver.css" type="text/css"  media="screen" />
     <meta name="description" content="Московский философский колледж">
-	<link rel="shortcut icon" href="/images/favicon_runiver.ico" type="image/x-icon"> 
+	<link rel="shortcut icon" href="/images/favicon_runiver.ico" type="image/x-icon">
+	<link rel="alternate" type="application/rss+xml" title="Новости в Твиттере RSS" href="http://twitter.com/statuses/user_timeline/113075501.rss" />
+	<link rel="alternate" type="application/atom+xml" title="Видео колледжа RSS" href="http://vimeo.com/user2657358/videos/rss" />
+	<link rel="alternate" type="application/atom+xml" title="Аудиоподкасты RSS" href="http://runiver.podfm.ru/rss" />
+	<link rel="alternate" type="application/rss+xml" title="Сообщество МФК RSS" href="http://community.livejournal.com/runiver/data/rss" />
+	<link rel="alternate" type="application/atom+xml" title="Сообщество МФК Atom" href="http://community.livejournal.com/runiver/data/atom" />
+
+
     <script type="text/javascript" src="/css/jquery.tools.min.js"></script>
     <script type="text/javascript" src="/css/personal.js"></script>
     <script type="text/javascript" src="/css/jquery.ajaxupload-3.5.js"></script>
@@ -30,15 +37,17 @@
 		{% else %}
 		<h2><a href="/news/">Личный кабинет</a></h2>
 	    {% endif %}
-	    <div>
+	    <div style="padding: 3px;">
 	    	
 			<form action="/search" id="cse-search-box">
+		  <div>
 		  	<label>поиск</label><br/>
 		    <input type="hidden" name="cx" value="012268017940460993452:cdvyhwq2loa" />
 		    <input type="hidden" name="cof" value="FORID:10" />
 		    <input type="hidden" name="ie" value="UTF-8" />
 		    <input type="text" name="q" size="12" />
 		    <input type="submit" name="sa" value="Поиск" />
+		  </div>
 		</form>
 		<script type="text/javascript" src="http://www.google.com/cse/brand?form=cse-search-box&lang=ru"></script>
 			
@@ -47,15 +56,15 @@
 	        <input id="spe42" type="text" size="10" name="find"  style="background-color:#f5f5f5;" onfocus="val = new String(this.value);  if (val.length < 15 && val.indexOf('поиск') > 0) this.value='';"  value="&nbsp;строка&nbsp;поиска">
 	        <input onclick='$("#search").submit();' type="submit" value="найти"/>
 	        </form-->
-			
 	    </div>
 	
   <div id="sectionLinks">
     
     <ul>
-      <li><a href="/home">Семинары, лекции, события</a></li>
-      <li><a href="/manifest">Манифест Колледжа</a></li>
-      <li><a href="/events">Календарь</a></li>
+      <li><a href="/home">Темы и события</a></li>
+      <li><a href="/manifest">Манифест колледжа</a></li>
+      <li><a href="/calendar">Календарь</a></li>
+      <li><a href="/events">Все события</a></li>
       <li><a href="/persons">Лица</a></li>
       <li><a href="/help">Обучение в колледже</a></li>
       <li><a href="/contacts">Контакты</a></li>
@@ -63,7 +72,8 @@
   </div>
   {% if news %}
   <div class="relatedLinks">
-    <h3>Новости Колледжа</h3>
+    <h3>Новости колледжа</h3>
+  	<hr />
     <ul>
   	{% for item in news %}
       <li><a href="/news/{{item.id}}">{{item.sdate}} {{item.caption}}</a> <div class="feature">{{item.preview}} <a href="/news/{{item.id}}">далее...</a></div></li>
@@ -71,19 +81,46 @@
     </ul>
   </div>
   {% endif %}
-    <!-- h3>Архив событий</h3>
+  <div class="relatedLinks">
+	<hr />
+	<hr />
+  <h3>Ресурсы МФК</h3>
+  	<hr/>
     <ul>
-      <li><a href="/video">Видеозапись 1</a></li>
-      <li><a href="#">Стенограмма 1</a></li>
-      <li><a href="/links">Related Link</a></li>
-      <li><a href="#">Аудиозапись 1</a></li>
-      <li><a href="#">Стенограмма X</a></li>
-      <li><a href="/album">Фотоальбом</a></li>
-      <li><a href="/event1">Событие 1</a></li>
-      <li><a href="/event/8011">Философия языка</a></li>
-      <li><a href="/links">Полезные ресурсы</a></li>
+      <li><a target="_blank" href="http://community.livejournal.com/runiver"><div class="feature">Cообщество</div><img width="100" style="padding: 3px;" src="/picture/2/47066"/></a></li>
+  	<hr/>
+      <li><a target="_blank" href="http://theoryandpractice.ru/organizers/1074-moskovskiy-filosofskiy-kolledzh"><div class="feature">Анонсы колледжа на сайте "Теории и практики"</div><img width="100" style="padding: 3px;" src="/picture/2/109046"/></a></li>
+  	<hr/>
+      <li><a target="_blank" href="http://twitter.com/runiver"><div class="feature">Новости колледжа в Твиттере</div>
+	  <img width="100" style="padding: 3px;" src="/picture/2/109043"/></a>
+	  </li>
+  	<hr/>
+      <li><a href="http://vimeo.com/user2657358" target="_blank"><div class="feature">Все видеозаписи на Vimeo</div>
+	  <img width="100" style="padding: 3px;" src="/picture/2/109044"/></a>
+	  </li>
+  	<hr/>
+      <li><a href="http://runiver.podfm.ru/" target="_blank"><div class="feature">Подкаст - все аудиозаписи</div><img width="100" style="padding: 3px;" src="/picture/2/47069"/></a></li>
+  	<hr/>
+      <li><a href="/contacts#rss"><div class="feature">Все RSS-подписки колледжа</div>
+	  <img width="100" style="padding: 3px;" src="/picture/2/109048"/></a>
+	  </li>
     </ul>
-  </div-->
+  </div>
+  <div class="relatedLinks">
+  	<hr/>
+	<hr />
+    <h3>Партнеры МФК</h3>
+  	<hr/>
+    <ul>
+      <li><a target="_blank" href="http://censura.ru"><div class="feature">Censura. Политика концепта.</div><img width="100" style="padding: 3px;" src="/picture/2/52011"/></a></li>
+  	<hr/>
+      <li><a target="_blank" href="http://zinoviev.info/wps/archives/126"><div class="feature">«ЗИНОВЬЕВ. Исключительный журнал»</div><img width="100" style="padding: 3px;" src="/picture/2/51034"/></a></li>
+  	<hr/>
+      <li><a target="_blank" href="http://community.livejournal.com/philos_club"><div class="feature">Дискуссионный клуб «Перспективы» философского факультета МГУ</div><img width="100" style="padding: 3px;" src="/picture/2/109049"/></a></li>
+  	<hr/>
+      <li><a target="_blank" href="http://pangloss.ru"><div class="feature">«Панглосс» - книжный магазин</div><img width="100" style="padding: 3px;" src="/picture/2/45035"/></a></li>
+    </ul>
+  </div>
 </div>
 <!--end navBar div -->
 
@@ -92,7 +129,7 @@
 </div>
   
 <!--end content -->
-<div id="siteInfo"> <a href="/help">Помощь</a> | <a href="/contacts">Связаться с администрацией</a> | &copy;2009 Moscow Philosophical College </div>
+<div id="siteInfo"> <a href="/help">Помощь</a> | <a href="/contacts">Контакты</a> | &copy;2009 Moscow Philosophical College </div>
 <br />
 
 <!-- Yandex.Metrika -->
