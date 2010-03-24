@@ -24,7 +24,12 @@ class forum_topic_edit(OutputClass):
         if super(forum_topic_edit, self).get(topic.author.key().id()): self.insertMenu()
         else: return
         
-        self.insertTemplate("forum/topic_add.html", {'topic':topic})
+        formalized_topic = {}
+        
+        formalized_topic['description'] = topic.description.replace('<br />', '\n')
+        formalized_topic['name'] = topic.name
+        
+        self.insertTemplate("forum/topic_add.html", {'topic':formalized_topic})
         self.drawPage("Редактирование топика")
 
     def post(self):
