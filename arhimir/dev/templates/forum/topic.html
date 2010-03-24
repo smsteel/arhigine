@@ -3,6 +3,9 @@
 <div class="forum_post">
 	<a href="/users/{{ user_name }}">{{ user_name }}</a> пишет: <br />
 	{{ top_descr }}
+	{% if can_edit %}
+	<a href="/forum/topic/edit/{{ id }}"><img src="/images/edit.png" /></a>
+	{% endif %}
 </div>
 </div>
 
