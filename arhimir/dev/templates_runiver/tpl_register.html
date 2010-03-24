@@ -19,7 +19,10 @@ $(function() {
 			</tr>
 	        <tr valign = "top" height=30>
 	            <td width=30%>Логин в системе:</td>
-	            <td align="right" width=70%><input {% if login %} disabled value = "{{ login }}" {% endif %} id = "login{% if login %}1{% endif %}" maxlength=30 type="text" name="login{% if login %}1{% endif %}" style="left:0; right:0; width:100%;"></td>
+	            <td align="right" width=70%>
+	            	<input {% if login %} disabled value = "{{ login }}" {% endif %} id = "login{% if login %}1{% endif %}" maxlength=30 type="text" name="login{% if login %}1{% endif %}" style="left:0; right:0; width:100%;">
+					{% if login %}{% ifequal email login %}<br><span style="font-size:x-small;">* поскольку логин совпадает с адресом электронной почты, он не отображается в общем списке пользователей; чтобы его изменить, <a href='/msg/send/oleg'>обратитесь к администраторам</a> и укажите желаемый логин.</span>{% endifequal %}{% endif %}
+				</td>
 	        </tr>
 			<tr>
 			    <td colspan="2"><div align="center" id = "infodiv"></div></td>
