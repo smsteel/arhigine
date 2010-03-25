@@ -1,0 +1,13 @@
+<form method="post">
+    <table>
+        <tr>
+            <td>Имя</td><td><input type="text" name="name" value="{{ cat.name }}" /></td>
+        </tr>
+        <tr>
+            <td>Описание</td><td><textarea name="descr">{{ cat.descr }}</textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Добавить" /></td>
+        </tr>
+    </table>
+</form>
