@@ -551,6 +551,7 @@ div.forum {
 					padding: 0;
 					margin: 2px;
 					color: #A3B4D9;
+					padding-right: 10px;
 				}
 				div.forum #topic_name_magic {
 					width:1px; margin-right:-1px;
