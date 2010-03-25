@@ -13,6 +13,9 @@ class forum_main(OutputClass):
         
         self.checkSession(self.request.headers.get('Cookie'), False)
         
+        is_admin = False
+        if self.Session['access'] == 10: is_admin = True
+        
         _categories = []
         
         cats = db.GqlQuery("SELECT * FROM DBForumCategory order by position") 
@@ -29,7 +32,7 @@ class forum_main(OutputClass):
                 last_message['topic'] = { 'name' : topic_name[0:32] + "..." if len(topic_name) > 32 else topic_name,
                                           'id' : int(topic.key().id()) }
             _categories.append({'id':int(cat.key().id()), 'name':cat.name.encode("utf-8"),
-                                'last_message' : last_message, 'descr': cat.descr.encode("utf-8"),
+                                'last_message' : last_message, 'descr': cat.descr.encode("utf-8"), 'is_admin': is_admin,
                                 'answers' : comments.getCommentsCount(formilized_topics) })
         
         self.insertTemplate('forum/forum_main.html', {'cats':_categories})
