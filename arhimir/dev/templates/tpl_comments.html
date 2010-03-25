@@ -5,7 +5,7 @@
         if($("#comment_" + t).html() != "")
             $("#comment_" + t).empty();
         else
-            $("#comment_" + t).append('<div class="reply_form"><form method="POST" action="/comments"><input type="hidden" name="entity" value="{{ entity }}" /><textarea name="content"></textarea><input type="submit" value="Ответить" /><input type="hidden" name="parent_comment" value="' + t + '"</form></div>');
+            $("#comment_" + t).append('<div class="reply_form"><form method="POST" action="/comments"><input type="hidden" name="entity" value="{{ entity }}" /><textarea name="content"></textarea><input type="submit" value="Ответить" /><input type="hidden" name="parent_comment" value="' + t + '" /></form></div>');
     }
 </script>
 {% for comment in comments %}

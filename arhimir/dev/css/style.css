@@ -486,13 +486,13 @@ div.forum {
 		padding: 5px 0 4px 0;
 		background-color: #fd9446;
 		color: white;
-		display: block;
+		display: inline-block;
 		height: 20px;
 		margin: 0;
 	}
 	div.forum ul {
 		list-style: none;
-		display: block;
+		display: inline-block;
 		width: 100%;
 		margin: 0;
 		padding: 0;
@@ -505,9 +505,18 @@ div.forum {
 		div.forum #column0 {
 			width: 10%;
 			max-width: 70px;
+			_width: 70px;
 		}
 			div.forum #column0 img {
-				padding: 8px 0 0 7px;
+				margin: 8px 0 0 7px;
+			}
+		div.forum #column_admin {
+			width: 10%;
+			max-width: 30px;
+			_width: 30px;
+		}
+			div.forum #column_admin img {
+				margin: 17px 0;
 			}
 		div.forum #column1 {
 			width: 40%;
@@ -527,9 +536,21 @@ div.forum {
 					+display: inline;
 					+zoom: 1;
 					font-size: 17px;
+					font-weight: bold;
 					letter-spacing: normal;
 					word-spacing: normal;
 					vertical-align: middle;
+				}
+				div.forum #topic_name_inner a:hover {
+					text-decoration: underline;
+				}
+				div.forum #topic_name_inner label {
+					display: block;
+					font-size: 12px;
+					font-weight: normal;
+					padding: 0;
+					margin: 2px;
+					color: #A3B4D9;
 				}
 				div.forum #topic_name_magic {
 					width:1px; margin-right:-1px;
