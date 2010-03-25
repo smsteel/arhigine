@@ -12,7 +12,7 @@
 		<ul>
 			<li id="column0"><img src="/images/message.png" /></li>
 			<li id="column1"><div id="topic_name"></a><div id="topic_name_inner"><a href="/forum/category/?cat={{ cat.id }}">{{ cat.name }}<br /><font size="2">{{ cat.descr }}</font></a>
-				{% if is_amin %}
+				{% if is_admin %}
 					<a href="/forum/admin/category/edit/{{ cat.id }}"><img src="/images/edit.png" /></a>
 				{% endif %}
 				</div><div id="topic_name_magic"></div></div></li>
