@@ -2,6 +2,7 @@
 <div class="forum_cap">
 	<ul>
 		<li id="column0">&nbsp;</li>
+		{% if is_admin %}<li id="column_admin">&nbsp</li>{% endif %}
 		<li id="column1">Категории</li>
 		<li id="column2">Статистика</li>
 		<li id="column3">Последнее сообщение</li>
@@ -11,10 +12,13 @@
 	<div class="forum_cats">
 		<ul>
 			<li id="column0"><img src="/images/message.png" /></li>
-			<li id="column1"><div id="topic_name"></a><div id="topic_name_inner"><a href="/forum/category/?cat={{ cat.id }}">{{ cat.name }}<br /><font size="2">{{ cat.descr }}</font></a>
-				{% if is_admin %}
-					<a href="/forum/admin/category/edit/{{ cat.id }}"><img src="/images/edit.png" /></a>
-				{% endif %}
+			{% if is_admin %}
+			<li id="column_admin">
+				<a href="/forum/admin/category/edit/{{ cat.id }}"><img src="/images/edit.png" /></a>
+			</li>
+			{% endif %}
+			<li id="column1"><div id="topic_name"></a><div id="topic_name_inner"><a href="/forum/category/?cat={{ cat.id }}">{{ cat.name }}</a>
+			<label to="topic_name">{{ cat.descr }}</label>
 				</div><div id="topic_name_magic"></div></div></li>
 			<li id="column2">
 			<div class="cat_stats">
