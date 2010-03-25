@@ -11,24 +11,14 @@ class forum_category_add(OutputClass):
     
     def get(self):
         if not super(forum_category_add, self).get(): return
-        self.insertContent("""
-        <form method="post">
-            <table>
-                <tr>
-                    <td>Имя</td><td><input type="text" name="name" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="submit" value="Добавить" /></td>
-                </tr>
-            </table>
-        </form>
-        """)
+        self.insertTemplate('forum/category_anketa.html', {})
         self.drawPage("Добавление категории в форум")
 
     def post(self):
         if not super(forum_category_add, self).get(): return
         new_category = DBForumCategory()
         new_category.name = cgi.escape(self.request.get("name"))
+        new_category.descr = cgi.escape(self.request.get("descr"))
         new_category.access = 0
         new_category.position = 0
         new_category.put()
