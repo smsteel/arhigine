@@ -486,12 +486,14 @@ div.forum {
 		padding: 5px 0 4px 0;
 		background-color: #fd9446;
 		color: white;
+		display:-moz-inline-stack;
 		display: inline-block;
 		height: 20px;
 		margin: 0;
 	}
 	div.forum ul {
 		list-style: none;
+		display:-moz-inline-stack;
 		display: inline-block;
 		width: 100%;
 		margin: 0;
