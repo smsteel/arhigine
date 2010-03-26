@@ -42,5 +42,5 @@ class forum_main(OutputClass):
                                 'last_message' : last_message, 'descr': cat.descr.encode("utf-8") if cat.descr else None,
                                 'answers' : comments_count, 'topics' : len(formilized_topics) })
         
-        self.insertTemplate('forum/forum_main.html', {'cats':_categories, 'is_admin': is_admin, 'all_comments_count' : all_comments_count-all_topics_count, 'all_topics_count' : all_topics_count, 'your_comments' : DBUser().count_comments(self.Session['user_key'])})
+        self.insertTemplate('forum/forum_main.html', {'cats':_categories, 'is_admin': is_admin, 'all_comments_count' : all_comments_count-all_topics_count, 'all_topics_count' : all_topics_count })
         self.drawPage("Форум")
