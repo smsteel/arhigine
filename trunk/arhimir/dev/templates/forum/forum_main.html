@@ -21,8 +21,11 @@
 			<label to="topic_name">{{ cat.descr }}</label>
 				</div><div id="topic_name_magic"></div></div></li>
 			<li id="column2">
-			<div class="cat_stats">
+			<div class="cat_stats cat_answers">
 				<img src="/images/balloon_message.png" /> ответов: {{ cat.answers }}
+			</div>
+			<div class="cat_stats cat_topics">
+				<img src="/images/balloon_message.png" /> тем: {{ cat.topics }}
 			</div>
 			</li>
 			<li id="column3">
@@ -42,4 +45,8 @@
 		</ul>
 	</div>
 {% endfor %}
+</div>
+<div class="forum">
+<font class="info">У нас уже {{ all_comments_count }} сообщений, а также {{ all_topics_count }} темы</font>
+<font class="info">{% ifequal your_comments 0 %}Безобразие! А вы еще не оставили ни одного сообщения!{% else %}А вы оставили всего {{ your_comments }} сообщений, включая различные комментарии на ресурсе{% endifequal %}</font>
 </div>
