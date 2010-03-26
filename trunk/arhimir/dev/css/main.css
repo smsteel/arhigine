@@ -71,7 +71,7 @@ div.top {
 	height: 135px;
 }
 	div.top #logo {
-		margin: 25px 0 0 30px;
+		#margin: 25px 0 0 30px;
 		padding: 0;
 		float: left;
 	}
@@ -79,7 +79,7 @@ div.top {
 		width: 550px;
 		position: relative;
 		left: 20%;
-		margin: 65px 0 0 -150px;
+		margin: 65px 0 0 -275px;
 		list-style: none;
 		float: left;
 	}
