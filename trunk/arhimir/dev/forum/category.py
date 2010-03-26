@@ -5,7 +5,7 @@ from google.appengine.ext import db
 from comments.comments import Comments
 from db_entities.forum.db_forum_category import DBForumCategory
 from tools.multipage import Multipage
-import operator
+from time import mktime
 
 class forum_category(OutputClass):
     
@@ -37,7 +37,7 @@ class forum_category(OutputClass):
                                 'answers' : comments.getCommentsCount([top.key()]) - 1,
                                 'last_message' : last_message })
         except: pass
-        _topics.sort(key=lambda k: k['last_message']['date'])
+        _topics.sort(key=lambda k: k['last_message']['date'], reverse=True)
         multipage = Multipage(self.request.get('page'), _topics, '/forum/category&cat=' + str(cat))
         self.insertTemplate('forum/category.html', {
                                                     'tops': multipage.getItems(),
