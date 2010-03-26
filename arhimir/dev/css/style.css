@@ -541,6 +541,9 @@ div.forum {
 					word-spacing: normal;
 					vertical-align: middle;
 				}
+				div.forum .normal {
+					font-weight: normal;
+				}
 				div.forum #topic_name_inner a:hover {
 					text-decoration: underline;
 				}
@@ -566,7 +569,11 @@ div.forum {
 		div.forum #column3 {
 			width: 30%;
 		}
-
+div.forum .info {
+	font-size: 12px;
+	margin: 5px 0 5px 10px;
+	display: block;
+}
 div.forum_cats {
 	margin-top: 5px;
 	border-bottom: 1px solid #fd9446;
@@ -575,6 +582,12 @@ div.forum_cats {
 	/* padding: 2px; */
 	display: block;
 	height: 70px;
+}
+div.forum .cat_answers {
+	margin: 10px 0;
+}
+div.forum .cat_topics {
+	margin: -4px 0;
 }
 div.message_info {
 	font-size: 14px;
