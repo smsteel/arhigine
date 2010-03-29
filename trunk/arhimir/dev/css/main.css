@@ -71,6 +71,7 @@ div.top {
 	height: 135px;
 }
 	div.top #logo {
+		display: block;
 		#margin: 25px 0 0 30px;
 		padding: 0;
 		float: left;
