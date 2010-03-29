@@ -59,6 +59,7 @@ class AdminEventHandler(OutputClass):
             event.owner = self.request.get('owner')
             event.place = self.request.get('place')
             event.userid = self.Session['userid']
+            event.author = self.Session['user_key']
             event.catid = int(self.request.get('cat'))
             event.put()
             self.insertMenu()
