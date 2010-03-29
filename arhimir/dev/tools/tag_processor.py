@@ -31,6 +31,7 @@ class tag_processor:
         
                 if letter == '<':
                     r_flag = True
+                    s_flag = 0
                           
                 if r_flag:
                     if s_flag == 3:
