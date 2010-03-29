@@ -52,7 +52,6 @@ class tag_processor:
                     if s_flag == 0:
                         if letter == '&':
                             s_flag = 1
-                        else: s_flag = 0
                      
                 if s_flag == 0: 
                     topic_text += letter
