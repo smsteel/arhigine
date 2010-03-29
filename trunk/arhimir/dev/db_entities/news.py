@@ -1,4 +1,5 @@
 from google.appengine.ext import db
+from db_entities.user import DBUser
 
 class DBNews(db.Model):
     image = db.BlobProperty()
@@ -7,6 +8,7 @@ class DBNews(db.Model):
     content = db.TextProperty()
     userid = db.IntegerProperty()
     date = db.DateProperty(auto_now_add = True)
+    author = db.ReferenceProperty(DBUser)
     
     def getItems (self, count):
         news = []

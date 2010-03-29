@@ -22,6 +22,7 @@ class NewsAdd(OutputClass):
         self.checkSession(self.request.headers.get('Cookie'))
         piece_of_news = DBNews()
         piece_of_news.userid = self.Session['userid']
+        piece_of_news.author = self.Session['user_key']
         piece_of_news.cap = self.request.get('cap')
         piece_of_news.preview = self.request.get('preview')
         piece_of_news.content = self.request.get('content')

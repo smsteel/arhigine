@@ -1,4 +1,5 @@
 from google.appengine.ext import db
+from db_entities.user import DBUser
 
 class DBEvent(db.Model):
     name = db.StringProperty()
@@ -11,4 +12,5 @@ class DBEvent(db.Model):
     access = db.IntegerProperty()
     userid = db.IntegerProperty()
     catid = db.IntegerProperty()
+    author = db.ReferenceProperty(DBUser)
     
