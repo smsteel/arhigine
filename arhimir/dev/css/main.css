@@ -72,8 +72,10 @@ div.top {
 }
 	div.top #logo {
 		display: block;
+		position: relative;
 		#margin: 25px 0 0 30px;
 		padding: 0;
+		margin: -5px 0;
 		float: left;
 	}
 	div.top ul {
@@ -88,11 +90,11 @@ div.top {
 			float: left;
 			margin: 0 10px 0 -4px;
 			padding: 0;
-			color: #fd9446;
+			color: #ff8400;
 			font: 20px sans-serif;
 		}
 			div.top a {
-				color: #fd9446;
+				color: #ff8400;
 				text-decoration: none;
 			}
 		
@@ -135,7 +137,7 @@ div.top {
 		}
 div.arhi {
 	display: block;
-	border: 1px solid #fd9446;
+	border: 1px solid #ff8400;
 	height: 200px;
 	width: 792px;
 	padding-left: 10px;
@@ -195,7 +197,7 @@ div.scroll_cap {
 		margin-left: 100px;
 	}
 	div.scroll_cap a {
-		color: #fd9446;
+		color: #ff8400;
 		text-decoration: none;
 	}
 	div.scroll_cap #new_block {
@@ -231,16 +233,3 @@ div.bottom {
 	margin: 20px 0 20px 0;
 	font: 11px sans-serif;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

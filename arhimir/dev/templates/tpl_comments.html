@@ -17,6 +17,7 @@
 		</div>
 		<div class="commentinfo">
 			<font>Комментарий оставлен {{ comment.date|date:"d.m.Y" }} в {{ comment.date|date:"H:i:s" }}</font>
+			<a href="#comment_{{ comment.id }}" title="Ссылка на комментарий" rel="bookmark">#</a>
 		</div>
 		<div class="content">
 			{{ comment.content }}

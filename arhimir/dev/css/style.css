@@ -480,11 +480,11 @@ div.forum {
 	margin-right: 10px;
 	margin-left: 10px;
 	background-color: #ffebdc;
-	border: 1px solid #fd9446;
+	border: 1px solid #ff8400;
 }
 	div.forum_cap {
 		padding: 5px 0 4px 0;
-		background-color: #fd9446;
+		background-color: #ff8400;
 		color: white;
 		/* display:-moz-inline-stack;
 		display: inline-block; */
@@ -578,8 +578,8 @@ div.forum .info {
 }
 div.forum_cats {
 	margin-top: 5px;
-	border-bottom: 1px solid #fd9446;
-	border-top: 1px solid #fd9446;
+	border-bottom: 1px solid #ff8400;
+	border-top: 1px solid #ff8400;
 	background-color: white;
 	/* padding: 2px; */
 	display: block;
