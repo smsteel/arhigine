@@ -1,11 +1,12 @@
 from google.appengine.ext import db
+from db_entities.comments import DBComments
 
 class Comments():
     
     def getCommentsCount(self, entities):
         comments_count = 0
         for entity in entities:
-            comments = db.GqlQuery("SELECT * FROM DBComments WHERE obj = :entity", 
+            comments = db.GqlQuery("SELECT __key__ FROM DBComments WHERE obj = :entity", 
                                      entity = entity)
             comments_count += comments.count()
         return comments_count
