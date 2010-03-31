@@ -18,6 +18,6 @@ class MailTrain(webapp.RequestHandler):
                 
     def send_letter(self, to, subject, body, sender="no.reply.arhimir@gmail.com"):
         try:
-            mail.send_mail(sender, to, subject, body=tag_processor().del_tags(body), html=body)
+            mail.send_mail(sender, to, subject, body=tag_processor().del_tags(body.replace('<br />', '\n').replace('<br>', '\n')), html=body)
             return True
         except: return False
