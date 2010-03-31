@@ -1,4 +1,6 @@
-﻿from output_class import OutputClass
+#coding: utf-8
+
+from output_class import OutputClass
 from db_entities.comments import DBComments
 from db_entities.user import DBUser
 from google.appengine.ext import db
@@ -33,14 +35,14 @@ class CommentHandler(OutputClass):
             comment = db.get(key_)
             
             #Отсылаем владельцу топика
-            if self.Session['user_key'] is not comment.obj.author:
+            if self.Session['user_key'] != comment.obj.author.key():
                 body = template.render("comments/comment_notification.html", { 
                                                                                 'user' : self.Session,
                                                                                 'comment' : comment,
                                                                                 'referer' : self.request.headers.get("Referer"),
                                                                                 'site_url' : DBCustomField().getByName('url')
                                                                               })
-                PostOffice().append_to_queue(comment.obj.author.email, """Новый комментарий на портале Архимир""", body)
+                PostOffice().append_to_queue(comment.obj.author, """Новый комментарий на портале Архимир""".decode("utf-8"), body.decode("utf-8"))
                 
             #Отсылаем владельцу коммента-предка:
             if comment.parent_comment and \
@@ -53,5 +55,5 @@ class CommentHandler(OutputClass):
                                                                                 'referer' : self.request.headers.get("Referer"),
                                                                                 'site_url' : DBCustomField().getByName('url')
                                                                               })
-                PostOffice().append_to_queue(comment.parent_comment.user.email, """Новый комментарий на портале Архимир""", body)
+                PostOffice().append_to_queue(comment.parent_comment.user, """Новый комментарий на портале Архимир""".decode("utf-8"), body.decode("utf-8"))
             self.redirect(self.request.headers.get("Referer"))
