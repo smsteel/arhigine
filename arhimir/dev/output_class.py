@@ -13,6 +13,8 @@ from db_entities.stat_daily_users import DBDailyUsers
 from random import choice as rndchoice
 from time import clock, time
 from message.handler import Handler as message_handler
+import pickle
+import hashlib
 
 class OutputClass(webapp.RequestHandler):
     
@@ -195,15 +197,22 @@ class OutputClass(webapp.RequestHandler):
         self.__ContentOfMainTemplate += Template
     
     def _drawMainPage(self):
-        self.insertTemplate('tpl_new_main.html', { 'scroll' : self._scroll,
-                                                   'news' : self._news,
-                                                   'tags' : self._tags,
-                                                   'events' : self._events,
-                                                   'confs' : self._confs,
-                                                   'arhs' : self._arhs, 
-                                                   'request_time' : self.request_time if self.Session['access'] == 10 else ""
-                                                 })
-        self.drawContent()
+        data = memcache.get("main_page")
+        if data:
+            self.response.out.write(pickle.loads(data))
+        else:
+            self.insertTemplate('tpl_new_main.html', { 'scroll' : self._scroll,
+                                                       'news' : self._news,
+                                                       'tags' : self._tags,
+                                                       'events' : self._events,
+                                                       'confs' : self._confs,
+                                                       'arhs' : self._arhs, 
+                                                       'request_time' : self.request_time if self.Session['access'] == 10 else ""
+                                                     })
+            minified_html = ' '.join(self.__ContentOfMainTemplate.split())
+            self.response.out.write(minified_html)
+            memcache.add("main_page", pickle.dumps(minified_html), 300)
+
     def drawMainPage(self, scroll, news, tags, events, confs, arhs):
         self.is_mainpage = True
         self._scroll = scroll
@@ -214,7 +223,7 @@ class OutputClass(webapp.RequestHandler):
         self._arhs = arhs
     
     def drawContent(self):
-        self.response.out.write(self.__ContentOfMainTemplate)
+        self.response.out.write(' '.join(self.__ContentOfMainTemplate.split()))
     
     def drawPage(self, title = ""):
         self.response_html = True
@@ -229,39 +238,24 @@ class OutputClass(webapp.RequestHandler):
             <div style="margin-top: 2px;"><a class="loginfo" href="/logout/">Выйти</a></div>
         
         """ if self.Session['authorized'] == True else """ssd"""
-        try:
-            #self.result = urlfetch.Fetch("http://ru-dev.appspot.com/version/version")
-            self.response.out.write(template.render(self.__TemplatePath + 'tpl_html.html', { 
-                                                                                               'content' : self.__ContentOfMainTemplate,
-                                                                                               'version' : 'Engine version: ' + str(self.version),
-                                                                                               'loginfo' : loginfo,
-                                                                                               #'news': DBNews ().getItems(5),
-                                                                                               'authorized' : self.Session['authorized'],
-                                                                                               'title' : title,
-                                                                                               'request_time' : self.request_time if self.Session['access'] == 10 else ""
-                                                                                            }))
-        except:
-            self.response.out.write(template.render(self.__TemplatePath + 'tpl_html.html', { 'content' : self.__ContentOfMainTemplate,
-                                                                                               'version' : 'Engine version: ' + str(self.version),
-                                                                                               #'news': DBNews ().getItems(5),
-                                                                                               'loginfo': loginfo,
-                                                                                               'authorized' : self.Session['authorized'],
-                                                                                               'request_time' : self.request_time if self.Session['access'] == 10 else ""
-                                                                                             }))
-        
-#    def insertComment(self, comment):
-#        self.insertTemplate('tpl_comments.html', {
-#                                                    'login' : DBUser().get_by_id(int(comment['userid'])).login.encode("utf8"),
-#                                                    'content' : comment['content'].encode("utf8"),
-#                                                    'userid' : comment['userid'],
-#                                                    'id' : comment['id'],
-#                                                    'admin' : True if \
-#                                                              self.Session['access'] >= 5 else False
-#                                                  })
-#    def generateComments(self, comments):
-#        for comment in comments:
-#            self.insertComment(comment)
-#            for child_comment in child_comments:
+        html = template.render(self.__TemplatePath + 'tpl_html.html',
+                               { 
+                                   'content' : self.__ContentOfMainTemplate,
+                                   'version' : 'Engine version: ' + str(self.version),
+                                   'loginfo' : loginfo,
+                                   #'news': DBNews ().getItems(5),
+                                   'authorized' : self.Session['authorized'],
+                                   'title' : title,
+                                   'request_time' : self.request_time if self.Session['access'] == 10 else ""
+                                })
+        #cache_name = hashlib.md5(html).hexdigest()
+        #data = memcache.get(cache_name)
+        #if data:
+            #self.response.out.write(pickle.loads(data))
+        #else:
+        minified_html = ' '.join(html.split())
+        self.response.out.write(minified_html)
+        #   memcache.add(cache_name, pickle.dumps(minified_html), 300)
         
     def insertComments(self, entity):
         ch = Comments()

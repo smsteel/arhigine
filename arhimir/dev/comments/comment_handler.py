@@ -24,7 +24,10 @@ class CommentHandler(OutputClass):
                 <br><a href='""" + self.request.headers.get("Referer") + """'>Вернуться в тему</a>""")
                 return
             comment = DBComments()
-            comment.user = DBUser.get_by_id(self.Session['userid'])
+            user = DBUser.get_by_id(self.Session['userid'])
+            comment.user = user
+            user.comments_count = user.comments_count + 1
+            user.put()
             
             comment.obj = db.Key(str(self.request.get('entity')))
             content = self.request.get("content")
