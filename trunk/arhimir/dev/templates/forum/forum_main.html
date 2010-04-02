@@ -48,5 +48,5 @@
 </div>
 <div class="forum">
 <font class="info">У нас уже {{ all_comments_count }} сообщени{{ all_comments_count|pluralize:"й,я" }}, а также {{ all_topics_count }} тем{{ all_topics_count|pluralize:"ы" }}</font>
-<!-- <font class="info">{% ifequal your_comments 0 %}Безобразие! А вы еще не оставили ни одного сообщения!{% else %}А вы оставили всего {{ your_comments }} сообщений, включая различные комментарии на ресурсе{% endifequal %}</font> -->
+{% if logged %}<font class="info">{% ifequal your_comments 0 %}Безобразие! А вы еще не оставили ни одного сообщения!{% else %}А вы оставили всего {{ your_comments }} сообщений, включая различные комментарии на ресурсе{% endifequal %}{% endif %}</font>
 </div>
