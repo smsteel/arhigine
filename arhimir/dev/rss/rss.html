@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+  <channel>
+    <title>Новости Архимира</title>
+    <link>http://www.arhimir.ru/news/</link>
+    <description>omg</description>
+    {% for item in items %}
+      <item>
+        <title>{{ item.title }}</title>
+        <link>{{ item.link }}</link>
+        <description>{{ item.description }}</description>
+        <pubDate>{{ item.pubdate }}</pubDate>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

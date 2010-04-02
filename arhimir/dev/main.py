@@ -53,7 +53,7 @@ if __name__ == "__main__":
     # Если их там нет, получаем их с нуля и добавляем в кэш
     if not url_handlers:
         url_handlers = get_url_handlers(os.path.curdir)
-        memcache.add("url_handlers", pickle.dumps(url_handlers), 3600) #@UndefinedVariable
+        memcache.add("url_handlers", pickle.dumps(url_handlers), 1) #@UndefinedVariable
     # Если есть, загружаем
     else:
         url_handlers = pickle.loads(url_handlers)
