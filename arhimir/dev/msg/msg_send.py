@@ -1,7 +1,6 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from output_class import OutputClass
 import cgi
-from msg.msg_sender import MSGSender
 from db_entities.user import DBUser
 from sendmail.post_office import PostOffice
 

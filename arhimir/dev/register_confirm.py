@@ -1,4 +1,5 @@
-﻿from output_class import OutputClass
+﻿#coding: UTF-8
+from output_class import OutputClass
 from google.appengine.ext import db
 from google.appengine.api import mail
 

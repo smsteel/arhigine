@@ -1,4 +1,5 @@
-﻿from output_class import OutputClass
+﻿#coding: UTF-8
+from output_class import OutputClass
 from db_entities.event_anketa import DBEventAnketa
 from db_entities.user import DBUser
 

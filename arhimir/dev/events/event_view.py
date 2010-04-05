@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-﻿
+﻿#coding: UTF-8
 from output_class import OutputClass
 from db_entities.event import DBEvent
 from db_entities.counter import DBCounter

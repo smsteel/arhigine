@@ -1,10 +1,9 @@
-﻿# -*- coding: UTF-8 -*-
+﻿#coding: UTF-8
 from google.appengine.ext import db
 import hashlib, cgi, random
 from db_entities.user import DBUser
 from db_entities.invite import DBInvite
 from output_class import OutputClass
-from register_confirm import RegisterConfirm
 from sendmail.post_office import PostOffice
 
 class RegisterHandler(OutputClass):

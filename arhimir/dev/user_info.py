@@ -1,9 +1,8 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from google.appengine.ext import db
 import cgi
 from db_entities.gallery_object import DBGalleryObject
 from output_class import OutputClass
-from login_handler import LoginHandler
 from twitter.twitt_get import TwittGet
 from db_entities.user import DBUser
 

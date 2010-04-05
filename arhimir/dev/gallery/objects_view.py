@@ -1,4 +1,5 @@
-﻿from google.appengine.ext import db
+﻿#coding: UTF-8
+from google.appengine.ext import db
 from db_entities.gallery_object import DBGalleryObject
 from db_entities.album import DBAlbum
 from db_entities.photo import DBPhoto

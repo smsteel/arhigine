@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-
+﻿#coding: UTF-8
 from output_class import OutputClass
 from sendmail.post_office import PostOffice
 from db_entities.user import DBUser

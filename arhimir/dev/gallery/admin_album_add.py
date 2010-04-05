@@ -1,4 +1,5 @@
-﻿import random, hashlib
+#coding: utf-8
+import random, hashlib
 from db_entities.gallery_object import DBGalleryObject
 from db_entities.album import DBAlbum
 from db_entities.photo import DBPhoto

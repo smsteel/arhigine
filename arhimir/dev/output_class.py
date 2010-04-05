@@ -1,4 +1,4 @@
-#coding: utf-8
+#coding: UTF-8
 from google.appengine.ext import webapp
 from google.appengine.ext import db
 from google.appengine.api import memcache
@@ -7,8 +7,6 @@ from session_handler import SessionHandler
 from tools.scroll import AjaxScroll
 from comments.comments import Comments
 from db_entities.custom_field import DBCustomField
-#from db_entities.message import DBMSG
-from db_entities.news import DBNews
 from db_entities.stat_daily_users import DBDailyUsers
 from random import choice as rndchoice
 from time import clock, time
@@ -40,7 +38,7 @@ class OutputClass(webapp.RequestHandler):
     def _get_request_time(self, *args, **kwargs):
         time_start = time()
         clock_start = clock()
-        f = self._child_get(*args, **kwargs)
+        self._child_get(*args, **kwargs)
         time_elapsed = (time() - time_start) * 1000
         clock_elapsed = (clock() - clock_start) * 1000
         self.request_time = "Запрос занял %5.0fмс (потрачено процессорного времени: %.0fмс)" % (time_elapsed, clock_elapsed)

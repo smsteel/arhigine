@@ -1,4 +1,5 @@
-﻿from google.appengine.ext import db
+#coding: utf-8
+from google.appengine.ext import db
 from admin_object_add import AdminObjectAdd
 from db_entities.gallery_object import DBGalleryObject
 

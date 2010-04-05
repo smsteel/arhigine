@@ -1,5 +1,4 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
-#from google.appengine.ext import db
+﻿#coding: UTF-8
 from output_class import OutputClass
 from db_entities.event_categories import DBEventCat
 

@@ -1,4 +1,5 @@
-﻿import operator
+﻿#coding: UTF-8
+import operator
 import random
  
 #this is a tag cloud script-generator created by spe

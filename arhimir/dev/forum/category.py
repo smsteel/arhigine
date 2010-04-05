@@ -5,7 +5,6 @@ from google.appengine.ext import db
 from comments.comments import Comments
 from db_entities.forum.db_forum_category import DBForumCategory
 from tools.multipage import Multipage
-from time import mktime
 
 class forum_category(OutputClass):
     

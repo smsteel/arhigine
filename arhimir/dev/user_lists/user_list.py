@@ -1,7 +1,6 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from google.appengine.ext import db
 from output_class import OutputClass
-from tools.multi_page import MultiPage
 import  pickle,operator
 from google.appengine.api import memcache
 from twitter.twitt_get import TwittGet

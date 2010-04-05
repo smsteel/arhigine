@@ -1,4 +1,5 @@
-﻿from db_entities.photo_tags import DBPhotoTags
+﻿#coding: UTF-8
+from db_entities.photo_tags import DBPhotoTags
 from output_class import OutputClass
 from spe_tager import Tager
 from google.appengine.ext import db

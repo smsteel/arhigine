@@ -1,5 +1,4 @@
-﻿import Cookie
-from google.appengine.api import images
+﻿#coding: UTF-8
 from google.appengine.ext import db
 from output_class import OutputClass
 from db_entities.page import DBPage
