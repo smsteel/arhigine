@@ -271,6 +271,7 @@ class OutputClass(webapp.RequestHandler):
                                                     'comments' : comments,
                                                     'admin' : True if self.Session['access'] > 9 else False,
                                                     'logged' : True if self.Session['access'] > -1 else False,
+                                                    'login' : self.Session['login'],
                                                     'url' : self.request.uri
                                                  })
         

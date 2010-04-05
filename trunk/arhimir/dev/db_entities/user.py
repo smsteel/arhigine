@@ -41,13 +41,16 @@ class DBUser(db.Model):
             return key
     
     def count_comments(self, key):
-        user = db.get(key)
-        if user.comments_count:
-            return user.comments_count
-        else:
-            cmt =  0
-            for x_ in db.GqlQuery("select __key__ from DBComments where user = :user", user = key):
-                cmt += 1
-            user.comments_count = cmt
-            user.put()
+        if key:
+            user = db.get(key)
+            if user.comments_count:
+                return user.comments_count
+            else:
+                cmt =  0
+                for x_ in db.GqlQuery("select __key__ from DBComments where user = :user", user = key):
+                    cmt += 1
+                user.comments_count = cmt
+                user.put()
             return cmt
+        else:
+            return 0

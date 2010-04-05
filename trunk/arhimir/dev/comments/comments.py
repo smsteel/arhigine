@@ -43,7 +43,7 @@ class Comments():
                 except: pass
             return formalized_comments
 
-    def getChildComments(self, comment, level = 20):
+    def getChildComments(self, comment, level = 50):
         child_comments = []
         for child_comment in comment.parent_comments:
             child_comments.append({ 
@@ -54,5 +54,5 @@ class Comments():
                                     'id' : child_comment.key().id(),
                                     'level' : level,
                                  })
-            child_comments += self.getChildComments(child_comment, level + 20)
+            child_comments += self.getChildComments(child_comment, level + 50)
         return sorted(child_comments, key=lambda k: k['date'])
