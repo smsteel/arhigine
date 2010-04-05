@@ -1,51 +1,120 @@
 <link rel="stylesheet" href="/css/comments.css" type="text/css" media="screen">
 <script>
+	$(document).ready(function() {
+		$(".new_comment").addClass("hidden");
+	});
     function show_reply(t)
     {
+    	if(!$(".new_comment").hasClass("hidden")) $(".new_comment").addClass("hidden");
+    	$(".reply_form").each(function() {
+    		if($(this).attr("id") != "comment_" + t) {
+    			$(this).empty();
+    		}
+    	});
         if($("#comment_" + t).html() != "")
             $("#comment_" + t).empty();
         else
-            $("#comment_" + t).append('<div class="reply_form"><form method="POST" action="/comments"><input type="hidden" name="entity" value="{{ entity }}" /><textarea name="content"></textarea><input type="submit" value="Ответить" /><input type="hidden" name="parent_comment" value="' + t + '" /></form></div>');
+            $("#comment_" + t).append('<div class="reply_form"><div class="reply_info">Вы, {{ login }}, отвечаете:</div><form method="POST" action="/comments"><input type="hidden" name="entity" value="{{ entity }}" /><textarea name="content"></textarea><input type="submit" value="Ответить" /><input type="hidden" name="parent_comment" value="' + t + '" /></form></div>');
+    }
+    function show_new_comment() {
+    	if($(".new_comment").hasClass("hidden")) {
+    		$(".new_comment").removeClass("hidden");
+    	}
+    	else {
+    		$(".new_comment").addClass("hidden");
+    	}
     }
 </script>
-{% for comment in comments %}
-<div style="display: block; margin-left: {% if comment.level %}{{ comment.level }}{% else %}0{% endif %};">
-	<div class="comment">
-		<div class="userinfo">
-			<a id="username" href="/users/{{ comment.login }}">{{ comment.login }}</a>
-			<img id="avatar" width="50" height="50" alt="Аватара пользователя" src="/show_avatara/{{ comment.userid }}?resize=50x50" />
+
+<!-- Внешний блок комментариев -->
+<div class="comments">
+
+	{% for comment in comments %}
+
+	<!-- Комментарий -->
+	<div class="comment" style="margin-left: {% if comment.level %}{{ comment.level }}{% else %}0{% endif %};">
+
+		<!-- Аватара -->
+		<div class="avatar">
+		
+			<!-- Картинка с аватарой -->
+			<img width="50" height="50" src="/show_avatara/{{ comment.userid }}?resize=50x50" alt="Аватара пользователя" />
+			
+			<!-- Закругленные углы -->
+			<img class="avatar_foreground" width="50" height="50" src="/images/avatar_foreground.png" alt="Аватара пользователя" />
+			
 		</div>
-		<div class="commentinfo">
-			<font>Комментарий оставлен {{ comment.date|date:"d.m.Y" }} в {{ comment.date|date:"H:i:s" }}</font>
-			<a href="#comment_{{ comment.id }}" title="Ссылка на комментарий" rel="bookmark">#</a>
-		</div>
+		
+		<!-- Содержимое комментария -->
 		<div class="content">
+			
+			<!-- Информация о комментарии -->
+			<ul class="info">
+			
+				<!-- Логин пользователя -->
+				<li class="login">
+					<a href="/users/{{ comment.login }}">{{ comment.login }}</a>
+				</li>
+				
+				<!-- Дата и время комментария -->
+				<li class="datetime">
+					написал {{ comment.date|date:"d.m.Y" }} в {{ comment.date|date:"H:i:s" }}
+				</li>
+				
+			</ul>
+			
+			<!-- Текст комментария -->
+			<span class="text">
 			{{ comment.content }}
+			</span>
+			
+			{% if logged %}
+
+			<!-- Быстрое управление комментарием -->
+			<div class="fast_controls">
+				<a onclick="show_reply({{ comment.id }}); return false;" href="">ответить</a>
+			</div>
+			
+			{% endif %}
+			
 		</div>
+		
+		<!-- Поле для формы ответа на комментарий -->
+		<div id="comment_{{ comment.id }}" class="reply_form">
+	
+		</div>
+
 	</div>
-	<div class="actions">
-		{% if admin %}<a href="/comment/delete/{{ comment.id }}"><img src="/images/delete_small.png" /></a>{% endif %}
-		{% if logged %}<a onclick="show_reply({{ comment.id }});">Ответить на этот комментарий</a>{% endif %}
-	</div>
-	<div id="comment_{{ comment.id }}"></div>
+	{% endfor %}
+
 </div>
-{% endfor %}
-{% if logged %}
-﻿<div style="padding: 10px;">
-	﻿<form method="post" action="/comments?entity={{ entity }}">
-		<table width="100%">
-			<tr>
-				<td align="center"><b>Добавить новый комментарий:</b></td>
-			</tr>
-			<tr>
-				<td align="center"><textarea style="width: 300px; height: 100px;" name="content"></textarea></td>
-			</tr>
-			<tr>
-				<td align="center"><input style="padding: 5px;" type=submit value="Добавить"></td>
-			</tr>
-		</table>
+
+
+
+<!-- Добавление нового комментария -->
+<div class="add_comment">
+	
+	{% if logged %}
+	
+	<a onclick="show_reply(0); show_new_comment(); return false;" href="">
+		<img src="/images/balloon_message.png" alt="Добавление комментария" />
+		Добавить комментарий
+	</a>
+	
+	<form class="new_comment" method="post" action="/comments?entity={{ entity }}">
+		
+		<textarea name="content"></textarea>
+		<input type="submit" value="Добавить" />
+		
 	</form>
+	
+	{% else %}
+	
+	<a href="/login/?return={{ url }}">
+		<img style="margin-top: 0px;" src="/images/people.png" alt="Форма авторизации" />
+		Авторизуйтесь, чтобы добавить комментарий
+	</a>
+	
+	{% endif %}
+	
 </div>
-{% else %}
-<div class="forum_cats" style="margin-left: 10px; margin-right: 10px; padding: 5px;"><a href="/login/?return={{ url }}">Авторизируйтесь</a>, чтобы оставить комментарий</a></div>
-{% endif %}

@@ -1,66 +1,136 @@
-div.comment {
-	/* float: left; */
-	display: block;
-	/* width: 100%; */
+/* CSS Reset */
+.comments {
+	font-size: 62.5%;
+}
+ul {
+	list-style: none;
+}
+li {
+	float: left;
+}
+ul, li, a {
+	margin: 0;
 	padding: 0;
-	min-height: 84px;
-	margin: 10px;
-	background-color: #F0F0FF;
 }
-	div.comment div.userinfo {
-		background-color: #DDD;
+/* Внешний блок комментариев */
+.comments {
+	display: block;
+	margin: 20px 40px 10px 40px;
+	padding: 0;
+}
+	/* Единичный комментарий */
+	.comments .comment {
+		clear: both;
 		display: block;
-		min-width: 50px;
 		float: left;
-		margin-right: 10px;
-		padding: 5px;
+		margin-bottom: 10px;
 	}
-		div.comment div.userinfo #avatar {
+		/* Аватара */
+		.comments .comment .avatar {
+			border: 0;
+			float: left;
+			height: 50px;
+			margin: 0;
+			padding: 0;
+			width: 50px;
+		}
+			/* Закругленные углы */
+			.comments .comment .avatar .avatar_foreground {
+				display: block;
+				position: relative;
+				margin-top: -50px;
+			}
+		/* Содержимое комментария */
+		.comments .comment .content {
 			display: block;
-			padding: 2px;
+			float: left;
+			margin-left: 6px;
+			padding: 0;
 		}
-	div.comment div.commentinfo {
-		font-family: Verdana;
-		font-size: 10px;
-		color: #777;
-		padding-top: 4px;
-	}
-		div.comment div.commentinfo font {
-			border-bottom: 1px dashed #777;
+			/* Информация о комментарии */
+			.comments .comment .content .info {
+			
+			}
+				/* Логин пользователя */
+				.comments .comment .content .info .login a {
+					color: #777;
+					font: bold 1.15em Tahoma,sans-serif;
+				}
+				/* Дата и время размещения комментария */
+				.comments .comment .content .info .datetime {
+					color: #999;
+					font: normal 1.1em Tahoma,sans-serif;
+					margin: 1px 0px 0px 5px;
+				}
+			/* Текст комментария */
+			.comments .comment .content .text {
+				clear: both;
+				color: #111;
+				float: left;
+				font: normal 1.5em Verdana,sans-serif;
+				padding: 4px 0px 12px 0px;
+			}
+			/* Быстрое управление комментарием */
+			.comments .comment .content .fast_controls {
+				clear: both;
+				display: block;
+				float: left;
+			}
+			/* Ссылки в быстром управлении */
+			.comments .comment .content .fast_controls a {
+				color: #2291E6;
+				font: normal 1.2em Tahoma,sans-serif;
+			}
+			.comments .comment .content .fast_controls a:hover {
+				color: #75B5E6;
+			}
+		/* Форма ответа */
+		.comments .comment .reply_form {
+			clear: both;
+			display: block;
+			float: left;
+			margin: 5px 0px 5px 30px;
 		}
-	div.comment div.content {
-		padding: 4px;
-	}
-div.actions {
-	display: block;
-	height: 20px;
-	margin-left: 10px;
-	margin-top: -8px;
+			/* Заголовок формы */
+			.comments .comment .reply_form .reply_info {
+				color: #999;
+				font: normal 1.05em Tahoma,sans-serif;
+			}
+/* Форма добавления нового комментария */
+.add_comment {
+	clear: both;
+	float: left;
+	margin: 10px 0px 0px 30px;
 }
-	div.actions a {
-		display: block;
+	.add_comment img {
 		float: left;
-		margin-right: 4px;
-		font-family: Verdana;
-		font-size: 12px;
-		text-decoration: none;
-		border-bottom: 1px dashed;
-		cursor: pointer;
+		margin: 2px 4px 0px;
+		position: relative;
 	}
-div.reply_form {
-	display: block;
-	width: 100%;
-	height: 120px;
-	margin-left: 10px;
-}
-	div.reply_form textarea {
-		height: 80px;
-		width: 300px;
+	.add_comment form {
+		margin: 5px 0px;
+		font: normal 0.6em Verdana,sans-serif;
+		padding: 0px;
+	}
+	.new_comment {
 		display: block;
 	}
-	div.reply_form input {
-		width: 100px;
-		heigth: 20px;
-		margin-top: 5px;
-		margin-bottom: 5px;
+	.hidden {
+		display: none;
 	}
+/* Элементы форм */
+textarea {
+	clear: both;
+	float: left;
+	font: 1.5em Verdana,sans-serif;
+	height: 160px;
+	margin: 5px 0px 5px -5px;
+	padding: 4px;
+	width: 600px;
+}
+input {
+	clear: both;
+	float: left;
+	margin: 4px 0px;
+	padding: 2px 4px 2px 4px;
+}
