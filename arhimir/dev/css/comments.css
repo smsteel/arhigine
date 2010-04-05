@@ -28,11 +28,11 @@ ul, li, a {
 		/* Аватара */
 		.comments .comment .avatar {
 			border: 0;
-			float: left;
 			height: 50px;
 			margin: 0;
 			padding: 0;
 			width: 50px;
+			position: relative;
 		}
 			/* Закругленные углы */
 			.comments .comment .avatar .avatar_foreground {
@@ -42,14 +42,16 @@ ul, li, a {
 			}
 		/* Содержимое комментария */
 		.comments .comment .content {
-			display: block;
 			float: left;
-			margin-left: 6px;
+			clear: right;
+			margin: -52px 0px 0px 56px;
 			padding: 0;
 		}
 			/* Информация о комментарии */
 			.comments .comment .content .info {
-			
+				clear: right;
+				display: block;
+				float: left;
 			}
 				/* Логин пользователя */
 				.comments .comment .content .info .login a {
@@ -64,9 +66,9 @@ ul, li, a {
 				}
 			/* Текст комментария */
 			.comments .comment .content .text {
-				clear: both;
 				color: #111;
-				float: left;
+				display: block;
+				
 				font: normal 1.5em Verdana,sans-serif;
 				padding: 4px 0px 12px 0px;
 			}
