@@ -100,7 +100,7 @@ ul, li, a {
 .add_comment {
 	clear: both;
 	float: left;
-	margin: 10px 0px 0px 30px;
+	margin: 10px 0px 30px 30px;
 }
 	.add_comment img {
 		float: left;
