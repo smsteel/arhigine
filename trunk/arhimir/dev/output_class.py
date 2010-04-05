@@ -14,7 +14,7 @@ from random import choice as rndchoice
 from time import clock, time
 from message.handler import Handler as message_handler
 import pickle
-import hashlib
+import re
 
 class OutputClass(webapp.RequestHandler):
     
@@ -209,7 +209,7 @@ class OutputClass(webapp.RequestHandler):
                                                        'arhs' : self._arhs, 
                                                        'request_time' : self.request_time if self.Session['access'] == 10 else ""
                                                      })
-            minified_html = ' '.join(self.__ContentOfMainTemplate.split())
+            minified_html = self.minified(self.__ContentOfMainTemplate)
             self.response.out.write(minified_html)
             memcache.add("main_page", pickle.dumps(minified_html), 300)
 
@@ -223,7 +223,7 @@ class OutputClass(webapp.RequestHandler):
         self._arhs = arhs
     
     def drawContent(self):
-        self.response.out.write(' '.join(self.__ContentOfMainTemplate.split()))
+        self.response.out.write(self.minified(self.__ContentOfMainTemplate))
     
     def drawPage(self, title = ""):
         self.response_html = True
@@ -253,10 +253,18 @@ class OutputClass(webapp.RequestHandler):
         #if data:
             #self.response.out.write(pickle.loads(data))
         #else:
-        minified_html = ' '.join(html.split())
-        self.response.out.write(minified_html)
+        self.response.out.write(self.minified(html))
         #   memcache.add(cache_name, pickle.dumps(minified_html), 300)
-        
+    
+    def minified(self, html):
+        # Вырезаем спецсимволы
+        minified_html = re.sub(r'\t|\n|\r', '', html)
+        # Правильно вырезаем лишние пробелы
+        minified_html = re.sub(r' +', ' ', minified_html)
+        # Вырезаем комментарии
+        minified_html = re.sub(r'<!--[\s\S]*?-->', '', minified_html)
+        return minified_html
+
     def insertComments(self, entity):
         ch = Comments()
         comments = ch.getComments(entity)
