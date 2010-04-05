@@ -1,4 +1,5 @@
-﻿from google.appengine.ext import db
+﻿#coding: UTF-8
+from google.appengine.ext import db
 from output_class import OutputClass
 from db_entities.event import DBEvent
 from db_entities.user import DBUser

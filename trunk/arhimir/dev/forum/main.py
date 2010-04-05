@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+#coding: UTF-8
 
 from output_class import OutputClass
 from google.appengine.ext import db
@@ -45,7 +45,7 @@ class forum_main(OutputClass):
         self.insertTemplate('forum/forum_main.html', {
                                                       'cats':_categories,
                                                       'is_admin': is_admin,
-                                                      'all_comments_count' : all_comments_count-all_topics_count,
+                                                      'all_comments_count' : all_comments_count,
                                                       'all_topics_count' : all_topics_count,
                                                       'logged' : self.Session['authorized'],
                                                       'your_comments' : DBUser().count_comments(self.Session['user_key'])

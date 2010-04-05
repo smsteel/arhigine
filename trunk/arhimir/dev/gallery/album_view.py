@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from output_class import OutputClass
 from db_entities.album import DBAlbum
 from db_entities.photo import DBPhoto

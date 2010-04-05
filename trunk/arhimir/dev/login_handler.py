@@ -1,4 +1,5 @@
-﻿from google.appengine.ext import db
+﻿#coding: UTF-8
+from google.appengine.ext import db
 import hashlib
 import cgi
 from session_handler import SessionHandler

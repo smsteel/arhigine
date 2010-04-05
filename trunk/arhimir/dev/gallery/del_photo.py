@@ -1,4 +1,5 @@
-﻿from db_entities.album import DBAlbum
+﻿#coding: UTF-8
+from db_entities.album import DBAlbum
 from db_entities.photo import DBPhoto
 from db_entities.photo_tags import DBPhotoTags
 from output_class import OutputClass

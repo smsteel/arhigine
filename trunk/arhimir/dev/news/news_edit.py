@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from google.appengine.api import images
 from google.appengine.api import memcache
 from google.appengine.ext import db

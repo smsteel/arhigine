@@ -1,4 +1,5 @@
-﻿from output_class import OutputClass
+﻿#coding: UTF-8
+from output_class import OutputClass
 from db_entities.gallery_object import DBGalleryObject
 
 class LastObjectsList(OutputClass):

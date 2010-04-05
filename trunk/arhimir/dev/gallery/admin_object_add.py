@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from google.appengine.api import images
 from output_class import OutputClass
 from db_entities.gallery_object import DBGalleryObject

@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from google.appengine.ext import db
 from db_entities.gallery_object import DBGalleryObject
 from db_entities.album import DBAlbum

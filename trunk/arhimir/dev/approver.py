@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-
+﻿#coding: UTF-8
 from output_class import OutputClass
 #from msg.msg_sender import MSGSender
 import cgi

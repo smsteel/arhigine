@@ -1,4 +1,4 @@
-# -*- coding: UTF-8 -*-
+#coding: UTF-8
 
 from db_entities.forum.db_forum_category import DBForumCategory
 from output_class import OutputClass

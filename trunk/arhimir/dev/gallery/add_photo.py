@@ -1,4 +1,5 @@
-﻿import hashlib, random
+﻿#coding: UTF-8
+import hashlib, random
 from db_entities.photo import DBPhoto
 from db_entities.photo_tags import DBPhotoTags
 from output_class import OutputClass

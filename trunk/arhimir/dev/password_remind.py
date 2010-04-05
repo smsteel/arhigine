@@ -1,4 +1,5 @@
-﻿from output_class import OutputClass
+﻿#coding: UTF-8
+from output_class import OutputClass
 from google.appengine.api import mail
 from google.appengine.ext import db
 import hashlib, random

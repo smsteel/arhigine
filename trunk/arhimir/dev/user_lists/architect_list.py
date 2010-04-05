@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from user_lists.user_list import UserList
 
 class ArhitectList(UserList):

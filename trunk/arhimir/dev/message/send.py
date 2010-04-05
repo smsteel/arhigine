@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from output_class import OutputClass
 from message.handler import Handler
 from db_entities.user import DBUser

@@ -1,10 +1,9 @@
-﻿# -*- coding: UTF-8 -*-
+﻿#coding: UTF-8
 from output_class import OutputClass
 from db_entities.event import DBEvent
 from db_entities.user import DBUser
 from db_entities.event_anketa import DBEventAnketa
 from message.handler import Handler
-from google.appengine.ext import db
 
 class EventMailFeed(OutputClass):
     

@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from google.appengine.ext import db
 from google.appengine.ext.webapp import template
 import cgi, random, hashlib
@@ -6,7 +6,6 @@ from output_class import OutputClass
 from db_entities.event_anketa import DBEventAnketa
 from db_entities.user import DBUser
 from db_entities.event import DBEvent
-from register_handler import RegisterHandler
 from google.appengine.api import mail
 
 class EventReg(OutputClass):
@@ -50,7 +49,7 @@ class EventReg(OutputClass):
                     newuser.login = str(cgi.escape(self.request.get('email'))).lower()
                     newuser.email = str(self.request.get('email'))
                     pwchars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm"
-                    pwd = "".join(random.choice(pwchars) for x in range(8))
+                    pwd = "".join(random.choice(pwchars) for _ in range(8))
                     newuser.password = hashlib.md5(str(pwd)).hexdigest()
                     confirmation = hashlib.md5(str(random.random())).hexdigest()
                     newuser.confirmation = confirmation

@@ -1,4 +1,5 @@
-﻿from google.appengine.ext import db
+﻿#coding: UTF-8
+from google.appengine.ext import db
 from output_class import OutputClass
 
 class PageHandler(OutputClass):

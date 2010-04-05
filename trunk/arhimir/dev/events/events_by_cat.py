@@ -1,4 +1,4 @@
-﻿# -*- coding: UTF-8 -*-﻿﻿
+﻿#coding: UTF-8
 from event_handler import EventHandler
 from google.appengine.ext import db
 

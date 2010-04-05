@@ -1,4 +1,5 @@
-﻿from google.appengine.ext import db
+﻿#coding: UTF-8
+from google.appengine.ext import db
 from db_entities.message_recipients import DBMSGRecipients
 from db_entities.user import DBUser
 from output_class import OutputClass
