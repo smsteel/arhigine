@@ -26,7 +26,8 @@ class CommentHandler(OutputClass):
             comment = DBComments()
             user = DBUser.get_by_id(self.Session['userid'])
             comment.user = user
-            user.comments_count = user.comments_count + 1
+            if user.comments_count:
+                user.comments_count = user.comments_count + 1
             user.put()
             
             comment.obj = db.Key(str(self.request.get('entity')))
