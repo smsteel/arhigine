@@ -7,7 +7,7 @@ class DBNews(db.Model):
     preview = db.TextProperty()
     content = db.TextProperty()
     userid = db.IntegerProperty()
-    date = db.DateProperty(auto_now_add = True)
+    date = db.DateTimeProperty(auto_now_add = True)
     author = db.ReferenceProperty(DBUser)
     
     def getItems (self, count):
@@ -21,5 +21,6 @@ class DBNews(db.Model):
                          "date": item.date.strftime("%d-%m-%Y") if item.date else "",
                          "sdate": item.date.strftime("%d.%m") if item.date else "",
                          "preview": item.preview,
+                         "truedate": item.date.strftime("%a, %d-%b-%Y %H:%M:%S GMT") if item.date else ""
                          })
         return news
