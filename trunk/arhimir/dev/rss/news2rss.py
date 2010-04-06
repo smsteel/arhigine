@@ -11,7 +11,7 @@ class News2RSS(OutputClass):
         rss_ = RSS()
         
         for new in news:
-            rss_.add_item(new['caption'], "ya.ru", new['preview'], new['truedate'])
+            rss_.add_item(new['caption'], "http://www.arhimir.ru/news/%s" % str(new['id']), new['preview'], new['truedate'])
             
         self.response.out.write(rss_.generate_rss())
         

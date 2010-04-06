@@ -89,7 +89,12 @@
 	<div class="news">
 		<div id="caption_news">Новости</div>
 		{{ news }}
-		<div style="float: left; width: 300px; height: 50px;text-align: right;"><a class="all_news" href="/news_all/">Архив новостей</a></div>
+			<div style="float: left; width: 300px; height: 50px;text-align: right;">
+				<a class="all_news" href="/news_all/">Архив новостей</a>
+				<a style="margin-right: 5px;" href="/news_rss">
+					<img src="/images/rss.png" />
+				</a>
+			</div>
 		{{ tags }}
 	</div>
 		
