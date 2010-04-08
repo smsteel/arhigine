@@ -19,7 +19,7 @@ class tag_processor:
     
     def prepare(self, text, tags = ['a', 'img']):
         
-        prepared_text = cgi.escape(text)
+        prepared_text = text
         
         for tag in tags:
             topic_text = ""
