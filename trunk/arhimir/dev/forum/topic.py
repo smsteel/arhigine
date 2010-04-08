@@ -28,7 +28,9 @@ class forum_topic(OutputClass):
         t_p = tag_processor()
         topic_text = t_p.prepare(topic.description.encode("utf-8"))
         
-        self.insertTemplate('forum/topic.html', {'can_edit':can_edit, 'user_name':topic.author.login ,'top_name':topic.name.encode("utf-8"), 'top_descr':topic_text, 'id': topic.key().id()})
+        topic.category.id = topic.category.key().id()
+        
+        self.insertTemplate('forum/topic.html', {'cat': topic.category, 'can_edit':can_edit, 'user_name':topic.author.login ,'top_name':topic.name.encode("utf-8"), 'top_descr':topic_text, 'id': topic.key().id()})
         self.insertComments(topic.key())
         self.drawPage("Форум :: Просмотр темы "+topic.name.encode("utf-8"))
 
