@@ -234,7 +234,7 @@ div.navi a.active {
 var objects_loaded = {{ nonAjax }};
 var objects_count = {{ objects_count }};
 $(function() {         
-    var last_index = 0     
+    var last_index = 0;
     // initialize scrollable  
     var api = $("div.scrollable").scrollable({ 
         size: 3, 
@@ -250,7 +250,7 @@ $(function() {
 		        		$.get("/scroll/", { load: objects_loaded }, function(data){
 		        			if(data != "") {
 		        				var api = $("div.scrollable").scrollable();
-			        			api.getItemWrap().append("<div class=\"thms\" onclick='window.location = \"/objects/" + data + "\"'><span class=\"object_picture\" style=\"margin-left: 7px; margin-top: 7px; display:block; width:200px; height:200px; background-image:url(/picture/200/crop/0/" + data + ");\"></span></div>")
+			        			api.getItemWrap().append("<div class=\"thms\" onclick='window.location = \"/objects/" + data + "\"'><span class=\"object_picture\" style=\"margin-left: 7px; margin-top: 7px; display:block; width:200px; height:200px; background-image:url(/picture/200/crop/0/" + data + ");\"></span></div>");
 			        			api.reload();
 		        			}
 		        		});
