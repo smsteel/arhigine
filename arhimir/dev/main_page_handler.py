@@ -7,7 +7,7 @@ from db_entities.event import DBEvent
 from db_entities.conf import DBConf
 from tools.arch_top import ArchTop
 from google.appengine.api import memcache
-import pickle
+import pickle, random
 
 class MainPageHandler(OutputClass):
     
@@ -84,7 +84,14 @@ class MainPageHandler(OutputClass):
             confs = self.random_from_entity(DBConf, 3)
         except: pass
         
-        at = ArchTop()
+        at = None
+        data = memcache.get('random_top')
+        if data:
+            at = pickle.loads(data)
+        else:
+            at = ArchTop().get_top()
+            random.shuffle(at)
+            memcache.add('random_top', pickle.dumps(at), 3600)
         
-        self.drawMainPage(self.insertScroll(), spe_news, tags, events, confs, at.get_top())
+        self.drawMainPage(self.insertScroll(), spe_news, tags, events, confs, at)
 #        self.drawPage("Главная страница")
