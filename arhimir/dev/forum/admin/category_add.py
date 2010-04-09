@@ -19,7 +19,7 @@ class forum_category_add(OutputClass):
         new_category = DBForumCategory()
         new_category.name = cgi.escape(self.request.get("name"))
         new_category.descr = cgi.escape(self.request.get("descr"))
-        new_category.access = 0
+        new_category.access = 10 if self.request.get('hidden') else 0
         new_category.position = 0
         new_category.put()
         self.showMessage("Добавлено")

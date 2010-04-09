@@ -26,6 +26,7 @@ class forum_main(OutputClass):
         all_topics_count = 0
         for cat in cats:
             topics = db.GqlQuery("SELECT * FROM DBForumTopic where category = :cat", cat = cat.key())
+            if cat.access and not cat.access <= self.Session['access']: continue
             formilized_topics = []
             for topic in topics:
                 formilized_topics.append(topic.key())
