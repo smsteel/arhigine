@@ -21,6 +21,7 @@ class DBNews(db.Model):
                          "date": item.date.strftime("%d-%m-%Y") if item.date else "",
                          "sdate": item.date.strftime("%d.%m") if item.date else "",
                          "preview": item.preview,
-                         "truedate": item.date.strftime("%a, %d-%b-%Y %H:%M:%S GMT") if item.date else ""
+                         "truedate": item.date.strftime("%a, %d %b %Y %H:%M:%S GMT") if item.date else "",
+                         "key": item.key()
                          })
         return news
