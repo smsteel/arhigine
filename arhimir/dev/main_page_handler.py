@@ -93,5 +93,5 @@ class MainPageHandler(OutputClass):
             random.shuffle(at)
             memcache.add('random_top', pickle.dumps(at), 50)
         
-        self.drawMainPage(self.insertScroll(), spe_news, tags, events, confs, at)
+        self.drawMainPage(self.insertScroll(), spe_news, tags, events, confs, at[0:5])
 #        self.drawPage("Главная страница")
