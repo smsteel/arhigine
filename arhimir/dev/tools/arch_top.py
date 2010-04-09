@@ -46,7 +46,7 @@ class ArchTop():
     #                           'value' : value })
     #            
     #        #rating2 = rate.sort(key=operator.itemgetter('value'), reverse = False)[:5]
-            for entity in rate[:5]:
+            for entity in rate[:25]:
                 slovar = {'id': entity[0], 'login' : str(u.get_login_by_id(entity[0]))}
                 arhs.append( slovar )
             memcache.add("arch_top", pickle.dumps(arhs), 3600)
