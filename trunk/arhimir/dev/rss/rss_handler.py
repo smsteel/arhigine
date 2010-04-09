@@ -4,13 +4,14 @@ class RSS():
     
     _items = []
     
-    def add_item(self, title, link, description, pubdate):
+    def add_item(self, title, link, description, pubdate, key):
         self._items.append(
                            {
                              'title': title,
                              'link': link,
                              'description': description,
                              'pubdate': pubdate,
+                             'key': key,
                            }
                            )
         
