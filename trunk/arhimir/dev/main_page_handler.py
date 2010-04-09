@@ -91,7 +91,7 @@ class MainPageHandler(OutputClass):
         else:
             at = ArchTop().get_top()
             random.shuffle(at)
-            memcache.add('random_top', pickle.dumps(at), 3600)
+            memcache.add('random_top', pickle.dumps(at), 50)
         
         self.drawMainPage(self.insertScroll(), spe_news, tags, events, confs, at)
 #        self.drawPage("Главная страница")
