@@ -25,3 +25,4 @@ class DBNews(db.Model):
                          "key": item.key()
                          })
         return news
+    

@@ -34,7 +34,7 @@ class MainPageHandler(OutputClass):
                                         </a>
                                         <br>
                                         <font style="font-size: 10px; color: #333333;">
-                                            Добавлена """ + str(piece_of_news.date) + 
+                                            Добавлена """ + str(piece_of_news.date.strftime("%d.%m.%Y")) + 
                                             """, <a href=\"/users/""" + login + """\">""" +
                                             login +      
                                             """</a>
