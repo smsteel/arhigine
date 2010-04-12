@@ -18,7 +18,7 @@ class NewsAll(OutputClass):
         for piece_of_news in news:
             u_class = DBUser()
             login = u_class.get_login_by_id(piece_of_news.userid)
-            self.insertContent('<table width=100% style="border-width: 1px; border-style: dashed;"><tr><td><li>' + str(piece_of_news.date) +
+            self.insertContent('<table width=100% style="border-width: 1px; border-style: dashed;"><tr><td><li>' + str(piece_of_news.date.strftime("%d.%m.%Y")) +
                                ' | <a href="/news/' + 
                                str(piece_of_news.key().id()) + '">' + 
                                piece_of_news.cap.encode("utf8") + '</a>'+
