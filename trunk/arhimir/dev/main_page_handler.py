@@ -22,8 +22,17 @@ class MainPageHandler(OutputClass):
                 news = db.GqlQuery("select * from DBNews order by date desc LIMIT 5")
                 spe_news+=("<div style='padding: 5px; margin-bottom: 50px;'>")
      
-     
+                counter = 0
                 for piece_of_news in news:
+                    counter += 1
+                    if counter == 4:
+                        spe_news += """
+                        <div style="padding-left: 25px;">
+                            <a href="http://fashionhome.ru/catalog/arcdes/13664.html">
+                                <img src="/images/banners/dak_decor.gif" style="align: center;" />
+                            </a>
+                        </div>
+                        """
                     u_class = DBUser()
                     login = u_class.get_login_by_id(piece_of_news.userid)
                     spe_news+=("""
@@ -55,7 +64,7 @@ class MainPageHandler(OutputClass):
                                 </div>
                                """)
                 spe_news+=("</div>")
-                memcache.add("news4main", spe_news, 18000)
+                memcache.add("news4main", spe_news, 1)
             except: pass
         return spe_news
 
