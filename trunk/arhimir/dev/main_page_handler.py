@@ -27,10 +27,13 @@ class MainPageHandler(OutputClass):
                     counter += 1
                     if counter == 4:
                         spe_news += """
-                        <div style="padding-left: 29px;">
-                            <a href="http://fashionhome.ru/catalog/arcdes/13664.html">
+                        <div style="text-align: center;">
+                            <a href="http://fashionhome.ru/catalog/arcdes/13664.html" target=”_blank”>
                                 <img src="/images/banners/dak_decor.gif" style="align: center;" />
                             </a>
+                        </div>
+                        <div style="text-align: right; font-size: 12px;">
+                            <a href="/advertising">Реклама на портале</a>
                         </div>
                         """
                     u_class = DBUser()
