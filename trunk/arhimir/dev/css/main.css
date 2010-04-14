@@ -181,7 +181,10 @@ div.info {
 		div.info_block #content {
 			margin-top: 35px;
 			padding: 10px;
-			//background-color: orange;		
+			//background-color: orange;	
+			overflow-y: auto;
+			overflow-x: 0;
+			height: 200px;	
 		}
 			div.info a {
 				font-size: 17px;
