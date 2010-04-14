@@ -27,7 +27,7 @@ class MainPageHandler(OutputClass):
                     counter += 1
                     if counter == 4:
                         spe_news += """
-                        <div style="padding-left: 25px;">
+                        <div style="padding-left: 29px;">
                             <a href="http://fashionhome.ru/catalog/arcdes/13664.html">
                                 <img src="/images/banners/dak_decor.gif" style="align: center;" />
                             </a>
@@ -64,7 +64,7 @@ class MainPageHandler(OutputClass):
                                 </div>
                                """)
                 spe_news+=("</div>")
-                memcache.add("news4main", spe_news, 1)
+                memcache.add("news4main", spe_news, 3600)
             except: pass
         return spe_news
 
