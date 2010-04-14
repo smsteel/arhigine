@@ -37,7 +37,7 @@ class DBUser(db.Model):
             return db.Key(pickle.loads(data))
         else:
             key = db.GqlQuery("SELECT __key__ FROM DBUser WHERE login = :login", login=login)[0]
-            memcache.add(cache_name, pickle.dumps(key), 86400)
+            memcache.add(cache_name, pickle.dumps(str(key)), 86400)
             return key
     
     def count_comments(self, key):
