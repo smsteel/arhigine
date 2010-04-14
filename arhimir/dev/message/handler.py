@@ -47,7 +47,7 @@ class Handler():
             title = message.title
             o_read = message.read
             datetime = message.datetime
-            formalized_messages.append({'key' : message.key(), 'r_read' : r_read, 'o_read' : o_read, 'owner':owner, 'rcp':rcp[:5], 'title':title, 'datetime': datetime})
+            formalized_messages.append({'key' : message.key(), 'r_read' : r_read, 'o_read' : o_read, 'owner':owner, 'rcp':rcp[:5], 'title':title[:32] + " ...", 'datetime': datetime})
             formalized_messages.sort(key=lambda k: k['datetime'])
         return formalized_messages
     
