@@ -1,11 +1,14 @@
 <style>
 	#message_list {
-		display: block;
-		margin: 20px;
 		border: 1px solid #000;
+		display: block;
+		font: normal 14px Tahoma,sans-serif;
+		margin: 20px;
+		
 	}
 	#message {
 		display: block;
+		height: 30px;
 	}
 	#message #check {
 		float: left;
@@ -65,11 +68,11 @@
 </script>
 <h2>{% block caption %}{% endblock %}</h2>
 <div id="message_list">
-<div id="message" class="legend bold">
+<div id="message" class="legend">
 	<div id="check">&nbsp;</div>
-	<div id="title">Тема письма</div>
-	<div id="owner">{% block whois %}{% endblock %}</div>
-	<div id="datetime">Дата</div>
+	<div id="title" class="bold">Тема письма</div>
+	<div id="owner" class="bold">{% block whois %}{% endblock %}</div>
+	<div id="datetime" class="bold">Дата</div>
 </div>
 {% for message in messages %}
 <div id="message" class="{% cycle first,second %} {% if not message.o_read %}bold{% endif %}">
