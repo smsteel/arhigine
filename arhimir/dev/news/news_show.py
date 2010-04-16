@@ -10,9 +10,11 @@ class NewsShow(OutputClass):
         self.checkSession(self.request.headers.get('Cookie'), False)
         self.insertMenu()
         
-        id = int(self.request.uri.split('/')[-1])
-        object = DBNews.get_by_id(id)
-        self.insertTemplate("tpl_news_show.html", { 'image'     : "<img src='/picture/2/"+str(id)+"'>",
+        parametres = self.get_from_url('news_id')
+        
+        
+        object = DBNews.get_by_id(parametres.news_id)
+        self.insertTemplate("tpl_news_show.html", { 'image'     : "<img src='/picture/2/"+str(news.id)+"'>",
                                                                 'cap'       : object.cap.encode("utf8"),
                                                                 'content'   : object.content.encode("utf8")})
         if self.Session['access'] >=8: 
