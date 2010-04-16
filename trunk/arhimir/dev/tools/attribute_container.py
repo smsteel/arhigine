@@ -1,7 +1,6 @@
 #coding: UTF-8
 
-""" Класс-"контейнер" """
-from types import NoneType
+# Класс-"контейнер"
 class AttributeContainer(object):
     
     # Словарь, где хранятся имена аттрибутов и их значения
