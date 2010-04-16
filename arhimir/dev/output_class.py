@@ -305,8 +305,10 @@ class OutputClass(webapp.RequestHandler):
         parametres = AttributeContainer()
         
         url = re.sub(r"(http://)(.*?)/", "", self.request.uri)
+        
         url = re.sub(r"\?.*", "", url)
-        url_parametres = url.split('/').reverse()
+        url_parametres = url.split('/')
+        url_parametres.reverse()
         
         for i, arg in enumerate(args):
             parametres.set(arg, url_parametres[i])
@@ -316,9 +318,11 @@ class OutputClass(webapp.RequestHandler):
     def get_url_part(self, num):
         return self.request.uri.split('/')[num*(-1)]
     
+    # Похоже, эта функция была написана под веществом, но выполняет свою задачу
+    #@author: Sm[SteeL]
     def random_from_entity(self, entity, count):
         rnd_records = []
-        entity_count = entity.all().count()
+        entity_count = entity.all(keys_only=True).count()
         if entity_count < count: count = entity_count
         rnd_numbers = [i for i in range(entity_count)]
         while(len(rnd_records)<count):
