@@ -17,7 +17,7 @@ class tag_processor:
             fixed_text += letter
         return fixed_text
     
-    def prepare(self, text, tags = ['a', 'img']):
+    def prepare(self, text, tags = ['a', 'img', 'b', 'i']):
         
         prepared_text = text
         
