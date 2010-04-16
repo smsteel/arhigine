@@ -13,8 +13,8 @@ class NewsShow(OutputClass):
         parametres = self.get_from_url('news_id')
         
         
-        object = DBNews.get_by_id(parametres.news_id)
-        self.insertTemplate("tpl_news_show.html", { 'image'     : "<img src='/picture/2/"+str(news.id)+"'>",
+        object = DBNews.get_by_id(int(parametres.news_id))
+        self.insertTemplate("tpl_news_show.html", { 'image'     : "<img src='/picture/2/"+str(parametres.news_id)+"'>",
                                                                 'cap'       : object.cap.encode("utf8"),
                                                                 'content'   : object.content.encode("utf8")})
         if self.Session['access'] >=8: 
