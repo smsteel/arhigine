@@ -58,7 +58,7 @@
 			</a>
 			<div id="search">
 				<form id="searcher" action="/search/" method="post">
-					<input type="text" value="Поиск" name="find" />
+					<input id="search_field" onFocus="$('#search_field').attr('value','');" onBlur="if($('#search_field').attr('value')=='') $('#search_field').attr('value','Поиск');" type="text" value="Поиск" name="find" />
 					<a onclick="$('#searcher').submit();" href="#"></a>
 				</form>
 			</div>

@@ -13,6 +13,7 @@ from time import clock, time
 from message.handler import Handler as message_handler
 import pickle
 import re
+from tools.attribute_container import AttributeContainer
 
 class OutputClass(webapp.RequestHandler):
     
@@ -293,6 +294,24 @@ class OutputClass(webapp.RequestHandler):
     
     def paramByName (self, name):
         return DBCustomField().getByName(name)
+    
+    # Получение параметров из ссылки, разделенных символом '/'
+    # Использование: 
+    # url = get_from_url('category_id', 'topic_id')
+    # url.category_id
+    # url.topic_id
+    def get_from_url(self, *args, **kwargs):
+        
+        parametres = AttributeContainer()
+        
+        url = re.sub(r"(http://)(.*?)/", "", self.request.uri)
+        url = re.sub(r"\?.*", "", url)
+        url_parametres = url.split('/').reverse()
+        
+        for i, arg in enumerate(args):
+            parametres.set(arg, url_parametres[i])
+        
+        return parametres
     
     def get_url_part(self, num):
         return self.request.uri.split('/')[num*(-1)]
