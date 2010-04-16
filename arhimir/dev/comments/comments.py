@@ -48,7 +48,7 @@ class Comments():
         for child_comment in comment.parent_comments:
             child_comments.append({ 
                                     'login' : child_comment.user.login.encode("utf8"),
-                                    'content' : child_comment.content,
+                                    'content' : tag_processor().prepare(child_comment.content),
                                     'date' : child_comment.date,
                                     'userid' : child_comment.user.key().id(),
                                     'id' : child_comment.key().id(),
