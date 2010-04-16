@@ -8,8 +8,8 @@ class NewsAll(OutputClass):
     url_handler = '/news_all/?'
     
     def get(self):
-        self.checkSession(self.request.headers.get('Cookie'), True)
-        self.insertMenu()
+        if self.checkSession(self.request.headers.get('Cookie'), False):
+            self.insertMenu()
         
         news = db.GqlQuery("select * from DBNews order by date desc")
         self.insertContent("<div style='padding: 10px;'>")
@@ -18,11 +18,11 @@ class NewsAll(OutputClass):
         for piece_of_news in news:
             u_class = DBUser()
             login = u_class.get_login_by_id(piece_of_news.userid)
-            self.insertContent('<table width=100% style="border-width: 1px; border-style: dashed;"><tr><td><li>' + str(piece_of_news.date.strftime("%d.%m.%Y")) +
+            self.insertContent('<table width="100%" style="border-width: "1px"; border-style: dashed;"><tr><td><li>' + str(piece_of_news.date.strftime("%d.%m.%Y")) +
                                ' | <a href="/news/' + 
                                str(piece_of_news.key().id()) + '">' + 
                                piece_of_news.cap.encode("utf8") + '</a>'+
-                               '<font size=1> размещено '+
+                               '<font size="1"> размещено '+
                                '<a href="/users/'+login+'">'+login+'</a>'+
                                '</font><hr><font size=2>'+
                                piece_of_news.preview.encode("utf8") +
