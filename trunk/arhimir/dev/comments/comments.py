@@ -1,5 +1,5 @@
 from google.appengine.ext import db
-from db_entities.comments import DBComments
+from tools.tag_processor import tag_processor
 
 class Comments():
     
@@ -34,7 +34,7 @@ class Comments():
                     if not comment.parent_comment and comment.content != "":
                         formalized_comments.append({ 
                                                      'login' : comment.user.login.encode("utf8"),
-                                                     'content' : comment.content, 
+                                                     'content' : tag_processor().prepare(comment.content), 
                                                      'date' : comment.date,
                                                      'userid' : comment.user.key().id(),
                                                      'id' : comment.key().id(),
