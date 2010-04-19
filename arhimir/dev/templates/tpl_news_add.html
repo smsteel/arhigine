@@ -1,7 +1,20 @@
+<link rel="stylesheet" href="/css/jquery-ui-1.7.2.custom.css" type="text/css" media="screen">
+<script type="text/javascript" src="/css/jquery-ui-1.7.2.custom.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+</script>
 ﻿<form method="post" enctype="multipart/form-data">
 <div class="form">Заголовок: <input type="text" name="cap" value="{{ cap }}"></div>
 <div class="form">Изображение: <input type="file" name="pic" style="width: 250px;"></div>
+<div class="form">Дата: <input id="datepicker" type="text" name="date" value="{{ date }}"></div>
 <div class="form">Краткое описание <textarea name="preview" >{{ preview }}</textarea></div>
 <div class="form">Полное описание: {{ editor }}</div>
 <div class="form" align="center"><input type="submit" value="Добавить"</div>
 </form>
+
+
+
+
+
