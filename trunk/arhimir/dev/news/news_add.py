@@ -26,7 +26,13 @@ class NewsAdd(OutputClass):
         piece_of_news.cap = self.request.get('cap')
         piece_of_news.preview = self.request.get('preview')
         piece_of_news.content = self.request.get('content')
-
+        
+        try:
+            date = self.request.get('date').split('/')
+            piece_of_news.date = db.datetime.datetime(int(date[2]),int(date[0]),int(date[1])) 
+        except:
+            pass
+        
         data = self.request.get('pic')
         if data:
             image = images.resize(data, 200, 200)

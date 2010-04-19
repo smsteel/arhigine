@@ -18,6 +18,6 @@ class NewsShow(OutputClass):
                                                                 'cap'       : object.cap.encode("utf8"),
                                                                 'content'   : object.content.encode("utf8")})
         if self.Session['access'] >=8: 
-            self.insertContent('<a href="/news/edit/%s">Редактировать</a>' % str(id))
+            self.insertContent('<a href="/news/edit/%s">Редактировать</a>' % str(parametres.news_id))
         self.insertComments(object.key())
         self.drawPage("Просмотр новости :: "+object.cap.encode("utf8"))
