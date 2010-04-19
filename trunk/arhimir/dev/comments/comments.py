@@ -37,7 +37,7 @@ class Comments():
                                                      'content' : tag_processor().prepare(comment.content), 
                                                      'date' : comment.date,
                                                      'userid' : comment.user.key().id(),
-                                                     'id' : comment.key().id(),
+                                                     'key' : comment.key(),
                                                   })
                         formalized_comments += self.getChildComments(comment)
                 except: pass
@@ -51,8 +51,10 @@ class Comments():
                                     'content' : tag_processor().prepare(child_comment.content),
                                     'date' : child_comment.date,
                                     'userid' : child_comment.user.key().id(),
-                                    'id' : child_comment.key().id(),
+                                    'key' : child_comment.key(),
                                     'level' : level,
                                  })
+            
             child_comments += self.getChildComments(child_comment, level + 50)
+            child_comment = None
         return sorted(child_comments, key=lambda k: k['date'])

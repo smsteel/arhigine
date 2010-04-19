@@ -33,8 +33,13 @@ class CommentHandler(OutputClass):
             comment.obj = db.Key(str(self.request.get('entity')))
             content = self.request.get("content")
             comment.content = cgi.escape(content).replace("\n", "<br />")
-            comment.parent_comment = DBComments().get_by_id(int(self.request.get('parent_comment'))) if \
-                                                            self.request.get('parent_comment') else None
+            
+            comment.parent_comment = DBComments().get(self.request.get('parent_comment')) if \
+                                     self.request.get('parent_comment') else None
+            # Old part with id
+            #DBComments().get_by_id(int(self.request.get('parent_comment'))) if \
+            #                       self.request.get('parent_comment') else None
+            
             key_ = comment.put()
             comment = db.get(key_)
             
