@@ -67,7 +67,6 @@ div.top {
 	display: block;
 	width: 100%;
 	min-width: 1024px;
-	/* background-color: #bd3935; */
 	height: 135px;
 }
 	div.top #logo {
@@ -172,8 +171,6 @@ div.info {
 		float: left;
 		margin-right: 5%;
 		width: 45%;
-		/* height: 200px; */
-		//background-color: orange;	
 	}
 		div.info_block #caption {
 			
@@ -191,7 +188,7 @@ div.info {
 			}
 div.scroll_cap {
 	float: left;
-	margin-top: 20px;
+	#margin-top: 20px;
 	width: 700px;
 	display: block;
 	
@@ -208,9 +205,9 @@ div.scroll_cap {
 		margin-top: 5px;
 		margin-left: 20px;
 	}
-	div.scroll_cap #new {
+	div.scroll_cap #new_link {
 		font-size: 18px;
-		
+	
 	}
 div.news {
 	background-color: #ffebdc;
