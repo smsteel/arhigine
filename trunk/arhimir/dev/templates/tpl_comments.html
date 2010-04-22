@@ -3,21 +3,21 @@
 	$(document).ready(function() {
 		$(".new_comment").addClass("hidden");
 	});
-    function show_reply(t)
+    function show_reply(key)
     {
     	if(!$(".new_comment").hasClass("hidden")) $(".new_comment").addClass("hidden");
     	$(".reply_form").each(function() {
-    		if($(this).attr("id") != "comment_" + t) {
+    		if($(this).attr("id") != "comment_" + key) {
     			$(this).empty();
     		}
     	});
-        if($("#comment_" + t).html() != "")
-            $("#comment_" + t).empty();
+        if($("#comment_" + key).html() != "")
+            $("#comment_" + key).empty();
         else
         {
         	var text = '<div class="reply_form"><div class="reply_info">Вы, {{ login }}, отвечаете:</div><form method="POST" action="/comments"><input type="hidden" name="entity" value="{{ entity }}" /><textarea name="content"></textarea><input type="submit" value="Ответить" /><input type="hidden" name="parent_comment" value="" /></form></div>';
-            $("#comment_" + t).html(text);
-            $("input[name=parent_comment]").attr("value", t);
+            $("#comment_" + key).html(text);
+            $("input[name=parent_comment]").attr("value", key);
     	}
     }
     function show_new_comment() {
@@ -71,7 +71,6 @@
 			
 			<!-- Текст комментария -->
 			<div class="text">
-			{{ comment.key }}
 			{{ comment.content }}
 			</div>
 			
