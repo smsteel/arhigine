@@ -30,23 +30,24 @@ class Comments():
             comments = db.GqlQuery("SELECT * FROM DBComments WHERE obj = :obj ORDER BY date", 
                                      obj = obj)
             for comment in comments:
-                try:
-                    if not comment.parent_comment and comment.content != "":
-                        formalized_comments.append({ 
-                                                     'login' : comment.user.login.encode("utf8"),
-                                                     'content' : tag_processor().prepare(comment.content), 
-                                                     'date' : comment.date,
-                                                     'userid' : comment.user.key().id(),
-                                                     'key' : comment.key(),
-                                                  })
-                        formalized_comments += self.getChildComments(comment)
-                except: pass
+                #try:
+                if not comment.parent_comment and comment.content != "":
+                    formalized_comments.append({ 
+                                                 'login' : comment.user.login.encode("utf8"),
+                                                 'content' : tag_processor().prepare(comment.content), 
+                                                 'date' : comment.date,
+                                                 'userid' : comment.user.key().id(),
+                                                 'key' : comment.key(),
+                                              })
+                    formalized_comments += self.getChildComments(comment)
+                #except: pass
             return formalized_comments
 
     def getChildComments(self, comment, level = 50):
-        child_comments = []
-        for child_comment in comment.parent_comments:
-            child_comments.append({ 
+        formilized_child_comments = []
+        child_comments = db.GqlQuery("SELECT * FROM DBComments WHERE parent_comment = :key ORDER BY date", key = comment.key())
+        for child_comment in child_comments:
+            formilized_child_comments.append({ 
                                     'login' : child_comment.user.login.encode("utf8"),
                                     'content' : tag_processor().prepare(child_comment.content),
                                     'date' : child_comment.date,
@@ -55,6 +56,6 @@ class Comments():
                                     'level' : level,
                                  })
             
-            child_comments += self.getChildComments(child_comment, level + 50)
+            formilized_child_comments += self.getChildComments(child_comment, level + 50)
             child_comment = None
-        return sorted(child_comments, key=lambda k: k['date'])
+        return formilized_child_comments
