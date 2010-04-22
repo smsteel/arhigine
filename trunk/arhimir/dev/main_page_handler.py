@@ -22,10 +22,8 @@ class MainPageHandler(OutputClass):
                 news = db.GqlQuery("select * from DBNews order by date desc LIMIT 5")
                 spe_news+=("<div style='padding: 5px; margin-bottom: 50px;'>")
      
-                counter = 0
-                for piece_of_news in news:
-                    counter += 1
-                    if counter == 4:
+                for news_position, piece_of_news in enumerate(news):
+                    if news_position == 4:
                         spe_news += """
                         <div style="text-align: center;">
                             <a href="http://fashionhome.ru/catalog/arcdes/13664.html" target=”_blank”>
