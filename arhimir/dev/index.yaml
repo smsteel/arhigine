@@ -14,3 +14,13 @@ indexes:
   properties:
   - name: obj
   - name: date
+
+- kind: DBComments
+  properties:
+  - name: parent_comment
+  - name: date
+
+- kind: DBComments
+  ancestor: yes
+  properties:
+  - name: date
