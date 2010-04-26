@@ -73,11 +73,15 @@ class AdminUser(OutputClass):
                                                 dbuserid = int(self.request.get('userid')))
                         avataras = dbQuery.fetch(1)
                         avatara = avataras[0]
-                        avatar = images.resize(data, 128, 128)
+                        small = images.Image(data).width if images.Image(data).width < images.Image(data).height else images.Image(data).height
+                        avatar = images.crop(data, 0., 0., small/float(images.Image(data).width), small/float(images.Image(data).height))
+                        avatar = images.resize(avatar, 128, 128)
                         avatara.image = db.Blob(avatar)
                         avatara.put()
                     except:
-                        avatar = images.resize(data, 128, 128)
+                        small = images.Image(data).width if images.Image(data).width < images.Image(data).height else images.Image(data).height
+                        avatar = images.crop(data, 0., 0., small/float(images.Image(data).width), small/float(images.Image(data).height))
+                        avatar = images.resize(avatar, 128, 128)
                         avatara.image = db.Blob(avatar)
                         avatara.userid = int(self.request.get('userid'))
                         avatara.put()
