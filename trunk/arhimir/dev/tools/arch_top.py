@@ -1,17 +1,21 @@
 from google.appengine.api import memcache
 from db_entities.gallery_object import DBGalleryObject
 from db_entities.user import DBUser
+from db_entities.user_picture import DBAvatara
 import pickle
 
 class ArchTop():
     
     def get_top(self):
+#        print 1
         arhs = []
         data = memcache.get("arch_top")
         if data is not None:
             arhs = pickle.loads(data)
+#            print 2
         else:
             data = memcache.get("sorted_objects_v2")
+#            print 3
             if not data: return arhs
             o_list = pickle.loads(data)[0:25]
             objects = []
@@ -20,17 +24,8 @@ class ArchTop():
             
             rating = {}
     
-    #            cnt = 0
             u = DBUser()
-    #            while 1:
-    #                slovar = {'id': objects[cnt].userid, 'login' : str(u.get_login_by_id(objects[cnt].userid))}
-    #                if not slovar in arhs: 
-    #                    arhs.append( slovar )
-    #                cnt += 1
-    #                if len(arhs)==5: break
-    #            
-    #            return arhs
-    
+            
             obj_k = 100.0
             for object in objects:
                 try:
@@ -41,12 +36,12 @@ class ArchTop():
             
             rate = sorted(rating.items(), key = lambda(k,v): (v,k), reverse=True)
             
-    #        for key,value in rating.items():
-    #            rate.append( { 'key': key,
-    #                           'value' : value })
-    #            
-    #        #rating2 = rate.sort(key=operator.itemgetter('value'), reverse = False)[:5]
             for entity in rate[:25]:
+
+                # lets check if user has a photo
+                if not DBAvatara().get_by_userid(entity[0]):
+                    continue
+                
                 slovar = {'id': entity[0], 'login' : str(u.get_login_by_id(entity[0]))}
                 arhs.append( slovar )
             memcache.add("arch_top", pickle.dumps(arhs), 3600)
