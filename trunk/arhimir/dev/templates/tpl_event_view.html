@@ -44,7 +44,7 @@
 							<tr>
 								<td colspan=3 style="height: 15px;" valign=middle>
 									<form target="_blank" method="post" action="http://www.livejournal.com/update.bml" id="ljForm">
-										<input type="hidden" name="event" id="ljmsg" value='{{ event_descr }}Дата проведения: {% if date %}{{ date }}{% else %}не указана{% endif %}<br>Время проведения: {% if time %}{{ time }}{% else %}не указано{% endif %}<br>Место проведения: {% if place %}{{ place }}{% else %}не указано{% endif %}<br>Организатор: {% if owner %}{{ owner }}{% else %}не указано{% endif %}<br>{% if register %}{{ register }}{% else %}регистрация закрыта{% endif %}'>
+										<input type="hidden" name="event" id="ljmsg" value='{{ event_descr }}Дата проведения: {% if date %}{{ date }}{% else %}не указана{% endif %}<br>Время проведения: {% if time %}{{ time }}{% else %}не указано{% endif %}<br>Место проведения: {% if place %}{{ place }}{% else %}не указано{% endif %}<br>Организатор: {% if owner %}{{ owner }}{% else %}не указано{% endif %}<br>'>
 										<input align="middle" name="submit" title="разместить в ЖЖ" style="height:30px" type="image" src="http://www.livejournal.com/img/userpic_loggedout.gif">
 										<input type="hidden" name="subject" value="{{ event_name }}">
 										<a href="#" onclick='$("#ljForm").submit();'>Разместить информацию о событии в ЖЖ</a>
