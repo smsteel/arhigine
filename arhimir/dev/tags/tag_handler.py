@@ -1,4 +1,9 @@
 ﻿#coding: UTF-8
+
+#
+#     NOT RECOMENDED TO USE!
+#
+
 from db_entities.photo_tags import DBPhotoTags
 from output_class import OutputClass
 from spe_tager import Tager

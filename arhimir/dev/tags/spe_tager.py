@@ -1,4 +1,9 @@
 ﻿#coding: UTF-8
+
+#
+#     NOT RECOMENDED TO USE!
+#
+
 import operator
 import random
  
