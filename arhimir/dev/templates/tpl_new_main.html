@@ -116,15 +116,20 @@
 		
 			<div id="caption">Конференции</div>
 			<div id="content">
-				{% for conf in confs %}
-				<a class="event" href="/conf/{{ conf.name }}">{{ conf.cap }}</a><br />
-				<a style="font-size: 12px;">Обновлена {{ conf.updated|date:"d.m.Y" }}</a><br /><br />
-				{% endfor %}
+				{% if never_if %}
+					{% for conf in confs %}
+					<a class="event" href="/conf/{{ conf.name }}">{{ conf.cap }}</a><br />
+					<a style="font-size: 12px;">Обновлена {{ conf.updated|date:"d.m.Y" }}</a><br /><br />
+					{% endfor %}
+				{% endif %}
+				<a class="event" href="/forum/topic/687001">Тренинги по эффективному взаимодействию с клиентами</a>
+				<br /><br />
+
 			</div>
 		</div>
 	</div>
 	
-	<div class="bottom"><a href="/conf/ask/arhimir">Я хочу сообщить об ошибке на сайте/предложить улучшение!</a><br>Copyright ©2009-2010 Arhimir developer team</div>
+	<div class="bottom"><a href="/forum/topic/add/138009">Я хочу сообщить об ошибке на сайте/предложить улучшение!</a><br>Copyright ©2009-2010 Arhimir developer team</div>
 	{%if request_time %}<div style="font-family: Verdana; font-size: 12px; position: fixed; bottom: 0px; left: 0px; background-color: #ffdacb; padding: 10px; opacity: 0.85;">{{ request_time }}</div>{% endif %}
 	<!-- Yandex.Metrika -->
 	<script src="//mc.yandex.ru/resource/watch.js" type="text/javascript"></script>
