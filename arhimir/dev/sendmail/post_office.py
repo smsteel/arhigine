@@ -1,18 +1,16 @@
 from db_entities.sendmail.letter import Letter
 
 class PostOffice:
-    
-    def __init__(self):
-        pass
-    
+   
     def append_to_queue(self, to, subject, body):
-#        try:
-            new_letter = Letter()
-            new_letter.to = to
-            new_letter.subject = "[arhimir.ru]"+subject
-            new_letter.body = body
-            new_letter.put()
-            return True
-#        except: return False
-    
-
+        new_letter = Letter()
+        
+        #check if to is a list
+        if type(to) != type([]):
+            new_to = [to]
+            to = new_to
+        
+        new_letter.to = to
+        new_letter.subject = "[arhimir.ru]"+subject
+        new_letter.body = body
+        new_letter.put()

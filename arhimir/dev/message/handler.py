@@ -20,7 +20,10 @@ class Handler():
             msg_r.rcp = r
             msg_r.message = message
             msg_r.put()
-            PostOffice().append_to_queue(r, title, body)
+        
+#        to = [r for r in rcp]  # generate list of rcp keys
+            
+        PostOffice().append_to_queue(rcp, title, body)
             
     def get_incoming(self, user):
         rcp_list = Rcp_list.gql("where rcp = :rcp", rcp = user)
