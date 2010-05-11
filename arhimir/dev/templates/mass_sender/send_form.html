@@ -1,0 +1,17 @@
+<div style="padding: 10px;">
+	<form method="post">
+		Кому отправляем: <select name="type">
+			<option value="1">Всем</option>
+			<option value="2">Архитекторам</option>
+			<option value="3">Команде портала</option>
+		</select>
+		<br />
+		Заголовок сообщения: <input name="subject" />
+		<br />
+		Текст сообщения:
+		<br />
+		{{ body }}
+		<br />
+		<input type="submit" value="Отправить" />
+	</form>
+</div>
