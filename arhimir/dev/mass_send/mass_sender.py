@@ -18,5 +18,9 @@ class MassSender():
         self._send(admins, subject, body)
     
     def _send(self, users, subject, body):
+
+        keys = []
         for user in users:
-            PostOffice().append_to_queue(user.key(), subject, body)
+            keys.append(user.key())
+            
+        PostOffice().append_to_queue(keys, subject, body)
