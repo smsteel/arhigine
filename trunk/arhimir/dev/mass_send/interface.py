@@ -15,12 +15,12 @@ class Interface(OutputClass):
     
     def post(self):
         if not super(Interface, self).get(): return
-        type = self.request.get('type')
+        type = int(self.request.get('type'))
         subject = self.request.get('subject')
         body = self.request.get('body')
-        
+       
         if type == 1:
-            MassSender().send_all(self, subject, body)
+            MassSender().send_all(subject, body)
         elif type == 2:
             MassSender().send_arch(subject, body)
         else:
