@@ -135,6 +135,7 @@ class OutputClass(webapp.RequestHandler):
                 access['users'] = True
                 access['pages'] = True
                 access['customize'] = True
+                access['mass_send'] = True
                 
             self.insertTemplate('tpl_menu.html', {
                                                     'name'      :   self.Session['name'],
