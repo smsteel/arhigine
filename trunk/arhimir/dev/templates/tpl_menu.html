@@ -63,6 +63,9 @@
 				<li><a href="/admin/stats/gallery/photo/" target="_self">Статистика галереи</a></li>
 				<li><a href="/admin/stats/online/" target="_self">Статистика посещаемости</a></li>
 				{% endif %}
+				{% if access.mass_send %}
+				<li><a href="/admin/send/" target="_self">Массовая рассылка</a></li?>
+				{% endif %}
 			</ul>
 		</li>
 		{% endif %}

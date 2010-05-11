@@ -25,4 +25,4 @@ class Interface(OutputClass):
             MassSender().send_arch(subject, body)
         else:
             MassSender().send_admin(subject, body)
-#        self.showMessage("Отправлено")
+        self.showMessage("Отправлено")
