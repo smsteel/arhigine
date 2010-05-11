@@ -19,11 +19,16 @@ class MailTrain(webapp.RequestHandler):
         if letter_bag.count(1):
             for letter in letter_bag:
                 rcp = letter.to
-                for r in rcp:
-                    self.send_letter(DBUser.get(r).email, letter.subject, letter.body)
-                    rcp.remove(r)
+                
+                # нужен такой цикл, тк фор тупит при добавлении элементов
+                while len(rcp) > 0:
+                #for r in rcp:
+                    self.send_letter(DBUser.get(rcp[0]).email, letter.subject, letter.body)
+#                    rcp.remove(r)
+                    rcp.pop(0)
                     counter += 1
-                    if counter == self._step: 
+                    print counter
+                    if counter == self._step:
                         break
                 if len(rcp) > 0:
                     letter.to = rcp
