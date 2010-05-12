@@ -51,7 +51,7 @@ class CommentHandler(OutputClass):
                                                                                 'referer' : self.request.headers.get("Referer"),
                                                                                 'site_url' : DBCustomField().getByName('url')
                                                                               })
-                PostOffice().append_to_queue(comment.obj.author, """Новый комментарий на портале Архимир""".decode("utf-8"), body.decode("utf-8"))
+                PostOffice().append_to_queue(comment.obj.author.key(), """Новый комментарий на портале Архимир""".decode("utf-8"), body.decode("utf-8"))
                 
             #Отсылаем владельцу коммента-предка:
             if comment.parent_comment and \
@@ -64,5 +64,5 @@ class CommentHandler(OutputClass):
                                                                                 'referer' : self.request.headers.get("Referer"),
                                                                                 'site_url' : DBCustomField().getByName('url')
                                                                               })
-                PostOffice().append_to_queue(comment.parent_comment.user, """Новый комментарий на портале Архимир""".decode("utf-8"), body.decode("utf-8"))
+                PostOffice().append_to_queue(comment.parent_comment.user.key(), """Новый комментарий на портале Архимир""".decode("utf-8"), body.decode("utf-8"))
             self.redirect(self.request.headers.get("Referer"))
