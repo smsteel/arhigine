@@ -66,6 +66,9 @@
 				{% if access.mass_send %}
 				<li><a href="/admin/send/" target="_self">Массовая рассылка</a></li?>
 				{% endif %}
+				{% if access.flush_cash %}
+				<li><a href="/reset/" target="_self">Сбросить кэш</a></li?>
+				{% endif %}
 			</ul>
 		</li>
 		{% endif %}
