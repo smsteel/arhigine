@@ -60,9 +60,10 @@ class Handler():
         try:
             rcp = Rcp_list.gql("where message = :letter and rcp = :user", letter = db.Key(letter), user = user)[0]
         except: pass
-        if letter_.owner.key() == user or rcp:
-            rcp.read = True
-            rcp.put()
+        if letter_.owner.key() == db.Key(user) or rcp:
+            if rcp:
+                rcp.read = True
+                rcp.put()
             return letter_
 
             

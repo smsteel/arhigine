@@ -11,7 +11,7 @@ class Read(OutputClass):
         if super(Read, self).get(): self.insertMenu()
         else: return
         
-        user = self.Session['user_key']
+        user = str(self.Session['user_key'])
         message = self.get_url_part(1)
         
         letter = Handler().get_letter(message, user)
