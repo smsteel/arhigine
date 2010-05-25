@@ -24,7 +24,13 @@ class forum_topic_add(OutputClass):
         cat_id = int(self.get_url_part(1))
         new_topic = DBForumTopic()
         new_topic.name = cgi.escape(self.request.get("name"))
+        if len(new_topic.name) < 3:
+            self.showMessage("Заголовок сообщения слишком короткий")
+            return
         new_topic.description = cgi.escape(self.request.get("descr")).replace("\n", "<br />")
+        if len(new_topic.description) < 5:
+            self.showMessage("Сообщение слишком короткое")
+            return
         new_topic.category = DBForumCategory.get_by_id(cat_id).key()
         new_topic.author = DBUser.get_by_id(self.Session['userid']).key()
         

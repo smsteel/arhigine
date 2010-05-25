@@ -42,8 +42,13 @@ class forum_topic_edit(OutputClass):
         else: return
         
         topic.name = cgi.escape(self.request.get("name"))
+        if len(topic.name) < 3:
+            self.showMessage("Заголовок сообщения слишком короткий")
+            return
         topic.description = cgi.escape(self.request.get("descr")).replace("\n", "<br />")
-        
+        if len(topic.description) < 5:
+            self.showMessage("Сообщение слишком короткое")
+            return
         topic.put()
         
         self.showMessage("Изменено")
