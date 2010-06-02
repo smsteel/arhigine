@@ -7,6 +7,7 @@ from db_entities.user_picture import DBAvatara
 import hashlib, random
 from google.appengine.api import images
 from register_confirm import RegisterConfirm
+from google.appengine.api import memcache
 
 class AdminUser(OutputClass):
     
@@ -68,7 +69,10 @@ class AdminUser(OutputClass):
                 avatara = DBAvatara()
                 data = self.request.get("img")
                 if data:
+                    print "userava%s" % self.request.get('userid')
+                    memcache.delete("userava%s" % self.request.get('userid'))
                     try:
+                        
                         dbQuery = DBAvatara.gql("WHERE userid = :dbuserid", 
                                                 dbuserid = int(self.request.get('userid')))
                         avataras = dbQuery.fetch(1)
