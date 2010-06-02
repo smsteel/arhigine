@@ -34,8 +34,8 @@ class PictureHandler(webapp.RequestHandler):
             self.query = tquery.fetch(1)[0]
         if self.query:
             self.response.headers['Content-Type'] = 'image/jpeg'
-            self.response.headers['Expires'] = "Thu, 01 Jan 2020 00:00:01 GMT"
-            self.response.headers['Cache-Control'] = "no-cache, must-revalidate"
+            self.response.headers['Expires'] = "Thu,01 Jan 2020 00:00:01 GMT"
+            self.response.headers['Cache-Control'] = "public"
             if entity == 3:
                 image = watermark.insert(self.query.image_small) if dowatermark else self.query.image_small
                 self.response.out.write(image)
