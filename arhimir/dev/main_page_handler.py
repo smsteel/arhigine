@@ -30,6 +30,12 @@ class MainPageHandler(OutputClass):
                                 <img src="/images/banners/dak_decor.gif" style="align: center;" />
                             </a>
                         </div>
+                        <div style="text-align: center; margin-top: 3px;">
+                            <a href="http://ecodom-magazine.ru/" target=”_blank”>
+                                <img src="/images/banners/ekodom-banner200-240.gif" style="align: center;" />
+                            </a>
+                        </div>
+                        
                         <div style="text-align: right; font-size: 12px;">
                             <a href="/advertising">Реклама на портале</a>
                         </div>
