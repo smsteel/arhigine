@@ -34,9 +34,9 @@ class forum_category(OutputClass):
                 #last_message = comments.getLastComment([top.key()])
                 _topics.append({'id':int(top.key().id()), 'name':top.name.encode("utf-8"), 
                                 #'answers' : comments.getCommentsCount([top.key()]) - 1,
-                                'answers' : top.comments_count,
+                                'answers' : top.comments_count if top.comments_count else 0,
                             'last_message' : top.last_comment,
-                            'last_message_date' : top.last_comment.date })
+                            'last_message_date' : top.last_comment.date if top.last_comment else top.date })
         except: pass
         _topics.sort(key=lambda k: k['last_message_date'], reverse=True)
         multipage = Multipage(self.request.get('page'), _topics, '/forum/category&cat=' + str(cat))
