@@ -42,7 +42,12 @@ class CommentHandler(OutputClass):
             
             key_ = comment.put()
             comment = db.get(key_)
-            
+
+            try:
+                comment.obj.increase_comments_count(comment)
+            except: pass
+
+
             #Отсылаем владельцу топика
             if self.Session['user_key'] != comment.obj.author.key():
                 body = template.render("comments/comment_notification.html", { 

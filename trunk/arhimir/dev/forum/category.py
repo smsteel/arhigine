@@ -31,12 +31,14 @@ class forum_category(OutputClass):
         try:
             tops = db.GqlQuery("SELECT * FROM DBForumTopic where category = :category", category = category.key()) 
             for top in tops:
-                last_message = comments.getLastComment([top.key()])
+                #last_message = comments.getLastComment([top.key()])
                 _topics.append({'id':int(top.key().id()), 'name':top.name.encode("utf-8"), 
-                                'answers' : comments.getCommentsCount([top.key()]) - 1,
-                                'last_message' : last_message })
+                                #'answers' : comments.getCommentsCount([top.key()]) - 1,
+                                'answers' : top.comments_count,
+                            'last_message' : top.last_comment,
+                            'last_message_date' : top.last_comment.date })
         except: pass
-        _topics.sort(key=lambda k: k['last_message']['date'], reverse=True)
+        _topics.sort(key=lambda k: k['last_message_date'], reverse=True)
         multipage = Multipage(self.request.get('page'), _topics, '/forum/category&cat=' + str(cat))
         self.insertTemplate('forum/category.html', {
                                                     'tops': multipage.getItems(),

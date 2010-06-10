@@ -31,13 +31,18 @@ class forum_topic_add(OutputClass):
         if len(new_topic.description) < 5:
             self.showMessage("Сообщение слишком короткое")
             return
-        new_topic.category = DBForumCategory.get_by_id(cat_id).key()
+        category = DBForumCategory.get_by_id(cat_id)
+        new_topic.category = category.key()
         new_topic.author = DBUser.get_by_id(self.Session['userid']).key()
         
         info_comment = DBComments() #one of them
         info_comment.user = new_topic.author
         info_comment.obj = new_topic.put()
         info_comment.content = ""
-        info_comment.put()
+        info_comment_key = info_comment.put()
+
+        category.topics_count += 1
+        category.last_comment = info_comment_key
+        category.put()
         
         self.showMessage("Добавлено")
