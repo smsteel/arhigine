@@ -11,6 +11,45 @@ class Comments():
             comments_count += comments.count()
         return comments_count
 
+    def fixCommentsForTopics(self):
+        topics = db.GqlQuery("SELECT * FROM DBForumTopic")
+        for topic in topics:
+            topic.last_comment = self.getLastCommentInTopicForFix(topic.key())
+            topic.comments_count = self.getCommentsCount([topic.key()]) - 1
+            topic.put()
+
+    def fixCommentsForCategories(self):
+        categories = db.GqlQuery("SELECT * FROM DBForumCategory")
+        for cat in categories:
+            topics = db.GqlQuery("SELECT * FROM DBForumTopic where category = :cat", cat = cat.key())
+            formalized_topics = []
+            comments_count = 0
+            for topic in topics:
+                comments_count = comments_count + topic.comments_count
+                formalized_topics.append(topic.key())
+            topics_count = len(formalized_topics)
+            last_comment = self.getLastCommentForCategoryFix(formalized_topics)
+            cat.last_comment = last_comment
+            cat.topics_count = topics_count
+            cat.comments_count = comments_count
+            cat.put()
+
+    def getLastCommentInTopicForFix(self, key):
+        comments = db.GqlQuery("SELECT __key__ FROM DBComments WHERE obj = :obj ORDER BY date DESC", obj = key)
+        comment = comments.fetch(1)[0]
+        return comment
+
+    def getLastCommentForCategoryFix(self, entities):
+        comments = db.GqlQuery("SELECT * FROM DBComments ORDER BY date DESC")
+        if(comments.count()>0):
+            for comment in comments:
+                try:
+                    if comment.obj.key() in entities:
+                        return comment
+                except: pass
+            return False
+        else:
+            return False
     def getLastComment(self, entities):
         comments = db.GqlQuery("SELECT * FROM DBComments ORDER BY date DESC")
         if(comments.count()>0):
