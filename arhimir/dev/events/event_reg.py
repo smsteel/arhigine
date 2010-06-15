@@ -47,7 +47,7 @@ class EventReg(OutputClass):
                     newuser.name = self.request.get('name')
                     newuser.surname = self.request.get('surname')
                     newuser.login = str(cgi.escape(self.request.get('email'))).lower()
-                    newuser.email = str(self.request.get('email'))
+                    newuser.email = str(self.request.get('email')).replace(' ', '')
                     pwchars = "1234567890QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm"
                     pwd = "".join(random.choice(pwchars) for _ in range(8))
                     newuser.password = hashlib.md5(str(pwd)).hexdigest()

@@ -73,9 +73,9 @@ $(function() {
             var dot="."
             var lat=str.indexOf(at)
             var lstr=str.length
-            if (str.indexOf(at)==-1 || str.indexOf(at)==-1 || str.indexOf(at)==0 || str.indexOf(at)==lstr
+            if (str.indexOf(at)==-1 || str.indexOf(at)==0 || str.indexOf(at)==lstr
                 || str.indexOf(dot)==-1 || str.indexOf(dot)==0 || str.indexOf(dot)==lstr || str.indexOf(at,(lat+1))!=-1
-                || str.indexOf(at,(lat+1))!=-1 || str.indexOf(dot,(lat+2))==-1 || str.indexOf(" ")!=-1) return false
+                || str.indexOf(at,(lat+1))!=-1 || str.indexOf(dot,(lat+2))==-1) return false
             else return true
         }
         function showUserName() {
