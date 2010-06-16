@@ -29,3 +29,9 @@ indexes:
   ancestor: yes
   properties:
   - name: date
+
+- kind: DBEventAnketa
+  properties:
+  - name: eventid
+  - name: surname
+  

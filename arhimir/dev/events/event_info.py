@@ -13,7 +13,7 @@ class EventInfo(OutputClass):
         eventid = self.request.uri.split('/')[-1]
         event = DBEvent.get_by_id(int(eventid))
         if not super(EventInfo, self).get(event.userid): return
-        users = db.GqlQuery("SELECT * FROM DBEventAnketa WHERE eventid = :eventid",
+        users = db.GqlQuery("SELECT * FROM DBEventAnketa WHERE eventid = :eventid order by surname",
                             eventid = event.key().id())
         user_list = []
         for user in users:
