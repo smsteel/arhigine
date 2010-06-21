@@ -13,7 +13,7 @@ class EventInfo(OutputClass):
         eventid = self.request.uri.split('/')[-1]
         event = DBEvent.get_by_id(int(eventid))
         if not super(EventInfo, self).get(event.userid): return
-        users = db.GqlQuery("SELECT * FROM DBEventAnketa WHERE eventid = :eventid order by surname",
+        users = db.GqlQuery("SELECT * FROM DBEventAnketa WHERE eventid = :eventid",
                             eventid = event.key().id())
         user_list = []
         for user in users:
@@ -24,6 +24,7 @@ class EventInfo(OutputClass):
                                'surname' : user.surname.encode("utf8"),
                                'phone' : user.phone.encode("utf8"),
                             })
+        user_list = sorted(user_list, key=lambda user_list: user_list['surname'])
         self.insertMenu()
         self.insertTemplate("tpl_event_info.html", {
                                                      'user_list' : user_list,
