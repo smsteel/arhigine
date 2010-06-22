@@ -84,6 +84,11 @@ class AdminEventView(OutputClass):
                 event.place = self.request.get('place')
                 event.access = int(self.request.get('access'))
                 event.owner = self.request.get('owner')
+#                print self.request.get('closed')
+                if self.request.get('closed') == 'True':
+                    event.closed = True
+                else:
+                    event.closed = False
                 event.put()
                 self.insertContent('Данные успешно изменены')
             else:

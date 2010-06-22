@@ -13,4 +13,5 @@ class DBEvent(db.Model):
     userid = db.IntegerProperty()
     catid = db.IntegerProperty()
     author = db.ReferenceProperty(DBUser)
+    closed = db.BooleanProperty(default = False)
     
