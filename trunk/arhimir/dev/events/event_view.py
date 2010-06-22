@@ -30,6 +30,7 @@ class EventView(OutputClass):
             self.redirect('/page_not_found')
         self.checkSession(self.request.headers.get('Cookie'), False)
         self.insertMenu()
+#        print event.closed
         if self.Session['access'] >= event.access or int(self.Session['userid']) == int(event.userid) or int(event.access) <= 0:
             #tpl_cust = template.Template ("""<a href=\"" + self.paramByName("url") + "/event/reg/{{ event_id }}">Регистрация на мероприятие</a>""")
             self.insertTemplate('tpl_event_view.html', { 'event_id' : str(event_id),
@@ -39,7 +40,7 @@ class EventView(OutputClass):
                                                                      'time' : event.time.encode("utf8") if event.time else '',
                                                                      'place' : event.place.encode("utf8") if event.place else '',
                                                                      'owner' : event.owner.encode("utf8") if event.owner else '',
-                                                                     'register' : "<a href='/event/reg/%i'>Регистрация на мероприятие</a>" % event_id if event.date >= db.datetime.date.today() else False
+                                                                     'register' : "<a href='/event/reg/%i'>Регистрация на мероприятие</a>" % event_id if (event.date >= db.datetime.date.today() and event.closed != True) else False
                                                                      })
 
             
