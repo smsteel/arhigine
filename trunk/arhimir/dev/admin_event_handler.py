@@ -61,6 +61,10 @@ class AdminEventHandler(OutputClass):
             event.userid = self.Session['userid']
             event.author = self.Session['user_key']
             event.catid = int(self.request.get('cat'))
+            if self.request.get('closed') == 'True':
+                event.closed = True
+            else:
+                event.closed = False
             event.put()
             self.insertMenu()
             self.insertContent('Событие добавлено')

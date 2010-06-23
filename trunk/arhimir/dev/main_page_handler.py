@@ -19,7 +19,8 @@ class MainPageHandler(OutputClass):
         if not spe_news:
             try:
                 spe_news = ''
-                news = db.GqlQuery("select * from DBNews order by date desc LIMIT 5")
+                news = db.GqlQuery("select * from DBNews order by date desc LIMIT 15")
+                news = [new for new in news if new.hiden != True][:5]
                 spe_news+=("<div style='padding: 5px; margin-bottom: 50px;'>")
      
                 for news_position, piece_of_news in enumerate(news):

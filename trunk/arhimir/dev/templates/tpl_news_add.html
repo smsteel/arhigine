@@ -11,6 +11,13 @@
 <div class="form">Дата: <input id="datepicker" type="text" name="date" value="{{ date }}"></div>
 <div class="form">Краткое описание <textarea name="preview" >{{ preview }}</textarea></div>
 <div class="form">Полное описание: {{ editor }}</div>
+<div class="form">
+	Скрыть новость:
+	<select name="closed">
+		<option value="False">Нет</option>
+		<option value="True">Да</option>
+	</select>
+</div>
 <div class="form" align="center"><input type="submit" value="Добавить"</div>
 </form>
 
