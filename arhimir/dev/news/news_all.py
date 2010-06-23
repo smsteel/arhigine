@@ -12,6 +12,7 @@ class NewsAll(OutputClass):
             self.insertMenu()
         
         news = db.GqlQuery("select * from DBNews order by date desc")
+        news = [new for new in news if new.hiden != True]
         self.insertContent("<div style='padding: 10px;'>")
 #        if news.count() == 0:
 #            self.insertContent("Сейчас нет ни одной новости.")

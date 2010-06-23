@@ -11,7 +11,8 @@ class NewsList(OutputClass):
         self.checkSession(self.request.headers.get('Cookie'), True)
         self.insertMenu()
         
-        news = db.GqlQuery("select * from DBNews order by date desc limit 5")
+        news = db.GqlQuery("select * from DBNews order by date desc LIMIT 15")
+        news = [new for new in news if new.hiden != True][:5]
         self.insertContent("<div style='padding: 10px;'>")
 #        if news.count() == 0:
 #            self.insertContent("Сейчас нет ни одной новости.")

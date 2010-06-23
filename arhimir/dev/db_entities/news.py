@@ -9,6 +9,7 @@ class DBNews(db.Model):
     userid = db.IntegerProperty()
     date = db.DateTimeProperty(auto_now_add = True)
     author = db.ReferenceProperty(DBUser)
+    hiden = db.BooleanProperty(default = False)
     
     def getItems (self, count):
         news = []

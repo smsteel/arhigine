@@ -27,6 +27,11 @@ class NewsAdd(OutputClass):
         piece_of_news.preview = self.request.get('preview')
         piece_of_news.content = self.request.get('content')
         
+        if self.request.get('closed') == 'True':
+            piece_of_news.hiden = True
+        else:
+            piece_of_news.hiden = False
+        
         try:
             date = self.request.get('date').split('/')
             piece_of_news.date = db.datetime.datetime(int(date[2]),int(date[0]),int(date[1])) 
