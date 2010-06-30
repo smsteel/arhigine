@@ -10,12 +10,14 @@ class Handler():
         return Banner.all()[number]
     
     def count_banners(self):
-        return len(Banner.all())
+        return Banner.all().count()
     
     def get_iter(self):
         iter = 0
         try:
             iter = BannerIter.all()[0]
+            iter.number += 1
+            iter.put()
             return iter.number
         except:
             iter = BannerIter()
@@ -27,5 +29,5 @@ class Handler():
         all = self.count_banners()
         ban = self.get_banner_by_number(iter % all)
         
-        form_banner = {'href': ban.link, 'key': ban.key()}
+        form_banner = {'link': ban.link, 'key': ban.key()}
         return form_banner

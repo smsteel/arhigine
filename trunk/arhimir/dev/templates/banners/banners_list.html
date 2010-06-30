@@ -1,0 +1,8 @@
+<a href="/banner/add/">Добавить баннер</a>
+<hr>
+{% for banner in banners %}
+	<a href="/banner/edit/{{ banner.key }}">{{ banner.name }}</a>
+	<br>
+{% endfor %}
+<hr>
+<a href="/banner/add/">Добавить баннер</a>
