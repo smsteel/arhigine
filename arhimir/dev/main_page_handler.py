@@ -8,6 +8,7 @@ from db_entities.conf import DBConf
 from tools.arch_top import ArchTop
 from google.appengine.api import memcache
 import pickle, random
+from banners.handler import Handler as BannerHandler
 
 class MainPageHandler(OutputClass):
     
@@ -17,30 +18,26 @@ class MainPageHandler(OutputClass):
     def get_news(self):
         spe_news = memcache.get("news4main")
         if not spe_news:
-            try:
+#            try:
                 spe_news = ''
                 news = db.GqlQuery("select * from DBNews order by date desc LIMIT 15")
                 news = [new for new in news if new.hiden != True][:5]
                 spe_news+=("<div style='padding: 5px; margin-bottom: 50px;'>")
      
+                banner = BannerHandler().next_banner()
+     
                 for news_position, piece_of_news in enumerate(news):
                     if news_position == 4:
                         spe_news += """
                         <div style="text-align: center;">
-                            <a href="http://fashionhome.ru/catalog/arcdes/13664.html" target=”_blank”>
-                                <img src="/images/banners/dak_decor.gif" style="align: center;" />
+                            <a href="%s" target=”_blank”>
+                                <img src="/banner/show/%s" style="align: center;" />
                             </a>
                         </div>
-                        <div style="text-align: center; margin-top: 3px;">
-                            <a href="http://ecodom-magazine.ru/" target=”_blank”>
-                                <img src="/images/banners/ekodom-banner200-240.gif" style="align: center;" />
-                            </a>
-                        </div>
-                        
                         <div style="text-align: right; font-size: 12px;">
                             <a href="/advertising">Реклама на портале</a>
                         </div>
-                        """
+                        """ % (banner['link'].encode("utf-8"), banner['key'])
                     u_class = DBUser()
                     login = u_class.get_login_by_id(piece_of_news.userid)
                     spe_news+=("""
@@ -73,7 +70,7 @@ class MainPageHandler(OutputClass):
                                """)
                 spe_news+=("</div>")
                 memcache.add("news4main", spe_news, 3600)
-            except: pass
+#            except: pass
         return spe_news
 
     def get(self):

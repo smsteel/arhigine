@@ -1,7 +1,9 @@
 <form method="post" enctype="multipart/form-data">
-Название <input type="text" name="url" >
+Название <input type="text" name="name" value="{{ banner.name}}" >
 <br>
-Ссылка <input type="text" name="url" >
+Ссылка <input type="text" name="link" value="{{ banner.link }}" >
 <br>
 Изображение <input name="image" type="file">
+<br>
+<input type="submit" value="Сохранить" >
 </form>
