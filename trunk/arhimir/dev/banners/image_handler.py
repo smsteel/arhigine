@@ -9,7 +9,7 @@ class BannerImage(OutputClass):
         key = self.get_url_part(1)
         ban = Banner.get(key)
         
-        self.response.headers['Content-Type'] = 'image/jpeg'
+        self.response.headers['Content-Type'] = 'image'
 #        self.response.headers['Expires'] = "Thu,01 Jan 2020 00:00:01 GMT"
 #        self.response.headers['Cache-Control'] = "public"
         
