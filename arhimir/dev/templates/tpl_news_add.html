@@ -5,6 +5,11 @@
 		$("#datepicker").datepicker();
 	});
 </script>
+<script type="text/javascript">
+	$(function() {
+		$("#datepicker2").datepicker();
+	});
+</script>
 ﻿<form method="post" enctype="multipart/form-data">
 <div class="form">Заголовок: <input type="text" name="cap" value="{{ cap }}"></div>
 <div class="form">Изображение: <input type="file" name="pic" style="width: 250px;"></div>
@@ -18,6 +23,7 @@
 		<option value="True">Да</option>
 	</select>
 </div>
+<div class="form">Сделать видимой: <input id="datepicker2" type="text" name="showdate" value="{{ showdate }}"></div>
 <div class="form" align="center"><input type="submit" value="Добавить"</div>
 </form>
 
