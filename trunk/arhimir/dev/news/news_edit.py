@@ -21,7 +21,10 @@ class NewsEdit(OutputClass):
         self.insertMenu()
         self.insertTemplate("tpl_news_add.html", { 'editor' : self.insertFckEdit(Name = "content",Value = piece_of_news.content, ToolbarSet = "Admin"),
                                                                'cap'    : piece_of_news.cap,
-                                                               'preview': piece_of_news.preview, })
+                                                               'preview': piece_of_news.preview,
+#                                                               'date': piece_of_news.date,
+#                                                               'showdate': piece_of_news.showdate,
+                                                                })
         self.drawPage()
     
     def post(self):
@@ -42,6 +45,12 @@ class NewsEdit(OutputClass):
         try:
             date = self.request.get('date').split('/')
             piece_of_news.date = db.datetime.datetime(int(date[2]),int(date[0]),int(date[1])) 
+        except:
+            pass
+        
+        try:
+            showdate = self.request.get('showdate').split('/')
+            piece_of_news.showdate = db.datetime.datetime(int(showdate[2]),int(showdate[0]),int(showdate[1])) 
         except:
             pass
 

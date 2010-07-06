@@ -2,4 +2,9 @@ cron:
 - description: send mail every 8 minutes
   url: /system/mail_train/
   schedule: every 8 minutes
-
+  
+- description: check hidden news every 12 hours
+  url: /news/appear/
+  schedule: every 12 hours
+  
+  

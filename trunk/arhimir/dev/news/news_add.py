@@ -38,6 +38,12 @@ class NewsAdd(OutputClass):
         except:
             pass
         
+        try:
+            showdate = self.request.get('showdate').split('/')
+            piece_of_news.showdate = db.datetime.datetime(int(showdate[2]),int(showdate[0]),int(showdate[1])) 
+        except:
+            pass
+        
         data = self.request.get('pic')
         if data:
             image = images.resize(data, 200, 200)
