@@ -28,11 +28,11 @@ class UserInfo(OutputClass):
                 for object in objects:
                     objects_list += """<div style="padding: 20px 0px 0px 20px; float: left;"><a href="/objects/""" + str(object.key().id()) + """"><div style="border-width: 1px; border-color: #555555; border-style: solid; padding: 2px;"><img style="border: 0;" src="/picture/130/crop/0/""" + str(object.key().id()) + """" /></div></a></div>"""
                 
-            twitt = False    
+            twitter = False    
             try:
-                t = TwittGet(user.twitter.encode("utf8"))
-                twitt = t.get_last_twitt()
-            except: pass
+                twitter = user.twitter.encode("utf8")
+            except: 
+                pass
 
             self.insertTemplate('tpl_user_info.html', { 
                                                                    'id' :  str(user.key().id()),
@@ -44,7 +44,7 @@ class UserInfo(OutputClass):
                                                                    'logged_access' : self.Session['access'],
                                                                    'objects_count' : objects_count,
                                                                    'objects_list' : objects_list,
-                                                                   'twitt'      : twitt,
+                                                                   'twitter'      : twitter,
                                                                    'lj'      : user.livejournal.encode("utf8") if user.livejournal else False,
                                                                    'date' : user.date if user.date else False,
                                                                    'user_about' : user.about.encode("utf8") if user.about else False, 
