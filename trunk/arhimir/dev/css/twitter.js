@@ -387,8 +387,8 @@ if (typeof renderTwitters != 'function') (function () {
             if (delta < (48*60*60)) {
                 r = formatTime(date) + ' вчера';
             } else {
-                r = formatTime(date) + ' ' + formatDate(date);
-                // r = (parseInt(delta / 86400)).toString() + ' days ago';
+                // r = formatTime(date) + ' ' + formatDate(date);
+                r = (parseInt(delta / 86400)).toString() + ' дней назад';
             }
         }
 
