@@ -52,7 +52,7 @@ if (typeof renderTwitters != 'function') (function () {
     var readyList = [];
     var isReady = false;
     
-    var monthDict = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var monthDict = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
     
     /** Global functions */
     
