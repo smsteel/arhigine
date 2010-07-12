@@ -352,19 +352,20 @@ if (typeof renderTwitters != 'function') (function () {
                 th = 'th';
             
             // anti-'th' - but don't do the 11th, 12th or 13th
-            if ((dayi % 10) == 1 && day.substr(0, 1) != '1') {
-                th = 'st';
+            /*if ((dayi % 10) == 1 && day.substr(0, 1) != '1') {
+                th = 'го';
             } else if ((dayi % 10) == 2 && day.substr(0, 1) != '1') {
                 th = 'nd';
             } else if ((dayi % 10) == 3 && day.substr(0, 1) != '1') {
                 th = 'rd';
-            }
+            }*/
+            th = 'го';
             
             if (day.substr(0, 1) == '0') {
                 day = day.substr(1);
             }
             
-            return mon + ' ' + day + th + (thisyear != year ? ', ' + year : '');
+            return day + th + ' ' + mon + (thisyear != year ? ', ' + year : '');
         }
         
         delta = delta + (relative_to.getTimezoneOffset() * 60);
@@ -387,8 +388,8 @@ if (typeof renderTwitters != 'function') (function () {
             if (delta < (48*60*60)) {
                 r = formatTime(date) + ' вчера';
             } else {
-                // r = formatTime(date) + ' ' + formatDate(date);
-                r = (parseInt(delta / 86400)).toString() + ' дней назад';
+                r = formatTime(date) + ' ' + formatDate(date);
+                // r = (parseInt(delta / 86400)).toString() + ' дней назад';
             }
         }
 
