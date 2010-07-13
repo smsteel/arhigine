@@ -64,8 +64,26 @@
 								</font>
 							</a>
 						</div>
-						{% if user.twitt %}
-							<img src="/images/twitter.png" style="float: left; margin: 8px 0 0px 0px; padding-right: 2px;"/><font style="border-top: 1px dotted #444; margin-top: 5px; display: block; font-size: 11px;">{{ user.twitt }}</font>
+						{% if user.twitter %}
+								<a style"font-size: 12px;">Последний твит</a>:
+								
+								<script 
+								 src="/css/twitter.js" 
+								 type="text/javascript">
+								</script>
+								<script type="text/javascript" charset="utf-8">
+								getTwitters('tweet', { 
+								  id: '{{ user.twitter }}', 
+								  count: 1, 
+								  enableLinks: true, 
+								  ignoreReplies: true, 
+								  clearContents: true,
+								  template: '"%text%" <a href="http://twitter.com/%user_screen_name%/statuses/%id%/">%time%</a>'
+								});
+								</script>
+								<div id="tweet" style="float: left; font-size: 12px;"></div>
+				
+							</div>
 						{% endif %}
 					</td>
 				</tr>
