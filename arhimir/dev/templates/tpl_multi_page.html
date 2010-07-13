@@ -65,14 +65,13 @@
 							</a>
 						</div>
 						{% if user.twitter %}
-								<a style"font-size: 12px;">Последний твит</a>:
-								
+															
 								<script 
 								 src="/css/twitter.js" 
 								 type="text/javascript">
 								</script>
 								<script type="text/javascript" charset="utf-8">
-								getTwitters('tweet', { 
+								getTwitters('tweet{{user.login}}', { 
 								  id: '{{ user.twitter }}', 
 								  count: 1, 
 								  enableLinks: true, 
@@ -81,7 +80,7 @@
 								  template: '"%text%" <a href="http://twitter.com/%user_screen_name%/statuses/%id%/">%time%</a>'
 								});
 								</script>
-								<div id="tweet" style="float: left; font-size: 12px;"></div>
+								<div id="tweet{{user.login}}" style="float: left; font-size: 10px;"></div>
 				
 							</div>
 						{% endif %}
