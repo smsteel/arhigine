@@ -33,12 +33,18 @@ class UserList(OutputClass):
         if data is None:
             users = db.GqlQuery(self._query)
             
+#            for user in users:
+#                twitt = False    
+#                try:
+#                    t = TwittGet(user.twitter.encode("utf8"))
+#                    twitt = t.get_last_twitt()
+#                except: pass
             for user in users:
-                twitt = False    
+                twitter = False    
                 try:
-                    t = TwittGet(user.twitter.encode("utf8"))
-                    twitt = t.get_last_twitt()
-                except: pass
+                    twitter = user.twitter.encode("utf8")
+                except: 
+                    pass
                 users_serialized.append({
                                             'id'        : user.key().id(),
                                             'login'     : user.login,
@@ -46,7 +52,7 @@ class UserList(OutputClass):
                                             'surname'   : user.surname,
                                             'access'    : user.access,
                                             'registered' : user.date,
-                                            'twitt'     : twitt,
+                                            'twitter'     : twitter,
                                          })
             users_serialized.sort(key=operator.itemgetter('registered'), reverse = True)
             memcache.add(self._memcache_name, pickle.dumps(users_serialized), 600)
