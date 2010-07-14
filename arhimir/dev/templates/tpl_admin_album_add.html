@@ -215,7 +215,7 @@ function add_html()
 function add_img(data)
 {
 	$("#photo" + photos_added).attr("style", "background-image: url(/picture/3/" + data +"); background-repeat: no-repeat; background-position:0px 10px; float: left; width: 140px; height: 140px; margin: 0px 0px 0px 5px;");
-	$("#photo" + photos_added).html("<img onclick='remove_img(" + photos_added + ", " + data + ")' style='float: right; cursor: pointer;' src='/images/delete_button.png' />")
+	$("#photo" + photos_added).html("<img onclick='remove_img(" + photos_added + ", " + data + ")' style='float: right; cursor: pointer;' src='/images/delete_button.png' />");
 	photos_added++;
 }
 </script>
