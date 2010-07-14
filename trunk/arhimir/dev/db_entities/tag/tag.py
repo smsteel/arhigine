@@ -2,8 +2,8 @@ from google.appengine.ext import db
 from db_entities.user import DBUser
 
 class TagsList(db.Model):
-    entity = db.ReferenceProperty()
+    obj = db.ReferenceProperty(collection_name="taged_objects")
     tags = db.StringListProperty()
-    user = db.ReferenceProperty(DBUser)
+    user = db.ReferenceProperty(DBUser, collection_name="tager_user")
     datetime = db.DateTimeProperty(auto_now_add = True)
     
