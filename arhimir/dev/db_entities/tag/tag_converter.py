@@ -12,7 +12,7 @@ class TagCoverter(OutputClass):
     url_handler = '/tag_convert/?'
     
     def get(self):
-        old_tags = DBPhotoTags.gql('where fixed != :fixed', fixed = True)
+        old_tags = DBPhotoTags.gql('where fixed = :fixed', fixed = False)
         for tag_string in old_tags:
             tags = tag_string.tags.split(',')
             imageid = tag_string.imageid
