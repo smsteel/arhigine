@@ -27,6 +27,8 @@ class Handler():
     def next_banner(self):
         iter = self.get_iter()
         all = self.count_banners()
+        if not all:
+            return {}
         ban = self.get_banner_by_number(iter % all)
         
         form_banner = {'link': ban.link, 'key': ban.key()}
