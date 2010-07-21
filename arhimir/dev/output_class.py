@@ -254,7 +254,8 @@ class OutputClass(webapp.RequestHandler):
         #if data:
             #self.response.out.write(pickle.loads(data))
         #else:
-        self.response.out.write(self.minified(html))
+#        self.response.out.write(self.minified(html))
+        self.response.out.write(html)
         #   memcache.add(cache_name, pickle.dumps(minified_html), 300)
     
     def minified(self, html):
