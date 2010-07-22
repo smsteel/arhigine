@@ -7,4 +7,6 @@ cron:
   url: /news/appear/
   schedule: every 12 hours
   
-  
+- description: reset forum counters every week
+  url: /forum_fixer/
+  schendule: every 7 days

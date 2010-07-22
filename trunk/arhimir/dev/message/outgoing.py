@@ -13,7 +13,7 @@ class Outgoing(OutputClass):
         
         messages = Handler().get_outgoing(user)
        
-        multipage = Multipage(self.request.get('page'), messages, "/msg/incoming/")
+        multipage = Multipage(self.request.get('page'), messages, "/msg/outgoing/")
         
         self.insertTemplate("message/outgoing.html", {
                                                         'messages' : multipage.getItems(),
