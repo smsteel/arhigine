@@ -7,5 +7,5 @@ class DBForumCategory(db.Model):
     access = db.IntegerProperty()
     position = db.IntegerProperty()
     last_comment = db.ReferenceProperty(DBComments)
-    comments_count = db.IntegerProperty()
-    topics_count = db.IntegerProperty()
+    comments_count = db.IntegerProperty(default = 0)
+    topics_count = db.IntegerProperty(default = 0)

@@ -10,7 +10,7 @@ class DBForumTopic(db.Model):
     category = db.ReferenceProperty(DBForumCategory)
     author = db.ReferenceProperty(DBUser)
     last_comment = db.ReferenceProperty(DBComments)
-    comments_count = db.IntegerProperty()
+    comments_count = db.IntegerProperty(default = 0)
 
     def increase_comments_count(self, comment):
         self.comments_count = self.comments_count + 1

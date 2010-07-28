@@ -27,8 +27,8 @@ class forum_main(OutputClass):
         for cat in cats:
             topics = db.GqlQuery("SELECT * FROM DBForumTopic where category = :cat", cat = cat.key())
             if cat.access and not cat.access <= self.Session['access']: continue
-            all_comments_count += cat.comments_count
-            all_topics_count += cat.topics_count
+            if cat.comments_count: all_comments_count += cat.comments_count
+            if cat.topics_count: all_topics_count += cat.topics_count
             #formilized_topics = []
             #for topic in topics:
             #    formilized_topics.append(topic.key())
@@ -41,12 +41,12 @@ class forum_main(OutputClass):
 #                                          'id' : int(topic.key().id()) }
             #comments_count = comments.getCommentsCount(formilized_topics) - len(formilized_topics)
             #all_comments_count += comments_count
-            cat.last_comment.obj.name = cat.last_comment.obj.name[0:32] + "..." if len(cat.last_comment.obj.name) > 32 else cat.last_comment.obj.name
+            if cat.last_comment: cat.last_comment.obj.name = cat.last_comment.obj.name[0:32] + "..." if len(cat.last_comment.obj.name) > 32 else cat.last_comment.obj.name
             _categories.append({'id':int(cat.key().id()), 'name':cat.name.encode("utf-8"),
                                 'descr': cat.descr.encode("utf-8") if cat.descr else None,
                                 'last_message' : cat.last_comment,
-                                'answers' : cat.comments_count,
-                                'topics' : cat.topics_count
+                                'answers' : cat.comments_count if cat.comments_count else 0,
+                                'topics' : cat.topics_count if cat.topics_count else 0
                                 #'last_message' : last_message, 'answers' : comments_count, 'topics' : len(formilized_topics)
                                 })
         
