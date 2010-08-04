@@ -51,6 +51,7 @@ class AdminAlbumAdd(OutputClass):
             self.album.name = secret
             self.album.objectid = -1
             self.album.userid = self.Session['userid']
+            self.album.author = self.Session['user_key']
             self.album.put()
             albums = db.Query(DBAlbum)
             albums.filter("name =", secret)

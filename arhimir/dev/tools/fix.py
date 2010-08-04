@@ -6,6 +6,7 @@ from google.appengine.ext import db
 from db_entities.news import DBNews
 from db_entities.event import DBEvent
 from db_entities.photo_tags import DBPhotoTags
+from db_entities.album import DBAlbum
 
 class fix(OutputClass):
     
@@ -18,8 +19,8 @@ class fix(OutputClass):
         except:
             i = 0
         
-        news = DBPhotoTags.all()[i:i+200]
+        news = DBAlbum.all()[i:i+200]
         for new in news:
-            new.fixed = False
+            new.author = DBUser.get_by_id(new.userid)
             new.put()
        
