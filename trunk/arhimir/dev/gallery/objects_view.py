@@ -56,6 +56,7 @@ class ObjectsView(OutputClass):
             for photo in photos:
                 photohtml += """<div style="float: left; width: 136px; margin-right: 10px;"><a href="/picture/watermark/4/""" + str(photo.key().id()) + """\"><img src="/picture/3/""" + str(photo.key().id()) + """\" /></a></div>"""
             albumhtml += photohtml + """
+                        <div style="clear: both; margin: 20px 20px 0px 0px; padding-top: 20px;">Комментариев к альбому: """ + str(album.comments_count if album.comments_count else 0) + """</div>
                         </div>
                         
                         <div style="width: 100%; float: left;">

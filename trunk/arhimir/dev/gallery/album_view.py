@@ -94,6 +94,7 @@ class AlbumView(OutputClass):
                                                                  'options' : options,
                                                                  'in_fav' : in_fav,
                                                                   })
+        self.insertComments(album.key())
         self.drawPage("Альбом :: "+album.name.encode("utf8"))
         
     def post(self):
