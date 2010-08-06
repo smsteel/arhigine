@@ -37,7 +37,7 @@ class MainPageHandler(OutputClass):
                         <div style="text-align: right; font-size: 12px;">
                             <a href="/advertising">Реклама на портале</a>
                         </div>
-                        """ % (banner['link'].encode("utf-8"), banner['key'])
+                        """ % (banner['link'].encode("utf-8"), banner['key']) if banner else ""
                     u_class = DBUser()
                     login = u_class.get_login_by_id(piece_of_news.userid)
                     spe_news+=("""
