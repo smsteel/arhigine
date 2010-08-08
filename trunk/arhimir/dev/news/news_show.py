@@ -1,6 +1,7 @@
 ﻿#coding: UTF-8
 from output_class import OutputClass
 from db_entities.news import DBNews
+from db_entities.stat_news import StatNews
 
 class NewsShow(OutputClass):
     
@@ -12,8 +13,20 @@ class NewsShow(OutputClass):
         
         parametres = self.get_from_url('news_id')
         
-        
         object = DBNews.get_by_id(int(parametres.news_id))
+        
+        # Statistics
+        stat = StatNews().all().filter('pieceon = ', object)
+        if stat.fetch(1):
+            q =  StatNews().get(stat[0].key())
+            q.counter += 1
+            q.put()
+        else:
+            stat = StatNews()
+            stat.counter = 1
+            stat.pieceon = object
+            stat.put()
+            
         self.insertTemplate("tpl_news_show.html", { 'image'     : "<img src='/picture/2/"+str(parametres.news_id)+"'>",
                                                                 'cap'       : object.cap.encode("utf8"),
                                                                 'content'   : object.content.encode("utf8")})
