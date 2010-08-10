@@ -9,11 +9,16 @@ class StatsNews(OutputClass):
     
     def get(self):
         if not super(StatsNews, self).get(): return
+        all = StatNews().all()
+        counter = 0
+        for stat in all:
+            counter += stat.counter
         statistics = StatNews().all().order('-counter').fetch(10)
         self.insertMenu()
         self.insertTemplate('stat_news.html', {
                                                
-            'stats' : statistics
+            'stats' : statistics,
+            'all' : counter
             
         })
         self.drawPage('Статистика просмотра новостей')
