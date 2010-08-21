@@ -11,6 +11,6 @@ class PostOffice:
             to = new_to
         
         new_letter.to = to
-        new_letter.subject = "[arhimir.ru]"+subject
+        new_letter.subject = subject
         new_letter.body = body
         new_letter.put()
