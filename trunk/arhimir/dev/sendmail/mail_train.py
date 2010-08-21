@@ -5,6 +5,7 @@ from db_entities.sendmail.letter import Letter
 from google.appengine.ext import db
 from tools.tag_processor import tag_processor
 from db_entities.user import DBUser
+from db_entities.custom_field import DBCustomField
 
 class MailTrain(webapp.RequestHandler):
     
@@ -20,10 +21,12 @@ class MailTrain(webapp.RequestHandler):
             for letter in letter_bag:
                 rcp = letter.to
                 
+                sender_email = DBCustomField().getByName('email')
+                
                 # нужен такой цикл, тк фор тупит при добавлении элементов
                 while len(rcp) > 0:
                 #for r in rcp:
-                    self.send_letter(DBUser.get(rcp[0]).email, letter.subject, letter.body)
+                    self.send_letter(DBUser.get(rcp[0]).email, letter.subject, letter.body, sender_email)
 #                    rcp.remove(r)
                     rcp.pop(0)
                     counter += 1
@@ -36,7 +39,7 @@ class MailTrain(webapp.RequestHandler):
                 else:
                     db.delete(letter)
                 
-    def send_letter(self, to, subject, body, sender="no.reply.arhimir@gmail.com"):
+    def send_letter(self, to, subject, body, sender):
         try:
             mail.send_mail(sender, to, subject, body=tag_processor().del_tags(body.replace('<br />', '\n').replace('<br>', '\n')), html=body)
             return True
