@@ -41,7 +41,10 @@ class forum_topic_add(OutputClass):
         info_comment.content = ""
         info_comment_key = info_comment.put()
 
-        category.topics_count += 1
+        try:
+            category.topics_count += 1
+        except:
+            category.topics_count = 1
         category.last_comment = info_comment_key
         category.put()
         
