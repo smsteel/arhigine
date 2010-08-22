@@ -30,9 +30,15 @@ class forum_main(OutputClass):
             if cat.access and not cat.access <= self.Session['access']: continue
             try:
                 all_comments_count += cat.comments_count
+            except:
+                cat.comments_count = 0
+                cat.put()
+            
+            try:
                 all_topics_count += cat.topics_count
             except:
-                pass
+                cat.topics_count = 0
+                cat.put()
 
             try:
                 cat.last_comment.obj.name = cat.last_comment.obj.name[0:32] + "..." if len(cat.last_comment.obj.name) > 32 else cat.last_comment.obj.name

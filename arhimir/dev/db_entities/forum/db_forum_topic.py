@@ -13,9 +13,16 @@ class DBForumTopic(db.Model):
     comments_count = db.IntegerProperty(default = 0)
 
     def increase_comments_count(self, comment):
-        self.comments_count = self.comments_count + 1
+        try:
+            self.comments_count = self.comments_count + 1
+        except:
+            self.comments_count = 1
+        try:   
+            self.category.comments_count = self.category.comments_count + 1
+        except: 
+            self.category.comments_count = 1
         self.last_comment = comment
-        self.category.comments_count = self.category.comments_count + 1
+        
         self.category.last_comment = comment
         self.category.put()
         self.put()
